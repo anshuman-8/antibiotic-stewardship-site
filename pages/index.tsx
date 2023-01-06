@@ -21,6 +21,11 @@ export default function Home() {
             Register Patient
           </button>
         </Link>
+        <Link href="/form">
+          <button className='bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400 mx-5'>
+            Patient Form
+          </button>
+        </Link>
       </main>
     </>
   )
