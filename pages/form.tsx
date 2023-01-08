@@ -1,11 +1,12 @@
 import { ImSpinner2 } from "react-icons/im";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import CultureReport from "../components/Form/CultureReport";
 
-export default function form() {
+export default function Form() {
+
   const [loading, setLoading] = useState(false);
   const [cultureSent, setCultureSent] = useState(false);
 
