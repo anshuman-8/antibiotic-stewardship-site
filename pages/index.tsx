@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import PatientCard from '../components/PatientCard'
 import { Inter } from '@next/font/google'
+import Navbar from '../components/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,6 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main >
+        <Navbar/>
         <PatientCard/>
         <Link href="/p-register">
           <button className='bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400'>
