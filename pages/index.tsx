@@ -1,10 +1,10 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import PatientCard from '../components/PatientCard'
-import { Inter } from '@next/font/google'
-import Navbar from '../components/Navbar'
+import Head from "next/head";
+import Link from "next/link";
+import PatientCard from "../components/PatientCard";
+import { Inter } from "@next/font/google";
+import Navbar from "../components/Navbar";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
@@ -15,20 +15,25 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main >
-        <Navbar/>
-        <PatientCard/>
+      <main>
+        <Navbar />
+        <PatientCard />
         <Link href="/p-register">
-          <button className='bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400'>
+          <button className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400">
             Register Patient
           </button>
         </Link>
         <Link href="/form">
-          <button className='bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400 mx-5'>
+          <button className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400 mx-5">
             Patient Form
+          </button>
+        </Link>
+        <Link href="/analysis">
+          <button className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400 mx-5">
+            Analysis Form
           </button>
         </Link>
       </main>
     </>
-  )
+  );
 }

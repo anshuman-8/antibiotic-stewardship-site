@@ -69,7 +69,7 @@ export default function CultureReport() {
   ];
 
   return (
-    <div className="border p-2 rounded-md">
+    <div className="border p-2 rounded-md mb-5">
       <div className="text-lg text-white font-semibold mt-2 my-5">Culture Report</div>
       <div className="flex flex-wrap mb-2">
         <div className="flex items-center mb-5">
