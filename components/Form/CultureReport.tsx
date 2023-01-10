@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { CiSquareRemove } from "react-icons/ci";
 
-export default function CultureReport() {
+export default function CultureReport(props) {
+
+  const {id, deleteCultureReport} = props;
   const [antibioticList, setAntibioticList] = useState([]); // list of antibiotics selected
 
   const handleAntibioticChange = (
@@ -70,7 +72,10 @@ export default function CultureReport() {
 
   return (
     <div className="border p-2 rounded-md mb-5">
+      <div className="flex flex-row">
       <div className="text-lg text-white font-semibold mt-2 my-5">Culture Report</div>
+      <button className="mx-5 bg-red-500 px-2 py-1 my-auto" onClick={()=>deleteCultureReport(id)}> delete</button>
+      </div>
       <div className="flex flex-wrap mb-2">
         <div className="flex items-center mb-5">
           <label className="mr-4 block uppercase tracking-wide text-sm font-bold text-white">

@@ -6,9 +6,9 @@ import Link from "next/link";
 import CultureReport from "../components/Form/CultureReport";
 
 export default function Form() {
-
   const [loading, setLoading] = useState(false);
   const [cultureSent, setCultureSent] = useState(false);
+  const [cultureReportList, setCultureReportList] = useState([]);
 
   const notify = (message: String) => toast.error(message);
 
@@ -25,22 +25,41 @@ export default function Form() {
     return dd + "/" + mm + "/" + yyyy;
   };
 
+  const addCultureReport = () => {
+    if(cultureSent){
+      const n = cultureReportList[cultureReportList.length-1].report  + 1 
+      setCultureReportList(cultureReportList.concat({"report": n}));
+    }else{
+      setCultureSent(true);
+      setCultureReportList(cultureReportList.concat({"report": 1}));
+    }
+  };
+
+  const deleteCultureReport = (report: number) => {
+    if(cultureSent){
+      setCultureReportList(cultureReportList.filter((item) => item.report !== report));
+    }
+    if(cultureReportList.length<=1){
+      setCultureSent(false);
+    }
+  }
+
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
-         <div className="fixed z-50 top-10">
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
-        </div>
+      <div className="fixed z-50 top-10">
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+      </div>
       <div className="w-11/12 mx-auto max-w-7xl my-6 pt-7 pb-10 bg-slate-700/80 flex flex-col z-10 shadow-xl rounded-lg p-5 backdrop-blur-md">
         <Link href={"/"} className="w-min">
           <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
@@ -48,7 +67,7 @@ export default function Form() {
             Back
           </button>
         </Link>
-        <form className="w-full" >
+        <form className="w-full">
           <div className="my-5 mx-2 text-white font-semibold uppercase text-2xl">
             Data Collection Form{" "}
             <span className="lowercase">(1123MRDnumber)</span>
@@ -81,7 +100,9 @@ export default function Form() {
           </div>
 
           {/* Diagnosis */}
-          <div className="text-lg text-white font-semibold mt-2 my-1">Diagnosis- </div>
+          <div className="text-lg text-white font-semibold mt-2 my-1">
+            Diagnosis{" "}
+          </div>
           <div className="flex flex-wrap mb-5 mx-1">
             <div className="w-full md:w-1/3 mb-6 md:mb-0">
               <label
@@ -122,7 +143,7 @@ export default function Form() {
                 className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
                 htmlFor="email"
               >
-                 Syndromic diagnosis:
+                Syndromic diagnosis:
               </label>
               <input
                 required
@@ -269,7 +290,7 @@ export default function Form() {
                 name="cultureSent"
                 value="true"
                 required
-                onChange={(e) => setCultureSent(true)}
+                onChange={addCultureReport}
               />
               <label className="mr-6 my-auto ml-2 text-sm font-semibold text-white">
                 Yes
@@ -287,9 +308,21 @@ export default function Form() {
             </div>
           </div>
 
-          {cultureSent && <CultureReport />}
+          {cultureSent && (
+            <>
+              {cultureReportList.map((li,i)=> <CultureReport key={i} id={li.report} deleteCultureReport={deleteCultureReport}/>) }
+            </>
+          )}
 
-          <></>
+          {cultureSent && <div className="-mt-3 mx-3 ">
+            <button
+              type="button"
+              onClick={()=>addCultureReport()}
+              className="bg-blue-500 text-white p-2 font-medium rounded-md shadow-lg active:shadow-sm"
+            >
+              Add Report
+            </button>
+          </div>}
 
           {/* Comments */}
           <div className="w-full md:w-5/12 mb-6 md:mb-5">
@@ -314,7 +347,7 @@ export default function Form() {
               <button
                 type="submit"
                 className="px-5 py-3 bg-primary text-white rounded-md text-lg font-medium my-5"
-                onClick={()=>notify("Form not yet completed!!")}
+                onClick={() => notify("Form not yet completed!!")}
               >
                 Submit
               </button>
