@@ -44,6 +44,79 @@ export default function Form() {
     }
   }
 
+  const clinicalSigns=[{
+    name:"Temp(F)",
+    id:"cstempf",
+    placeholder:""
+  },
+  {
+    name:"Blood Pressure(mmHg)",
+    id:"csbp",
+    placeholder:"BP"
+  },
+  {
+    name:"O2 Saturation (%)",
+    id:"csosat",
+    placeholder:""
+  },
+  {
+    name:"White Blood Cells (K/uL)",
+    id:"cswbc",
+    placeholder:""
+  },
+  {
+    name:"CRP (mg/L)",
+    id:"cscrp",
+    placeholder:""
+  },
+  {
+    name:"Procalcitonin (ng/ml)",
+    id:"csprocalc",
+    placeholder:""
+  },
+  {
+    name:"Lactate (mmol/L)",
+    id:"cslactate",
+    placeholder:""
+  },
+  {
+    name:"S.Creatinine(mg/dl)",
+    id:"cscreatinine",
+    placeholder:""
+  },
+  {
+    name:"Neutrophils %",
+    id:"csneutrophils",
+    placeholder:""
+  },
+  {
+    name:"Platelets (109/L)",
+    id:"csplatelets",
+    placeholder:""
+  },
+  {
+    name:"Urine analysis",
+    id:"csurine",
+    placeholder:""
+  },
+  {
+    name:"CSF study",
+    id:"csfstudy",
+    placeholder:""
+  },
+  {
+    name:"Body fluid study",
+    id:"csbodyfluid",
+    placeholder:""
+  },
+  // {
+  //   name:"",
+  //   id:"",
+  //   placeholder:""
+  // },
+]
+
+
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
       <div className="fixed z-50 top-10">
@@ -314,7 +387,7 @@ export default function Form() {
             </>
           )}
 
-          {cultureSent && <div className="-mt-3 mx-3 ">
+          {cultureSent && <div className="-mt-3 mx-3 mb-3 ">
             <button
               type="button"
               onClick={()=>addCultureReport()}
@@ -323,6 +396,69 @@ export default function Form() {
               Add Report
             </button>
           </div>}
+
+           {/* Clinical Signs correlating with Antibiotic initiation(prior 48 hours) */}
+           <div className="text-lg text-white font-semibold mt-4 my-2">
+           Clinical Signs correlating with Antibiotic initiation(prior 48 hours){" "}
+          </div>
+          <div className="flex flex-wrap mb-5 mx-1">
+         
+
+
+            {clinicalSigns.map((imp,i)=>
+            <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0" key={i}>
+              <label
+                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+                htmlFor="email"
+              >
+                {imp.name}
+              </label>
+              <input
+                required
+                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                name="department"
+                id={imp.id}
+                type="text"
+                placeholder={imp.placeholder}
+              />
+            </div>)}
+
+            <div className="w-full md:w-1/4 md:pl-3 md:pr-1 mb-6 md:mb-0">
+              <label
+                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+                htmlFor="email"
+              >
+                Syndromic diagnosis:
+              </label>
+              <input
+                required
+                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                name="department"
+                id="department"
+                type="text"
+                placeholder="Organism"
+              />
+            </div>
+
+            <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+              <label
+                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+                htmlFor="email"
+              >
+                Final diagnosis:
+              </label>
+              <input
+                required
+                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                name="department"
+                id="department"
+                type="text"
+                placeholder="Department"
+              />
+            </div>
+
+           
+          </div>
 
           {/* Comments */}
           <div className="w-full md:w-5/12 mb-6 md:mb-5">
