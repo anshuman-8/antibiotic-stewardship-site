@@ -5,10 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import CultureReport from "../components/Form/CultureReport";
 
-export default function Form() {
+export default function Analysis() {
   const [loading, setLoading] = useState(false);
   const [cultureSent, setCultureSent] = useState(false);
-  const [cultureReportList, setCultureReportList] = useState([]);
 
   const notify = (message: String) => toast.error(message);
 
@@ -24,98 +23,6 @@ export default function Form() {
     }
     return dd + "/" + mm + "/" + yyyy;
   };
-
-  const addCultureReport = () => {
-    if(cultureSent){
-      const n = cultureReportList[cultureReportList.length-1].report  + 1 
-      setCultureReportList(cultureReportList.concat({"report": n}));
-    }else{
-      setCultureSent(true);
-      setCultureReportList(cultureReportList.concat({"report": 1}));
-    }
-  };
-
-  const deleteCultureReport = (report: number) => {
-    if(cultureSent){
-      setCultureReportList(cultureReportList.filter((item) => item.report !== report));
-    }
-    if(cultureReportList.length<=1){
-      setCultureSent(false);
-    }
-  }
-
-  const clinicalSigns=[{
-    name:"Temp(F)",
-    id:"cstempf",
-    placeholder:""
-  },
-  {
-    name:"Blood Pressure(mmHg)",
-    id:"csbp",
-    placeholder:"BP"
-  },
-  {
-    name:"O2 Saturation (%)",
-    id:"csosat",
-    placeholder:""
-  },
-  {
-    name:"White Blood Cells (K/uL)",
-    id:"cswbc",
-    placeholder:""
-  },
-  {
-    name:"CRP (mg/L)",
-    id:"cscrp",
-    placeholder:""
-  },
-  {
-    name:"Procalcitonin (ng/ml)",
-    id:"csprocalc",
-    placeholder:""
-  },
-  {
-    name:"Lactate (mmol/L)",
-    id:"cslactate",
-    placeholder:""
-  },
-  {
-    name:"S.Creatinine(mg/dl)",
-    id:"cscreatinine",
-    placeholder:""
-  },
-  {
-    name:"Neutrophils %",
-    id:"csneutrophils",
-    placeholder:""
-  },
-  {
-    name:"Platelets (109/L)",
-    id:"csplatelets",
-    placeholder:""
-  },
-  {
-    name:"Urine analysis",
-    id:"csurine",
-    placeholder:""
-  },
-  {
-    name:"CSF study",
-    id:"csfstudy",
-    placeholder:""
-  },
-  {
-    name:"Body fluid study",
-    id:"csbodyfluid",
-    placeholder:""
-  },
-  // {
-  //   name:"",
-  //   id:"",
-  //   placeholder:""
-  // },
-]
-
 
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
@@ -142,7 +49,7 @@ export default function Form() {
         </Link>
         <form className="w-full">
           <div className="my-5 mx-2 text-white font-semibold uppercase text-2xl">
-            Data Collection Form{" "}
+            Data Analysis Form{" "}
             <span className="lowercase">(1123MRDnumber)</span>
           </div>
 
@@ -172,11 +79,7 @@ export default function Form() {
             />
           </div>
 
-          {/* Diagnosis */}
-          <div className="text-lg text-white font-semibold mt-2 my-1">
-            Diagnosis{" "}
-          </div>
-          <div className="flex flex-wrap mb-5 mx-1">
+          <div className="flex flex-wrap mb-5">
             <div className="w-full md:w-1/3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
@@ -363,7 +266,7 @@ export default function Form() {
                 name="cultureSent"
                 value="true"
                 required
-                onChange={addCultureReport}
+                onChange={(e) => setCultureSent(true)}
               />
               <label className="mr-6 my-auto ml-2 text-sm font-semibold text-white">
                 Yes
@@ -381,101 +284,7 @@ export default function Form() {
             </div>
           </div>
 
-          {cultureSent && (
-            <>
-              {cultureReportList.map((li,i)=> <CultureReport key={i} id={li.report} deleteCultureReport={deleteCultureReport}/>) }
-            </>
-          )}
-
-          {cultureSent && <div className="-mt-3 mx-3 mb-3 ">
-            <button
-              type="button"
-              onClick={()=>addCultureReport()}
-              className="bg-blue-500 text-white p-2 font-medium rounded-md shadow-lg active:shadow-sm"
-            >
-              Add Report
-            </button>
-          </div>}
-
-           {/* Clinical Signs correlating with Antibiotic initiation(prior 48 hours) */}
-           <div className="text-lg text-white font-semibold mt-4 my-2">
-           Clinical Signs correlating with Antibiotic initiation(prior 48 hours){" "}
-          </div>
-          <div className="flex flex-wrap mb-5 mx-1">
-         
-
-
-            {clinicalSigns.map((imp,i)=>
-            <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0" key={i}>
-              <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
-                htmlFor="email"
-              >
-                {imp.name}
-              </label>
-              <input
-                required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
-                name="department"
-                id={imp.id}
-                type="text"
-                placeholder={imp.placeholder}
-              />
-            </div>)}
-
-            <div className="w-full md:w-1/4 md:pl-3 md:pr-1 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
-                htmlFor="email"
-              >
-                Syndromic diagnosis:
-              </label>
-              <input
-                required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
-                name="department"
-                id="department"
-                type="text"
-                placeholder="Organism"
-              />
-            </div>
-
-            <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
-                htmlFor="email"
-              >
-                Final diagnosis:
-              </label>
-              <input
-                required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
-                name="department"
-                id="department"
-                type="text"
-                placeholder="Department"
-              />
-            </div>
-
-           
-          </div>
-
-          {/* Comments */}
-          <div className="w-full md:w-5/12 mb-6 md:mb-5">
-            <label
-              className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
-              htmlFor=""
-            >
-              Comments
-            </label>
-            <textarea
-              required
-              className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
-              name="department"
-              id="department"
-              placeholder="Comments"
-            />
-          </div>
+          {cultureSent && <CultureReport />}
 
           {/* Submit */}
           <div className="flex justify-end">
@@ -483,7 +292,6 @@ export default function Form() {
               <button
                 type="submit"
                 className="px-5 py-3 bg-primary text-white rounded-md text-lg font-medium my-5"
-                onClick={() => notify("Form not yet completed!!")}
               >
                 Submit
               </button>

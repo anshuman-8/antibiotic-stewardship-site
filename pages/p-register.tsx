@@ -1,12 +1,12 @@
 import { ImSpinner2 } from "react-icons/im";
 import React, { useEffect, useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 
 function PRegister() {
-  let date_ob:Date = new Date();
-  var year:number = date_ob.getFullYear();
+  let date_ob: Date = new Date();
+  var year: number = date_ob.getFullYear();
 
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -14,32 +14,33 @@ function PRegister() {
   const [loading, setLoading] = useState(false);
   const [editDetail, setEditDetail] = useState(false);
 
-  const notify = (message:String) => toast.error(message);
+  const notify = (message: String) => toast.error(message);
 
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
-      <div className="w-11/12 mx-auto max-w-6xl my-6 pt-7 pb-10 bg-slate-700/80 flex flex-col z-10 shadow-xl rounded-lg p-5 backdrop-blur-md">
-        <Link href={"/"} className="w-min">
-          <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md"> Back</button>
-        </Link>
-      <div>
+      <div className="fixed z-50 top-10">
         <ToastContainer
-         position="top-right"
-         autoClose={5000}
-         hideProgressBar={false}
-         newestOnTop
-         closeOnClick
-         rtl={false}
-         pauseOnFocusLoss
-         draggable
-         pauseOnHover
-         theme="light"
-          />
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </div>
+      <div className="w-11/12 mx-auto max-w-7xl my-6 pt-7 pb-10 bg-slate-700/80 flex flex-col z-10 shadow-xl rounded-lg p-5 backdrop-blur-md">
+        <Link href={"/"} className="w-min">
+          <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
+            {" "}
+            Back
+          </button>
+        </Link>
         <form className="w-full">
-          <div
-            className="my-5 mx-2 text-white font-semibold uppercase text-xl"
-          >
+          <div className="my-5 mx-2 text-white font-semibold uppercase text-xl">
             Patient Details
           </div>
 
