@@ -392,13 +392,16 @@ export default function Form() {
             <button
               type="button"
               onClick={()=>addCultureReport()}
-              className="bg-blue-500 text-white p-2 font-medium rounded-md shadow-lg active:shadow-sm"
+              className="bg-blue-500 text-white p-2 mb-2 font-medium rounded-md shadow-lg active:shadow-sm"
             >
               Add Another Report
             </button>
           </div>}
 
           {/* Antibiotic used*/}
+          <>
+           <AntibioticUsed/>
+          </>
 
            {/* Clinical Signs correlating with Antibiotic initiation(prior 48 hours) */}
            <div className="text-lg text-white font-semibold mt-4 my-2">
@@ -424,12 +427,42 @@ export default function Form() {
             </div>)}
           </div>
 
-          <>
-          <AntibioticUsed/>
-          </>
 
           {/* Comments */}
-          <div className="w-full md:w-5/12 mb-6 md:mb-5">
+          <div className="flex flex-wrap mb-5 mx-1">
+
+          <div className="w-full md:w-1/3 px-1 mb-6 md:mb-5">
+            <label
+              className="label-upper"
+              htmlFor=""
+            >
+              Classification of patient:
+            </label>
+            <input
+              required
+              className="input-imp"
+              name="department"
+              id="department"
+              placeholder=""
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-1 mb-6 md:mb-5">
+            <label
+              className="label-upper"
+              htmlFor=""
+            >
+              Classification of disease/ diagnosis:
+            </label>
+            <input
+              required
+              className="input-imp"
+              name="department"
+              id="department"
+              placeholder=""
+            />
+          </div>
+
+          <div className="w-full md:w-1/3 pr-1 mb-6 md:mb-5">
             <label
               className="label-upper"
               htmlFor=""
@@ -443,6 +476,7 @@ export default function Form() {
               id="department"
               placeholder="Comments"
             />
+          </div>
           </div>
 
           {/* Submit */}
