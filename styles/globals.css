@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .input-imp {
+      @apply appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white;
+    }
+
+    .label-upper{
+       @apply block uppercase tracking-wide text-sm font-bold mb-2 text-white
+    }
+  }

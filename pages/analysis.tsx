@@ -64,14 +64,14 @@ export default function Analysis() {
 
           <div className="w-full md:w-1/3 mb-6 md:mb-5">
             <label
-              className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+              className="label-upper"
               htmlFor=""
             >
               Reviewing Department
             </label>
             <input
               required
-              className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+              className="input-imp"
               name="department"
               id="department"
               type="text"
@@ -82,14 +82,14 @@ export default function Analysis() {
           <div className="flex flex-wrap mb-5">
             <div className="w-full md:w-1/3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+                className="label-upper"
                 htmlFor="email"
               >
                 Provisional diagnosis:
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="department"
                 id="department"
                 type="text"
@@ -99,14 +99,14 @@ export default function Analysis() {
 
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+                className="label-upper"
                 htmlFor="email"
               >
                 Final diagnosis:
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="department"
                 id="department"
                 type="text"
@@ -116,14 +116,14 @@ export default function Analysis() {
 
             <div className="w-full md:w-3/12 md:pl-3 md:pr-1 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+                className="label-upper"
                 htmlFor="email"
               >
                 Syndromic diagnosis:
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="department"
                 id="department"
                 type="text"
@@ -138,7 +138,7 @@ export default function Analysis() {
               ></label>
               <div className="relative mt-7">
                 <select
-                  className=" appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                  className=" input-imp"
                   name="branch"
                   id="grid-branch"
                   required
