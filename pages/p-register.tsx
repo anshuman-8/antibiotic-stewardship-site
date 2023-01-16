@@ -56,7 +56,7 @@ function PRegister() {
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="name"
                 id="name"
                 type="text"
@@ -73,7 +73,7 @@ function PRegister() {
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="MRDNumber"
                 id="MRDNumber"
                 type="text"
@@ -93,7 +93,7 @@ function PRegister() {
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="dateOfAdmission"
                 id="dateOfAdmission"
                 type="date"
@@ -141,7 +141,7 @@ function PRegister() {
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="stayLength"
                 id="stayLength"
                 type="number"
@@ -159,7 +159,7 @@ function PRegister() {
                 type="text"
                 name="doctor"
                 id="doctor"
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 placeholder="Dr. "
               />
             </div>
@@ -169,14 +169,14 @@ function PRegister() {
           <div className="flex flex-wrap -mx-3 mb-10">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+                className="label-upper"
                 htmlFor="email"
               >
                 Department
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="department"
                 id="department"
                 type="text"
@@ -192,7 +192,7 @@ function PRegister() {
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="diagnostic"
                 id="diagnostic"
                 type="text"
@@ -212,7 +212,7 @@ function PRegister() {
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="dateOfBirth"
                 id="dateOfBirth"
                 type="date"
@@ -226,7 +226,7 @@ function PRegister() {
                 Height <span></span>
               </label>
               <input
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="diagnostic"
                 id="diagnostic"
                 type="number"
@@ -242,7 +242,7 @@ function PRegister() {
                 Weight <span>(Kg.)</span>
               </label>
               <input
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="diagnostic"
                 id="diagnostic"
                 step="0.01"
@@ -256,14 +256,14 @@ function PRegister() {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+                className="label-upper"
                 htmlFor="email"
               >
                 Address
               </label>
               <textarea
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="email"
                 id="address"
                 cols={2}

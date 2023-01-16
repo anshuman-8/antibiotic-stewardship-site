@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { CiSquareRemove } from "react-icons/ci";
+import {BsTrashFill} from "react-icons/bs"
+
 
 export default function CultureReport(props) {
 
@@ -74,7 +76,9 @@ export default function CultureReport(props) {
     <div className="border p-2 rounded-md mb-5">
       <div className="flex flex-row">
       <div className="text-lg text-white font-semibold mt-2 my-5">Culture Report</div>
-      <button className="mx-5 bg-red-500 px-2 py-1 my-auto" onClick={()=>deleteCultureReport(id)}> delete</button>
+      <button className="mx-5 px-2 py-1 hover:bg-slate-600 rounded-md my-auto" onClick={()=>deleteCultureReport(id)}> 
+      <BsTrashFill className=" fill-red-600 " size={24} fill="red" />
+      </button>
       </div>
       <div className="flex flex-wrap mb-2">
         <div className="flex items-center mb-5">
@@ -99,13 +103,13 @@ export default function CultureReport(props) {
       <div className="flex flex-wrap mb-5">
         <div className="w-full md:w-1/2 mb-2 md:mb-0">
           <label
-            className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+            className="label-upper"
             htmlFor="email"
           >
             Date and time of Culture sent
           </label>
           <input
-            className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+            className="input-imp"
             name="department"
             id="department"
             type="datetime-local"
@@ -114,13 +118,13 @@ export default function CultureReport(props) {
         </div>
         <div className="w-full md:w-1/2 px-3 mb-2 md:mb-0">
           <label
-            className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+            className="label-upper"
             htmlFor="email"
           >
             Date and time of Culture Reported
           </label>
           <input
-            className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+            className="input-imp"
             name="department"
             id="department"
             type="datetime-local"
@@ -172,14 +176,14 @@ export default function CultureReport(props) {
         </div>
         <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
           <label
-            className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+            className="label-upper"
             htmlFor="email"
           >
             Site of collection
           </label>
           <input
             required
-            className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+            className="input-imp"
             name="department"
             id="department"
             type="text"
@@ -188,14 +192,14 @@ export default function CultureReport(props) {
         </div>
         <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
           <label
-            className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+            className="label-upper"
             htmlFor="email"
           >
             Organism
           </label>
           <input
             required
-            className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+            className="input-imp"
             name="department"
             id="department"
             type="text"

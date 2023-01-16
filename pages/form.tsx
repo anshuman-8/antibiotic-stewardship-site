@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import CultureReport from "../components/Form/CultureReport";
+import AntibioticUsed from "../components/Form/AntibioticUsed";
 
 export default function Form() {
   const [loading, setLoading] = useState(false);
@@ -157,14 +158,14 @@ export default function Form() {
 
           <div className="w-full md:w-1/3 mb-6 md:mb-5">
             <label
-              className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+              className="label-upper"
               htmlFor=""
             >
               Reviewing Department
             </label>
             <input
               required
-              className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+              className="input-imp"
               name="department"
               id="department"
               type="text"
@@ -179,14 +180,14 @@ export default function Form() {
           <div className="flex flex-wrap mb-5 mx-1">
             <div className="w-full md:w-1/3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+                className="label-upper"
                 htmlFor="email"
               >
                 Provisional diagnosis:
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="department"
                 id="department"
                 type="text"
@@ -196,14 +197,14 @@ export default function Form() {
 
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+                className="label-upper"
                 htmlFor="email"
               >
                 Final diagnosis:
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="department"
                 id="department"
                 type="text"
@@ -213,14 +214,14 @@ export default function Form() {
 
             <div className="w-full md:w-3/12 md:pl-3 md:pr-1 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+                className="label-upper"
                 htmlFor="email"
               >
                 Syndromic diagnosis:
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="input-imp"
                 name="department"
                 id="department"
                 type="text"
@@ -235,7 +236,7 @@ export default function Form() {
               ></label>
               <div className="relative mt-7">
                 <select
-                  className=" appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                  className=" input-imp"
                   name="branch"
                   id="grid-branch"
                   required
@@ -391,90 +392,91 @@ export default function Form() {
             <button
               type="button"
               onClick={()=>addCultureReport()}
-              className="bg-blue-500 text-white p-2 font-medium rounded-md shadow-lg active:shadow-sm"
+              className="bg-blue-500 text-white p-2 mb-2 font-medium rounded-md shadow-lg active:shadow-sm"
             >
-              Add Report
+              Add Another Report
             </button>
           </div>}
+
+          {/* Antibiotic used*/}
+          <>
+           <AntibioticUsed/>
+          </>
 
            {/* Clinical Signs correlating with Antibiotic initiation(prior 48 hours) */}
            <div className="text-lg text-white font-semibold mt-4 my-2">
            Clinical Signs correlating with Antibiotic initiation(prior 48 hours){" "}
           </div>
           <div className="flex flex-wrap mb-5 mx-1">
-         
-
-
             {clinicalSigns.map((imp,i)=>
             <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0" key={i}>
               <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+                className="block capitalize tracking-wide text-sm font-bold mb-2 text-white"
                 htmlFor="email"
               >
                 {imp.name}
               </label>
               <input
                 required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
                 name="department"
                 id={imp.id}
                 type="text"
                 placeholder={imp.placeholder}
               />
             </div>)}
-
-            <div className="w-full md:w-1/4 md:pl-3 md:pr-1 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
-                htmlFor="email"
-              >
-                Syndromic diagnosis:
-              </label>
-              <input
-                required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
-                name="department"
-                id="department"
-                type="text"
-                placeholder="Organism"
-              />
-            </div>
-
-            <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
-                htmlFor="email"
-              >
-                Final diagnosis:
-              </label>
-              <input
-                required
-                className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
-                name="department"
-                id="department"
-                type="text"
-                placeholder="Department"
-              />
-            </div>
-
-           
           </div>
 
+
           {/* Comments */}
-          <div className="w-full md:w-5/12 mb-6 md:mb-5">
+          <div className="flex flex-wrap mb-5 mx-1">
+
+          <div className="w-full md:w-1/3 px-1 mb-6 md:mb-5">
             <label
-              className="block uppercase tracking-wide text-sm font-bold mb-2 text-white"
+              className="label-upper"
+              htmlFor=""
+            >
+              Classification of patient:
+            </label>
+            <input
+              required
+              className="input-imp"
+              name="department"
+              id="department"
+              placeholder=""
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-1 mb-6 md:mb-5">
+            <label
+              className="label-upper"
+              htmlFor=""
+            >
+              Classification of disease/ diagnosis:
+            </label>
+            <input
+              required
+              className="input-imp"
+              name="department"
+              id="department"
+              placeholder=""
+            />
+          </div>
+
+          <div className="w-full md:w-1/3 pr-1 mb-6 md:mb-5">
+            <label
+              className="label-upper"
               htmlFor=""
             >
               Comments
             </label>
             <textarea
               required
-              className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+              className="input-imp"
               name="department"
               id="department"
               placeholder="Comments"
             />
+          </div>
           </div>
 
           {/* Submit */}
