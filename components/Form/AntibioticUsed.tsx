@@ -22,7 +22,7 @@ export default function AntibioticUsed() {
             </div>
           </div>
           {antibiotic.map((d,i)=>(
-            <div className="flex flex-wrap mb-5 mx-1">
+            <div className="flex flex-wrap mb-5 mx-1" key={i}>
             <div className="w-full md:w-[33%] mb-6 md:mb-0">
               <label
                 className="label-upper"

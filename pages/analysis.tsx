@@ -255,37 +255,6 @@ export default function Analysis() {
             </div>
           </div>
 
-          {/* Culture sent */}
-          <div className="flex flex-wrap mb-2">
-            <div className="flex items-center mb-5">
-              <label className="block uppercase tracking-wide text-sm mr-3 font-bold text-white">
-                Culture Sent:{" "}
-              </label>
-              <input
-                type="radio"
-                name="cultureSent"
-                value="true"
-                required
-                onChange={(e) => setCultureSent(true)}
-              />
-              <label className="mr-6 my-auto ml-2 text-sm font-semibold text-white">
-                Yes
-              </label>
-              <input
-                type="radio"
-                name="cultureSent"
-                value="false"
-                required
-                onChange={(e) => setCultureSent(false)}
-              />
-              <label className="mx-2 text-sm font-semibold text-white">
-                No
-              </label>
-            </div>
-          </div>
-
-          {cultureSent && <CultureReport />}
-
           {/* Submit */}
           <div className="flex justify-end">
             {!loading ? (
