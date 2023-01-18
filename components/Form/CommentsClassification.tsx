@@ -1,9 +1,13 @@
 import React from 'react'
 
-export default function CommentsClassification() {
+interface PropType {
+    submitButton: () => JSX.Element
+}
+export default function CommentsClassification(props:PropType) {
   return (
+    <>
     <div className='form-component'>
-      <div className="flex flex-wrap mb-5 mx-1">
+      <div className="flex flex-wrap mb-2 mx-1">
             <div className="w-full md:w-1/3 px-1 mb-6 md:mb-5">
               <label className="label-upper" htmlFor="">
                 Classification of patient:
@@ -42,6 +46,8 @@ export default function CommentsClassification() {
               />
             </div>
           </div>
+    {props.submitButton()}
     </div>
+    </>
   )
 }

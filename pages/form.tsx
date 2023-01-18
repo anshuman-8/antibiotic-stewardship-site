@@ -45,6 +45,24 @@ export default function Form() {
     }
   };
 
+  const submitButton = () => (
+    <div className="flex justify-end max-w-6xl">
+      {!loading ? (
+        <button
+          type="submit"
+          className="px-5 py-3 bg-primary text-white rounded-md text-lg font-medium my-2"
+          onClick={() => notify("Form not yet completed!!")}
+        >
+          Submit
+        </button>
+      ) : (
+        <div className="bg-slate-400/50 px-6 mt-3 ">
+          <ImSpinner2 className="animate-spin my-3 fill-primary " size={30} />
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
       <div className="fixed z-50 top-10">
@@ -62,13 +80,15 @@ export default function Form() {
         />
       </div>
       <div className="">
-        <Link href={"/"} className="w-min">
-          <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
-            {" "}
-            Back
-          </button>
-        </Link>
         <form className="w-full">
+          <div className="max-w-7xl mx-auto mt-3">
+          <Link href={"/"} className="w-min">
+            <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
+              {"< "}
+              Back
+            </button>
+          </Link>
+          </div>
           {/* Intro and Diagnosis */}
           <IntroDiagnosis />
 
@@ -77,8 +97,9 @@ export default function Form() {
 
           {/* Culture sent */}
           <div className="form-component">
+            <div className="text-xl text-white font-semibold mt-2 mb-4 my-1">Culture Report</div>
             <div className="flex flex-wrap mb-2">
-              <div className="flex items-center mb-5">
+              <div className="flex items-center mb-3">
                 <label className="block uppercase tracking-wide text-sm mr-3 font-bold text-white">
                   Culture Sent:{" "}
                 </label>
@@ -137,27 +158,9 @@ export default function Form() {
           <ClinicalSign />
 
           {/* Comments */}
-          <CommentsClassification />
+          <CommentsClassification submitButton={submitButton}/>
 
           {/* Submit */}
-          <div className="flex justify-end">
-            {!loading ? (
-              <button
-                type="submit"
-                className="px-5 py-3 bg-primary text-white rounded-md text-lg font-medium my-5"
-                onClick={() => notify("Form not yet completed!!")}
-              >
-                Submit
-              </button>
-            ) : (
-              <div className="bg-slate-400/50 px-6 mt-3 ">
-                <ImSpinner2
-                  className="animate-spin my-3 fill-primary "
-                  size={30}
-                />
-              </div>
-            )}
-          </div>
         </form>
       </div>
     </div>

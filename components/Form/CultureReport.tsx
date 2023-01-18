@@ -78,15 +78,15 @@ export default function CultureReport(props: proptype) {
   return (
     <div className="border p-2 rounded-md mb-5">
       <div className="flex flex-row">
-        <div className="text-lg text-white font-semibold mt-2 my-5">
+        <div className="text-lg text-white font-semibold mt-3 my-5">
           Culture Report
         </div>
-        <button
-          className="mx-5 px-2 py-1 hover:bg-slate-600 rounded-md my-auto"
+        <div
+          className="mx-3 px-2 hover:bg-slate-600 rounded-md my-auto p-2"
           onClick={() => deleteCultureReport(id)}
         >
           <BsTrashFill className=" fill-red-600 " size={24} fill="red" />
-        </button>
+        </div>
       </div>
       <div className="flex flex-wrap mb-2">
         <div className="flex items-center mb-5">

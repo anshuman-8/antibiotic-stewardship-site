@@ -77,7 +77,7 @@ export default function ClinicalSign() {
 
   return (
     <div className='form-component'>
-       <div className="text-lg text-white font-semibold mt-4 my-2">
+       <div className="text-xl text-white font-semibold my-4 ">
             Clinical Signs correlating with Antibiotic initiation(prior 48
             hours){" "}
           </div>

@@ -12,13 +12,13 @@ export default function AntibioticUsed() {
 
   return (
     <div className="form-component">
-      <div className="text-lg text-white font-semibold mt-2 mb-2 my-1 flex flex-row">
+      <div className="text-xl text-white font-semibold mt-2 mb-2 my-1 flex flex-row">
         <div>Antibiotic Used </div>
         <div
           className="border-2 border-amber-400 p-1 mx-1 rounded-md hover:cursor-pointer"
           onClick={addAntibiotic}
         >
-          <GrAddCircle className="fill-amber-500" />
+          <GrAddCircle className="" fill="#ffffff" />
         </div>
       </div>
       {antibiotic.map((d, i) => (

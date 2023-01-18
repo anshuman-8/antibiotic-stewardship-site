@@ -31,8 +31,8 @@ export default function DrugReview() {
     };
 
   return (
-    <div className="">
-      <div className="text-white my-3 text-base font-semibold">
+    <div className="form-component">
+      <div className="text-white my-3 text-xl font-semibold">
         Drug Administered Review
       </div>
       {/* give a checkbox options with 5 in a row asking for different infections */}

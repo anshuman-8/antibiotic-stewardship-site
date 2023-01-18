@@ -4,7 +4,7 @@ export default function focusOfInfection() {
   return (
     <div className='form-component'>
       <div className="mb-5">
-            <div className="text-white my-3 text-base font-semibold">
+            <div className="text-white my-3 text-xl font-semibold">
               Suspected Focus Of Infection
             </div>
             {/* give a checkbox options with 5 in a row asking for different infections */}

@@ -24,7 +24,7 @@ export default function IntroDiagnosis() {
       </div>
 
       {/* to display patient data */}
-      <div className="text-white font-medium my-5">
+      <div className="text-white font-medium text-lg my-5">
         <div>Patient Name: Anshuman Swain</div>
       </div>
 
@@ -43,7 +43,7 @@ export default function IntroDiagnosis() {
       </div>
 
       {/* Diagnosis */}
-      <div className="text-lg text-white font-semibold mt-2 my-1">
+      <div className="text-xl text-white font-semibold mt-2 my-1">
         Diagnosis{" "}
       </div>
       <div className="flex flex-wrap mb-5 mx-1">
