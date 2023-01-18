@@ -294,6 +294,7 @@ function PRegister() {
               <button
                 type="submit"
                 className="px-5 py-3 bg-primary text-white rounded-md text-lg font-medium my-5"
+                onClick={() => notify("Form not yet completed!!")}
               >
                 Submit
               </button>

@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { CiSquareRemove } from "react-icons/ci";
-import {BsTrashFill} from "react-icons/bs"
+import { BsTrashFill } from "react-icons/bs";
 
+interface proptype {
+  id: number,
+  deleteCultureReport: (id: number) => void,
+};
 
-export default function CultureReport(props) {
-
-  const {id, deleteCultureReport} = props;
-  const [antibioticList, setAntibioticList] = useState([]); // list of antibiotics selected
+export default function CultureReport(props: proptype) {
+  const { id, deleteCultureReport } = props;
+  const [antibioticList, setAntibioticList] = useState<string[]>([]); // list of antibiotics selected
 
   const handleAntibioticChange = (
     e: React.ChangeEvent<HTMLSelectElement>
@@ -75,10 +78,15 @@ export default function CultureReport(props) {
   return (
     <div className="border p-2 rounded-md mb-5">
       <div className="flex flex-row">
-      <div className="text-lg text-white font-semibold mt-2 my-5">Culture Report</div>
-      <button className="mx-5 px-2 py-1 hover:bg-slate-600 rounded-md my-auto" onClick={()=>deleteCultureReport(id)}> 
-      <BsTrashFill className=" fill-red-600 " size={24} fill="red" />
-      </button>
+        <div className="text-lg text-white font-semibold mt-3 my-5">
+          Culture Report
+        </div>
+        <div
+          className="mx-3 px-2 hover:bg-slate-600 rounded-md my-auto p-2"
+          onClick={() => deleteCultureReport(id)}
+        >
+          <BsTrashFill className=" fill-red-600 " size={24} fill="red" />
+        </div>
       </div>
       <div className="flex flex-wrap mb-2">
         <div className="flex items-center mb-5">
@@ -102,10 +110,7 @@ export default function CultureReport(props) {
 
       <div className="flex flex-wrap mb-5">
         <div className="w-full md:w-1/2 mb-2 md:mb-0">
-          <label
-            className="label-upper"
-            htmlFor="email"
-          >
+          <label className="label-upper" htmlFor="email">
             Date and time of Culture sent
           </label>
           <input
@@ -117,10 +122,7 @@ export default function CultureReport(props) {
           />
         </div>
         <div className="w-full md:w-1/2 px-3 mb-2 md:mb-0">
-          <label
-            className="label-upper"
-            htmlFor="email"
-          >
+          <label className="label-upper" htmlFor="email">
             Date and time of Culture Reported
           </label>
           <input
@@ -175,10 +177,7 @@ export default function CultureReport(props) {
           </div>
         </div>
         <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <label
-            className="label-upper"
-            htmlFor="email"
-          >
+          <label className="label-upper" htmlFor="email">
             Site of collection
           </label>
           <input
@@ -191,10 +190,7 @@ export default function CultureReport(props) {
           />
         </div>
         <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <label
-            className="label-upper"
-            htmlFor="email"
-          >
+          <label className="label-upper" htmlFor="email">
             Organism
           </label>
           <input
@@ -334,9 +330,7 @@ export default function CultureReport(props) {
       </div>
 
       <div className="flex flex-wrap mb-5">
-        <div className="text-white text-base font-semibold">
-          Imaging
-        </div>
+        <div className="text-white text-base font-semibold">Imaging</div>
         <div className="w-full flex flex-wrap font-medium text-white">
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
             <input type="checkbox" name="UTI" id="UTI" className="" />

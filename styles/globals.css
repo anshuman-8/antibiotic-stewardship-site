@@ -8,6 +8,10 @@
     }
 
     .label-upper{
-       @apply block uppercase tracking-wide text-sm font-bold mb-2 text-white
+      @apply block uppercase tracking-wide text-sm font-bold mb-2 text-white
+    }
+
+    .form-component{
+      @apply w-11/12 mx-auto max-w-7xl my-5 pt-7 pb-10 backdrop-blur-md rounded-lg p-5 flex flex-col z-10 bg-slate-700/80 shadow-xl
     }
   }
