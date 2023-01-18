@@ -28,7 +28,6 @@ export default function DrugReview() {
       await setCheckBoxList({ ...checkBoxList, [name]: checked });
       // handleScore(checkBoxList)
       console.log(checkBoxList);
-
     };
 
   return (

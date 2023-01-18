@@ -11,7 +11,7 @@ export default function AntibioticUsed() {
   };
 
   return (
-    <div>
+    <div className="form-component">
       <div className="text-lg text-white font-semibold mt-2 mb-2 my-1 flex flex-row">
         <div>Antibiotic Used </div>
         <div
