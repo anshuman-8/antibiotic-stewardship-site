@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import DrugReview from "../components/Analysis/DrugReview";
 import Introduction from "../components/Analysis/Introduction";
+import Recommendation from "../components/Analysis/Recommendation";
 
 export default function Analysis() {
   const [loading, setLoading] = useState(false);
@@ -42,6 +43,8 @@ export default function Analysis() {
           <Introduction/>
 
           <DrugReview/>
+
+          <Recommendation/>
 
           {/* Submit */}
           <div className="flex justify-end max-w-6xl mx-auto">
