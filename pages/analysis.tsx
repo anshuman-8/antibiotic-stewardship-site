@@ -6,6 +6,7 @@ import Link from "next/link";
 import DrugReview from "../components/Analysis/DrugReview";
 import Introduction from "../components/Analysis/Introduction";
 import Recommendation from "../components/Analysis/Recommendation";
+import OtherAnalysis from "../components/Analysis/Others";
 
 export default function Analysis() {
   const [loading, setLoading] = useState(false);
@@ -32,12 +33,14 @@ export default function Analysis() {
         />
       </div>
       <div className="">
-        <Link href={"/"} className="w-min">
-          <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
-            {" "}
-            Back
-          </button>
-        </Link>
+      <div className="max-w-7xl mx-auto mt-3">
+          <Link href={"/"} className="w-min">
+            <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
+              {"< "}
+              Back
+            </button>
+          </Link>
+          </div>
         <form className="w-full">
           
           <Introduction/>
@@ -46,12 +49,15 @@ export default function Analysis() {
 
           <Recommendation/>
 
+          <OtherAnalysis/>
+
           {/* Submit */}
           <div className="flex justify-end max-w-6xl mx-auto">
             {!loading ? (
               <button
                 type="submit"
                 className="px-5 py-3 bg-primary text-white rounded-md text-lg font-medium my-5"
+                onClick={()=>notify("Form Not implemented")}
               >
                 Submit
               </button>
