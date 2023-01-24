@@ -7,9 +7,9 @@ import Link from "next/link";
 import ClinicalSign from "../components/Form/ClinicalSign";
 import CultureReport from "../components/Form/CultureReport";
 import AntibioticUsed from "../components/Form/AntibioticUsed";
-import IntroDiagnosis from "../components/Form/IntroDiagnosis";
+import FormIntro from "../components/Form/FormIntro";
+import Diagnosis from "../components/Form/Diagnosis";
 import FocusOfInfection from "../components/Form/FocusOfInfection";
-import CommentsClassification from "../components/Form/CommentsClassification";
 
 interface CultureReportType {
   report: number;
@@ -45,24 +45,6 @@ export default function Form() {
     }
   };
 
-  const submitButton = () => (
-    <div className="flex justify-end max-w-6xl">
-      {!loading ? (
-        <button
-          type="submit"
-          className="px-5 py-3 bg-primary text-white rounded-md text-lg font-medium my-2"
-          onClick={() => notify("Form not yet completed!!")}
-        >
-          Submit
-        </button>
-      ) : (
-        <div className="bg-slate-400/50 px-6 mt-3 ">
-          <ImSpinner2 className="animate-spin my-3 fill-primary " size={30} />
-        </div>
-      )}
-    </div>
-  );
-
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
       <div className="fixed z-50 top-10">
@@ -82,22 +64,27 @@ export default function Form() {
       <div className="">
         <form className="w-full">
           <div className="max-w-7xl mx-auto mt-3">
-          <Link href={"/"} className="w-min">
-            <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
-              {"< "}
-              Back
-            </button>
-          </Link>
+            <Link href={"/"} className="w-min">
+              <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
+                {"< "}
+                Back
+              </button>
+            </Link>
           </div>
           {/* Intro and Diagnosis */}
-          <IntroDiagnosis />
+          <FormIntro />
+
+          {/* Diagnosis */}
+          <Diagnosis />
 
           {/* Suspected focus of infection*/}
           <FocusOfInfection />
 
           {/* Culture sent */}
           <div className="form-component">
-            <div className="text-xl text-white font-semibold mt-2 mb-4 my-1">Culture Report</div>
+            <div className="text-xl text-white font-semibold mt-2 mb-4 my-1">
+              Culture Report
+            </div>
             <div className="flex flex-wrap mb-2">
               <div className="flex items-center mb-3">
                 <label className="block uppercase tracking-wide text-sm mr-3 font-bold text-white">
@@ -158,8 +145,25 @@ export default function Form() {
           <ClinicalSign />
 
           {/* Comments */}
-          <CommentsClassification submitButton={submitButton}/>
-
+          {/* <CommentsClassification submitButton={submitButton}/> */}
+          <div className="flex justify-end mx-auto max-w-6xl mb-10">
+            {!loading ? (
+              <button
+                type="submit"
+                className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
+                onClick={() => notify("Form not yet completed!!")}
+              >
+                Submit
+              </button>
+            ) : (
+              <div className="bg-slate-400/50 px-6 mt-3 ">
+                <ImSpinner2
+                  className="animate-spin my-3 fill-primary "
+                  size={30}
+                />
+              </div>
+            )}
+          </div>
           {/* Submit */}
         </form>
       </div>
