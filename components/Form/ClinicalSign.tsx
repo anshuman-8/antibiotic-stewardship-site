@@ -67,12 +67,7 @@ export default function ClinicalSign() {
           name: "Body fluid study",
           id: "csbodyfluid",
           placeholder: "",
-        },
-        // {
-        //   name:"",
-        //   id:"",
-        //   placeholder:""
-        // },
+        }
       ];
 
   return (

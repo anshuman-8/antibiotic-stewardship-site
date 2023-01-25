@@ -300,15 +300,11 @@ export default function CultureReport(props: proptype) {
               defaultValue={"Select Specialization"}
             >
               <option value="Select Specialization" disabled>
-                Select Specimen
+                Select Resistance
               </option>
-              <option value="Blood">
-                CRE (Carbapenem resistant enterobactereciae)
-              </option>
-              <option value="Sputum">
-                {" "}
-                VRE (Vancomycin resistant Enterococcus)
-              </option>
+              <option value="Blood">CRE (Carbapenem resistant enterobactereciae)</option>
+              <option value="Blood">CRAB (Carbapenem resistant acenetobacter)</option>
+              <option value="Sputum">VRE (Vancomycin resistant Enterococcus)</option>
               <option value="">Col Re (colistin Resistant)</option>
               <option value="">ESBL (Extended spectrum Beta lactamase)</option>
               <option value="">
@@ -341,6 +337,12 @@ export default function CultureReport(props: proptype) {
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
             <input type="checkbox" name="UTI" id="UTI" className="" />
             <label htmlFor="infection" className="ml-2">
+              Ultra Sound
+            </label>
+          </div>
+          <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
+            <input type="checkbox" name="UTI" id="UTI" className="" />
+            <label htmlFor="infection" className="ml-2">
               CT
             </label>
           </div>
@@ -348,6 +350,12 @@ export default function CultureReport(props: proptype) {
             <input type="checkbox" name="UTI" id="UTI" className="" />
             <label htmlFor="infection" className="ml-2">
               MRI
+            </label>
+          </div>
+          <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
+            <input type="checkbox" name="UTI" id="UTI" className="" />
+            <label htmlFor="infection" className="ml-2">
+              PET MRI
             </label>
           </div>
         </div>
