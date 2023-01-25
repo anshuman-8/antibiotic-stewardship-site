@@ -36,15 +36,15 @@ export default function Introduction() {
               className="label-upper"
               htmlFor=""
             >
-              Reviewing Department
+              Reviewing Doctor
             </label>
             <input
               required
               className="input-imp"
-              name="department"
-              id="department"
+              name="doctor"
+              id="doctor"
               type="text"
-              placeholder="Department"
+              placeholder="Dr."
             />
           </div>
     </div>

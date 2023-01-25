@@ -69,6 +69,7 @@ export default function DrugReview() {
             Right loading Dose
           </label>
         </div>
+
         <div className="w-1/2 sm:w-1/3 p-1">
           <input
             type="checkbox"
@@ -92,6 +93,32 @@ export default function DrugReview() {
           />
           <label htmlFor="infection" className="ml-2">
             Right Duration
+          </label>
+        </div>
+
+        <div className="w-1/2 sm:w-1/3 p-1">
+          <input
+            type="checkbox"
+            name="Appropiatness"
+            id="Appropiatness"
+            className=""
+            onChange={handleClick}
+          />
+          <label htmlFor="infection" className="ml-2">
+            Appropiatness
+          </label>
+        </div>
+
+        <div className="w-1/2 sm:w-1/3 p-1">
+          <input
+            type="checkbox"
+            name="rightDocumentation"
+            id="rightDocumentation"
+            className=""
+            onChange={handleClick}
+          />
+          <label htmlFor="infection" className="ml-2">
+            Right Documentation
           </label>
         </div>
 

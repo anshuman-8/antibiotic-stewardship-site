@@ -6,15 +6,14 @@ import Link from "next/link";
 import DrugReview from "../components/Analysis/DrugReview";
 import Introduction from "../components/Analysis/Introduction";
 import Recommendation from "../components/Analysis/Recommendation";
-import OtherAnalysis from "../components/Analysis/Others";
+import PatientOutcome from "../components/Analysis/PatientOutcome";
+import Compliance from "../components/Analysis/Compliance";
 
 export default function Analysis() {
   const [loading, setLoading] = useState(false);
   const [cultureSent, setCultureSent] = useState(false);
 
   const notify = (message: String) => toast.error(message);
-
- 
 
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
@@ -33,31 +32,32 @@ export default function Analysis() {
         />
       </div>
       <div className="">
-      <div className="max-w-7xl mx-auto mt-3">
+        <div className="max-w-7xl mx-auto mt-3">
           <Link href={"/"} className="w-min">
             <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
               {"< "}
               Back
             </button>
           </Link>
-          </div>
+        </div>
         <form className="w-full">
-          
-          <Introduction/>
+          <Introduction />
 
-          <DrugReview/>
+          <DrugReview />
 
-          <Recommendation/>
+          <Recommendation />
 
-          <OtherAnalysis/>
+          <Compliance/>
+
+          <PatientOutcome />
 
           {/* Submit */}
-          <div className="flex justify-end max-w-6xl mx-auto">
+          <div className="flex justify-end max-w-6xl mx-auto mb-10">
             {!loading ? (
               <button
                 type="submit"
-                className="px-5 py-3 bg-primary text-white rounded-md text-lg font-medium my-5"
-                onClick={()=>notify("Form Not implemented")}
+                className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
+                onClick={() => notify("Form Not implemented")}
               >
                 Submit
               </button>

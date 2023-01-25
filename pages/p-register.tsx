@@ -134,18 +134,18 @@ function PRegister() {
             </div>
             <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-white text-sm font-bold mb-2"
-                htmlFor="grid-sem"
+                className="label-upper"
+                htmlFor="email"
               >
-                Stay Length <span>(Days)</span>
+                Department
               </label>
               <input
                 required
                 className="input-imp"
-                name="stayLength"
-                id="stayLength"
-                type="number"
-                placeholder="Stay Length"
+                name="department"
+                id="department"
+                type="text"
+                placeholder="Department"
               />
             </div>
             <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
@@ -167,23 +167,7 @@ function PRegister() {
 
           {/* Department & Diagnostic */}
           <div className="flex flex-wrap -mx-3 mb-10">
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label
-                className="label-upper"
-                htmlFor="email"
-              >
-                Department
-              </label>
-              <input
-                required
-                className="input-imp"
-                name="department"
-                id="department"
-                type="text"
-                placeholder="Department"
-              />
-            </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-white text-sm font-bold mb-2"
                 htmlFor="phone-number"
@@ -199,6 +183,22 @@ function PRegister() {
                 placeholder="Diagnostic"
               />
             </div>
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label
+                className="label-upper"
+                htmlFor="email"
+              >
+                Cormorbodities
+              </label>
+              <textarea
+                required
+                className="input-imp"
+                name="department"
+                id="department"
+                placeholder="Department"
+              />
+            </div>
+            
           </div>
 
           {/* DOB, Height, weight */}
