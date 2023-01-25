@@ -63,13 +63,17 @@ export default function Form() {
       </div>
       <div className="">
         <form className="w-full">
-          <div className="max-w-7xl mx-auto mt-3">
-            <Link href={"/"} className="w-min">
+          <div className="max-w-7xl mx-auto mt-3 flex flex-row items-center space-x-10">
+            <Link href={"/"} className="w-auto">
               <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
                 {"< "}
                 Back
               </button>
             </Link>
+            <div className="my-5 mx-2 text-slate-800 font-semibold uppercase text-2xl">
+                Data Review Form{" "}
+                {/* <span className="lowercase">(1123MRDnumber)</span> */}
+              </div>
           </div>
           {/* Intro and Diagnosis */}
           <FormIntro />

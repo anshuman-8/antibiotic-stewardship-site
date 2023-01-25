@@ -11,7 +11,7 @@ export default function AntibioticUsed() {
   };
 
   return (
-    <div className="form-component">
+    <div className="form-component" id="antibiotic-used">
       <div className="text-xl text-white font-semibold mt-2 mb-2 my-1 flex flex-row">
         <div>Antibiotic Used </div>
         <div
@@ -23,6 +23,20 @@ export default function AntibioticUsed() {
       </div>
       {antibiotic.map((d, i) => (
         <div className="flex flex-wrap mb-0 mx-1" key={i}>
+              <div className="w-full  md:w-[11.12%] px-2 mb-4 md:mb-0">
+            <label className="label-upper" htmlFor="email">
+              init. Date:
+            </label>
+            <input
+              required
+              className="input-imp"
+              name=""
+              id=""
+              type="text"
+              placeholder=""
+            />
+          </div>
+
           <div className="w-full md:w-[33%] mb-4 md:mb-0">
             <label className="label-upper" htmlFor="email">
               Antibiotic:
@@ -39,7 +53,21 @@ export default function AntibioticUsed() {
 
           <div className="w-full  md:w-[11.12%] px-2 mb-4 md:mb-0">
             <label className="label-upper" htmlFor="email">
-              Dose:
+              Loading Dose:
+            </label>
+            <input
+              required
+              className="input-imp"
+              name=""
+              id=""
+              type="text"
+              placeholder=""
+            />
+          </div>
+
+          <div className="w-full  md:w-[11.12%] px-2 mb-4 md:mb-0">
+            <label className="label-upper" htmlFor="email">
+            Maintenance Dose:
             </label>
             <input
               required
@@ -79,37 +107,26 @@ export default function AntibioticUsed() {
             />
           </div>
 
-          <div className="w-full  md:w-[11.12%] px-2 mb-4 md:mb-0">
-            <label className="label-upper" htmlFor="email">
-              init. Date:
-            </label>
-            <input
-              required
-              className="input-imp"
-              name=""
-              id=""
-              type="text"
-              placeholder=""
-            />
-          </div>
+      
 
-          <div className="w-full  md:w-[11.12%] px-2 mb-4 md:mb-0">
-            <label className="label-upper" htmlFor="email">
-              Loading Dose:
-            </label>
-            <input
-              required
-              className="input-imp"
-              name=""
-              id=""
-              type="text"
-              placeholder=""
-            />
-          </div>
+          
 
           <div className="w-full md:w-[11.12%] md:pl-3 md:pr-1 mb-4 md:mb-0">
             <label className="label-upper" htmlFor="email">
-              Infusion:
+              Days (duration):
+            </label>
+            <input
+              required
+              className="input-imp"
+              name=""
+              id=""
+              type="text"
+              placeholder=""
+            />
+          </div>
+          <div className="w-full md:w-[11.12%] md:pl-3 md:pr-1 mb-4 md:mb-0">
+            <label className="label-upper" htmlFor="email">
+              End date:
             </label>
             <input
               required

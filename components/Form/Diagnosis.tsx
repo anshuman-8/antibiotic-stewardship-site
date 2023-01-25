@@ -12,12 +12,11 @@ export default function Diagnosis() {
           <label className="label-upper" htmlFor="email">
             Provisional diagnosis:
           </label>
-          <input
+          <textarea
             required
             className="input-imp"
             name="provisional_diagnosis"
             id="provisional_diagnosis"
-            type="text"
             placeholder=""
           />
         </div>
@@ -26,12 +25,11 @@ export default function Diagnosis() {
           <label className="label-upper" htmlFor="email">
             Final diagnosis:
           </label>
-          <input
+          <textarea
             required
             className="input-imp"
             name="final_diagnosis"
             id="provisional_diagnosis"
-            type="text"
             placeholder=""
           />
         </div>
@@ -40,12 +38,11 @@ export default function Diagnosis() {
           <label className="label-upper" htmlFor="email">
             Syndromic diagnosis:
           </label>
-          <input
+          <textarea
             required
             className="input-imp"
             name="syndromic_diagnosis"
             id="syndromic_diagnosis"
-            type="text"
             placeholder=""
           />
         </div>
