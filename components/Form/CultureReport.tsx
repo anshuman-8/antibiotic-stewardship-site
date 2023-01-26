@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef} from "react";
 import { CiSquareRemove } from "react-icons/ci";
 import { BsTrashFill } from "react-icons/bs";
 
@@ -9,7 +9,16 @@ interface proptype {
 
 export default function CultureReport(props: proptype) {
   const { id, deleteCultureReport } = props;
-  const [antibioticList, setAntibioticList] = useState<string[]>([]); // list of antibiotics selected
+  const [antibioticList, setAntibioticList] = useState<string[]>([]); 
+  const [imaging, setImaging] = useState({
+    xray: false,
+    ct: false,
+    mri: false,
+    ultrasound: false,
+    petmri:false
+  });
+
+  const checkbox = useRef();
 
   const handleAntibioticChange = (
     e: React.ChangeEvent<HTMLSelectElement>
@@ -77,12 +86,12 @@ export default function CultureReport(props: proptype) {
 
   return (
     <div className="border p-2 rounded-md mb-5">
-      <div className="flex flex-row">
+      <div className="flex flex-row justify-between">
         <div className="text-lg text-white font-semibold mt-3 my-5">
           Culture Report
         </div>
         <div
-          className="mx-3 px-2 hover:bg-slate-600 rounded-md my-auto p-2"
+          className="mx-3 px-2 hover:bg-slate-600 rounded-md my-auto p-2 hover:cursor-pointer border border-slate-300"
           onClick={() => deleteCultureReport(id)}
         >
           <BsTrashFill className=" fill-red-600 " size={24} fill="red" />
@@ -329,7 +338,7 @@ export default function CultureReport(props: proptype) {
         <div className="text-white text-base font-semibold">Imaging</div>
         <div className="w-full flex flex-wrap font-medium text-white">
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
-            <input type="checkbox" name="UTI" id="UTI" className="" />
+            <input type="checkbox" name="xray" id="xray" className=""/>
             <label htmlFor="infection" className="ml-2">
               X ray
             </label>
@@ -358,6 +367,9 @@ export default function CultureReport(props: proptype) {
               PET MRI
             </label>
           </div>
+        </div>
+        <div className="md:w-1/3 my-2 mx-2">
+          <textarea className="px-2 py-1 rounded-md w-full" placeholder="Impression..." disabled={false}/>
         </div>
       </div>
     </div>

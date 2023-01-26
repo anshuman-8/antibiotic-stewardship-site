@@ -63,7 +63,7 @@ const AntibioticsUsed: React.FC = () => {
         <table className="w-full">
           <thead>
             <tr className="text-white">
-              <th className="py-2">Init Date</th>
+              <th className="py-2">Initial Date</th>
               <th className="py-2">Antibiotic</th>
               <th className="py-2">Loading Dose</th>
               <th className="py-2">Maintenance Dose</th>

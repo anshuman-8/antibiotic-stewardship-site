@@ -21,8 +21,6 @@ export default function FormIntro() {
   return (
     <div className="form-component">
      
-     
-
       {/* to display patient data */}
       <div className="text-white font-semibold text-lg space-y-2 my-5">
         <div> <span className="text-2xl px-1">{" Anshuman Swain"}</span></div>
@@ -30,12 +28,13 @@ export default function FormIntro() {
         <div>Age : {"1123MRDnumber"}</div>
       </div>
 
-      <div className="text-white text-lg my-3">
-        <label>Review Date: </label> 
-        <input required className="appearance-none max-w-xs block w-full bg-gray-100 text-gray-700 border rounded py-1   px-3 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white" type="date" defaultValue={todaysDate} />
+      <div className="flex flex-row space-x-10 items-center">
+      <div className="mb-6 md:mb-5">
+        <label className="label-upper">Review Date: </label> 
+        <input required className="appearance-none max-w-xs block w-full bg-gray-100 text-gray-700 border rounded py-2  px-3 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white" type="date" defaultValue={todaysDate} />
       </div>
 
-      <div className="w-full md:w-1/3 mb-6 md:mb-5">
+      <div className=" md:w-1/3 mb-6 md:mb-5">
         <label className="label-upper" htmlFor="">
           Reviewing Department
         </label>
@@ -48,6 +47,8 @@ export default function FormIntro() {
           placeholder="Department"
         />
       </div>
+      </div>
+      
     </div>
   );
 }
