@@ -13,7 +13,6 @@ interface clinicalSignType {
 }
 
 export default function ClinicalSign() {
-
   const emptyClinicalSignsValue: clinicalSignType = {
     date: new Date(),
     temp: "",
@@ -153,35 +152,41 @@ export default function ClinicalSign() {
       <div className="text-xl text-white font-semibold my-4 ">
         Clinical Signs correlating with Antibiotic initiation(prior 48 hours){" "}
       </div>
-      <div className="flex flex-row mb-5 mx-1 overflow-scroll">
-        <div className="flex flex-col">
-          <div className="capitalize font-semibold text-white my-1 text-sm bg-slate-500 p-1 w-fit">
+      <div className="flex flex-row mb-5 mx-1">
+        <div className="flex flex-col ">
+          <div className="capitalize font-semibold h-10 w-[100%] text-white my-1 text-sm p-1 flex items-center">
             Date
           </div>
           {clinicalSignsPriority.map((item, index) => {
             return (
-              <div className="w-fit" key={index}>
-                <div className="capitalize font-semibold text-white my-1 text-sm bg-slate-500 p-1">
+              <div className="" key={index}>
+                <div className="capitalize font-semibold h-10 w-[100%] text-white my-1 text-sm flex items-center">
                   {item.name}
                 </div>
               </div>
             );
           })}
         </div>
-        {clinicalSignsValue.map((item, index) => {
-          return (
-            <div className="flex flex-col" key={index}>
-              <div>Date</div>
-              {clinicalSignsPriority.map((item, i) => {
-                return(
-                  <input className="max-w-sm p-1 m-1" key={item.id} placeholder={item.placeholder}/>
-                )
-              })}
-            </div>
-          )
-
-        })
-        }
+        <div className="flex overflow-scroll">
+          {clinicalSignsValue.map((item, index) => {
+            return (
+              <div className="flex flex-col" key={index}>
+                <div className="capitalize font-semibold h-10 w-[100%] text-white my-1 text-sm p-1 ">
+                  Date
+                </div>
+                {clinicalSignsPriority.map((item, i) => {
+                  return (
+                    <input
+                      className="max-w-sm p-1 m-1 h-10"
+                      key={item.id}
+                      placeholder={item.placeholder}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
