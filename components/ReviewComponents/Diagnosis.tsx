@@ -2,11 +2,11 @@ import React from "react";
 
 export default function Diagnosis() {
   return (
-    <div className="analytics-card" id="Diagnosis">
+    <div className="" id="Diagnosis">
       {/* Diagnosis */}
-      <div className="text-xl text-white font-semibold mt-2 my-2">
+      {/* <div className="text-xl text-white font-semibold mt-2 my-2">
         Diagnosis Report{" "}
-      </div>
+      </div> */}
       <div className="flex flex-wrap mb-2 mx-1">
         <div className="w-full md:w-1/3 mb-6 md:mb-0">
           <label className="label-upper" htmlFor="email">
