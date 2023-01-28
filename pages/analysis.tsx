@@ -8,6 +8,7 @@ import Introduction from "../components/Analysis/Introduction";
 import Recommendation from "../components/Analysis/Recommendation";
 import PatientOutcome from "../components/Analysis/PatientOutcome";
 import Compliance from "../components/Analysis/Compliance";
+import ReviewComponents from "../components/ReviewComponents";
 
 export default function Analysis() {
   const [loading, setLoading] = useState(false);
@@ -46,6 +47,8 @@ export default function Analysis() {
           </div>
         <form className="w-full">
           <Introduction />
+
+          <ReviewComponents />
 
           <DrugReview />
 

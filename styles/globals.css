@@ -11,6 +11,14 @@
       @apply block uppercase tracking-wide text-sm font-bold mb-2 text-white
     }
 
+    .analytics-card{
+      @apply w-11/12 mx-auto max-w-7xl my-5 pt-4 pb-4 backdrop-blur-md rounded-lg p-5 flex flex-col z-10 bg-slate-600/80 shadow-sm
+    }
+
+    .analytics-TextBox{
+      @apply block w-full bg-white text-gray-800 border rounded py-2 px-2 mb-3 leading-tight overflow-auto
+    }
+
     .form-component{
       @apply w-11/12 mx-auto max-w-7xl my-5 pt-7 pb-10 backdrop-blur-md rounded-lg p-5 flex flex-col z-10 bg-slate-700/80 shadow-xl
     }
