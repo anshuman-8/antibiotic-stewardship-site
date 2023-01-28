@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface clinicalSignType {
   date: Date;
@@ -27,14 +27,25 @@ export default function ClinicalSign() {
 
   const [clinicalSignsValue, setClinicalSignsValue] = useState<
     clinicalSignType[] | []
-  >([
-    { ...emptyClinicalSignsValue },
-    { ...emptyClinicalSignsValue },
-    { ...emptyClinicalSignsValue },
-    { ...emptyClinicalSignsValue },
-    { ...emptyClinicalSignsValue },
-    { ...emptyClinicalSignsValue },
-  ]);
+  >([]);
+
+  useEffect(() => {
+    const today: Date = new Date();
+    const pastSixDays: Date = new Date();
+    pastSixDays.setDate(today.getDate() - 6);
+    const dates = [];
+    for (let d = today; d >= pastSixDays; d.setDate(d.getDate() - 1)) {
+      dates.push(new Date(d));
+    }
+    console.log(dates);
+    const newClinicalSignsValue = dates.map((date) => {
+      return {
+        ...emptyClinicalSignsValue,
+        date,
+      };
+    });
+    setClinicalSignsValue(newClinicalSignsValue);
+  }, []);
 
   const clinicalSigns = [
     {
@@ -138,7 +149,7 @@ export default function ClinicalSign() {
     {
       name: "Blood Pressure(mmHg)",
       id: "csbp",
-      placeholder: "BP",
+      placeholder: "",
     },
     {
       name: "O2 Saturation (%)",
@@ -166,18 +177,19 @@ export default function ClinicalSign() {
               </div>
             );
           })}
-        </div>
-        <div className="flex overflow-scroll">
+        </div>  
+        <div className="flex overflow-scroll mx-2">
           {clinicalSignsValue.map((item, index) => {
             return (
-              <div className="flex flex-col" key={index}>
+              <div className="flex flex-col striped" key={index}>
                 <div className="capitalize font-semibold h-10 w-[100%] text-white my-1 text-sm p-1 ">
-                  Date
+
+                  {item.date.toLocaleDateString() + " "+ item.date.toLocaleDateString("en-US", { weekday: "short" })}
                 </div>
                 {clinicalSignsPriority.map((item, i) => {
                   return (
                     <input
-                      className="max-w-sm p-1 m-1 h-10"
+                      className="max-w-[10rem] p-1 m-1 h-10 rounded-sm"
                       key={item.id}
                       placeholder={item.placeholder}
                     />

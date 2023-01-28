@@ -25,7 +25,7 @@ export default function FormIntro() {
       <div className="text-white font-semibold text-lg space-y-2 my-5">
         <div> <span className="text-2xl px-1">{" Anshuman Swain"}</span></div>
         <div>MRD No: {"1123MRDnumber"}</div>
-        <div>Age : {"1123MRDnumber"}</div>
+        <div>Age : {"19"}</div>
       </div>
 
       <div className="flex flex-row space-x-10 items-center">
