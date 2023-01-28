@@ -164,7 +164,7 @@ export default function ClinicalSign() {
         Clinical Signs correlating with Antibiotic initiation(prior 48 hours){" "}
       </div>
       <div className="flex flex-row mb-5 mx-1">
-        <div className="flex flex-col ">
+        <div className="flex flex-col striped">
           <div className="capitalize font-semibold h-10 w-[100%] text-white my-1 text-sm p-1 flex items-center">
             Date
           </div>
@@ -177,22 +177,24 @@ export default function ClinicalSign() {
               </div>
             );
           })}
-        </div>  
-        <div className="flex overflow-scroll mx-2">
+        </div>
+        <div className="flex overflow-scroll px-2">
           {clinicalSignsValue.map((item, index) => {
             return (
               <div className="flex flex-col striped" key={index}>
-                <div className="capitalize font-semibold h-10 w-[100%] text-white my-1 text-sm p-1 ">
-
-                  {item.date.toLocaleDateString() + " "+ item.date.toLocaleDateString("en-US", { weekday: "short" })}
+                <div className="capitalize font-semibold h-10 w-[100%] text-white my-1 text-sm p-1 text-center align-middle">
+                  {item.date.toLocaleDateString() +
+                    " " +
+                    item.date.toLocaleDateString("en-US", { weekday: "short" })}
                 </div>
                 {clinicalSignsPriority.map((item, i) => {
                   return (
-                    <input
-                      className="max-w-[10rem] p-1 m-1 h-10 rounded-sm"
-                      key={item.id}
-                      placeholder={item.placeholder}
-                    />
+                    <div key={item.id}>
+                      <input
+                        className="max-w-[10rem] p-1 m-1 h-10 rounded-sm"
+                        placeholder={item.placeholder}
+                      />
+                    </div>
                   );
                 })}
               </div>

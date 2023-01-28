@@ -56,13 +56,14 @@ const AntibioticsUsed: React.FC = () => {
           className="border-2 border-amber-400 p-1 mx-1 rounded-md hover:cursor-pointer"
           onClick={addRow}
         >
-          <GrAddCircle className="" fill="#ffffff" />
+          <GrAddCircle className="text-red-700 fill-red-400" fill="#ffffff" />
         </div>
       </div>
       <div className="overflow-auto">
         <table className="w-full">
           <thead>
             <tr className="text-white">
+              <th></th>
               <th className="py-2">Initial Date</th>
               <th className="py-2">Antibiotic</th>
               <th className="py-2">Loading Dose</th>
@@ -76,6 +77,14 @@ const AntibioticsUsed: React.FC = () => {
           <tbody>
             {rows.map((row, index) => (
               <tr key={index} className="">
+                <td>
+                  <div
+                    className="border-2 border-amber-400 py-2 px-4 mb-3 rounded-md hover:cursor-pointer"
+                    onClick={() => deleteRow(index)}
+                  >
+                    <GrSubtractCircle className="fill-orange-700 text-red-300" />
+                  </div>
+                </td>
                 <td className="">
                   <input
                     type="date"
@@ -176,14 +185,7 @@ const AntibioticsUsed: React.FC = () => {
                     }}
                   />
                 </td>
-                <td>
-                  <div
-                    className="border-2 border-amber-400 py-2 px-4 mb-3 rounded-md hover:cursor-pointer"
-                    onClick={() => deleteRow(index)}
-                  >
-                    <GrSubtractCircle className="" fill="#ffffff" />
-                  </div>
-                </td>
+                
               </tr>
             ))}
           </tbody>

@@ -18,6 +18,6 @@
 
   @layer utilities {
     .striped div:nth-child(even) {
-      @apply bg-gray-100
+      @apply bg-slate-500
     }
   }
