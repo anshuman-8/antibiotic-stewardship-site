@@ -8,87 +8,121 @@ interface proptype {
 
 export default function CultureReports(props: proptype) {
   const { id } = props;
-  const [antibioticList, setAntibioticList] = useState<string[]>([]); // list of antibiotics selected
+  const [antibioticList, setAntibioticList] = useState<string[]>([]);
 
   return (
     <div className="border p-2 rounded-md mb-5 min-w-fit mx-3 bg-slate-600 py-4 ">
-      <div className="grid grid-cols-2 gap-4 h-[20rem] overflow-y-auto overflow-x-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[15rem] overflow-y-auto overflow-x-hidden">
         {/* left column */}
-        <div className="p-4 w-[20rem]">
-          <div className="flex flex-row">
+        <div className="p-4 w-[30rem] ">
+          {/* 1 */}
+          <div className="flex flex-row justify-between">
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Culture Sent Before Antibiotics:{" "}
             </p>
-            <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-black">
+            <p className="mr-2 block uppercase tracking-wide text-sm text-white">
               True
             </p>
           </div>
-          <div className="flex flex-row">
-            <label className="label-upper" htmlFor="email">
-              Site of collection:
-            </label>
-            <p className="text-black font-medium">{"NameOfDepartment"}</p>
+
+          {/* 2 */}
+          <div className="flex flex-row justify-between">
+            <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
+              Site of collection:{" "}
+            </p>
+            <p className="mr-2 block uppercase tracking-wide text-sm text-white">
+              {"Name Of Department"}
+            </p>
           </div>
-          <div className="mb-6 md:mb-0">
-            <label className="label-upper" htmlFor="email">
-              Organism:
-            </label>
-            <p>adsfsdfsd fsdfsdfsdf</p>
+
+          {/* 3 */}
+          <div className="flex flex-row justify-between">
+            <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
+              Organism:{" "}
+            </p>
+            <p className="mr-2 block uppercase tracking-wide text-sm text-white">
+              adsfsdfsd fsdfsdfsdf
+            </p>
           </div>
-          <div className=" mb-6 md:mb-0">
-            <label htmlFor="specimen" className="font-semibold text-white">
+
+          {/* 4 */}
+
+          <div className="flex flex-row justify-between">
+            <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Specimen:{" "}
-            </label>
-            <div className="relative">sdsdfsdfsdfsdfsdsfsdf</div>
+            </p>
+            <p className="mr-2 block uppercase tracking-wide text-sm  text-white">
+              sdsdfsdfsdfsdfsdsfsdf
+            </p>
           </div>
-          <div className="mb-6 md:mb-0">
-            <label htmlFor="specimen" className="font-semibold text-white">
-              Multi Drug Resistant Organism:
-            </label>
-            <div className="relative">sdfsdf ksjndfk skdfksdnf</div>
+
+          {/* 5 */}
+
+          <div className="flex flex-row justify-between">
+            <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
+              Multi Drug Resistant Organism:{" "}
+            </p>
+            <p className="mr-2 block uppercase tracking-wide text-sm  text-white">
+              sdfsdf ksjndfk
+            </p>
           </div>
-          <div className="mb-6 md:mb-0">
-            <label htmlFor="specimen" className="font-semibold text-white">
-              Resistance:
-            </label>
-            <div className="relative">dfsdf sdf s df sdf</div>
+
+          {/* 6 */}
+          <div className="flex flex-row justify-between">
+            <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
+              Resistance:{" "}
+            </p>
+            <p className="mr-2 block uppercase tracking-wide text-sm  text-white">
+              dfsdf sdf s df sdf
+            </p>
           </div>
-          <div className="col-span-2 row-span-1 flex flex-nowrap mb-5">
-            <div className="text-white text-base font-semibold">Imaging: </div>
-            <label htmlFor="infection" className="ml-2">
-              X ray
-            </label>
-            <p className="max-h-36 max-w-sm">
-              sdsdfsdf sd f sd f s dfsdfdsafsd f asdg adf g adf ga s fdgadfgadfg
-              adf g adf adfgdf gadfgadf g
+
+          {/* 7 */}
+          <div className="flex flex-row justify-between">
+            <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
+              Imaging:{" "}
+            </p>
+            <p className="mr-2 block uppercase tracking-wide text-sm  text-white">
+              <label htmlFor="infection" className="font-medium block">
+                X ray
+              </label>
+              <p>
+                sdsdfsdf sd f sd f s dfsdfdsafsd f asdg adf g adf ga s
+                fdgadfgadfg adf g adf adfgdf gadfgadf g sdsdfsdf sd f sd f s
+                {/* dfsdfdsafsd f asdg adf g adf ga s fdgadfgadfg adf g adf adfgdf
+                gadfgadf g */}
+              </p>
             </p>
           </div>
         </div>
         {/* right column */}
-        <div className="p-4 w-[20rem]">
-          <div className="flex flex-row">
+        <div className="p-4 w-[30rem]">
+          {/* 8 */}
+          <div className="flex flex-row justify-between">
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Culture Sent :
             </p>
-            <div className="flex flex-col text-black font-medium">
+            <div className="flex flex-col text-white">
               <p>23/24/5455</p>
               <p>34:344 PM</p>
             </div>
           </div>
-          <div className="flex flex-row">
+          {/* 9 */}
+          <div className="flex flex-row justify-between">
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Culture Reported :
             </p>
-            <div className="flex flex-col text-black font-medium">
+            <div className="flex flex-col text-white">
               <p>23/24/5455</p>
               <p>34:344 PM</p>
             </div>
           </div>
-          <div className="mb-6 md:mb-0">
+          {/* 10 */}
+          <div className="mb-6 md:mb-0 flex flex-row justify-between">
             <label htmlFor="specimen" className="font-semibold text-white">
               Antibiotic Sensitivity:
             </label>
-            <div className="flex flex-wrap">
+            <div className="flex justify-between">
               <div className="bg-slate-900/90 backdrop-blur-sm flex flex-row align-middle w-min rounded-md m-1 text-white">
                 dsfsdf
               </div>
