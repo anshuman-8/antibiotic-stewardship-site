@@ -6,15 +6,15 @@ import Link from "next/link";
 import DrugReview from "../components/Analysis/DrugReview";
 import Introduction from "../components/Analysis/Introduction";
 import Recommendation from "../components/Analysis/Recommendation";
-import OtherAnalysis from "../components/Analysis/Others";
+import PatientOutcome from "../components/Analysis/PatientOutcome";
+import Compliance from "../components/Analysis/Compliance";
+import ReviewComponents from "../components/ReviewComponents";
 
 export default function Analysis() {
   const [loading, setLoading] = useState(false);
   const [cultureSent, setCultureSent] = useState(false);
 
   const notify = (message: String) => toast.error(message);
-
- 
 
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
@@ -33,31 +33,38 @@ export default function Analysis() {
         />
       </div>
       <div className="">
-      <div className="max-w-7xl mx-auto mt-3">
-          <Link href={"/"} className="w-min">
-            <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
-              {"< "}
-              Back
-            </button>
-          </Link>
+      <div className="max-w-7xl mx-auto mt-3 flex flex-row items-center space-x-10">
+            <Link href={"/"} className="w-auto">
+              <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
+                {"< "}
+                Back
+              </button>
+            </Link>
+            <div className="my-5 mx-2 text-slate-800 font-semibold uppercase text-2xl">
+            Analysis Form{" "}
+                {/* <span className="lowercase">(1123MRDnumber)</span> */}
+              </div>
           </div>
         <form className="w-full">
-          
-          <Introduction/>
+          <Introduction />
 
-          <DrugReview/>
+          <ReviewComponents />
 
-          <Recommendation/>
+          <DrugReview />
 
-          <OtherAnalysis/>
+          <Recommendation />
+
+          <Compliance/>
+
+          <PatientOutcome />
 
           {/* Submit */}
-          <div className="flex justify-end max-w-6xl mx-auto">
+          <div className="flex justify-end max-w-6xl mx-auto mb-10">
             {!loading ? (
               <button
                 type="submit"
-                className="px-5 py-3 bg-primary text-white rounded-md text-lg font-medium my-5"
-                onClick={()=>notify("Form Not implemented")}
+                className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
+                onClick={() => notify("Form Not implemented")}
               >
                 Submit
               </button>
