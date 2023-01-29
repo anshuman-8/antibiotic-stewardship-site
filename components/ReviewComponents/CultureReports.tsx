@@ -12,15 +12,15 @@ export default function CultureReports(props: proptype) {
 
   return (
     <div className="border p-2 rounded-md mb-5 min-w-fit mx-3 bg-slate-600 py-4 ">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[15rem] overflow-y-auto overflow-x-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
         {/* left column */}
-        <div className="p-4 w-[30rem] ">
+        <div className="p-4 max-w-sm space-y-3">
           {/* 1 */}
           <div className="flex flex-row justify-between">
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Culture Sent Before Antibiotics:{" "}
             </p>
-            <p className="mr-2 block uppercase tracking-wide text-sm text-white">
+            <p className="mr-2 block tracking-wide text-sm text-white">
               True
             </p>
           </div>
@@ -30,7 +30,7 @@ export default function CultureReports(props: proptype) {
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Site of collection:{" "}
             </p>
-            <p className="mr-2 block uppercase tracking-wide text-sm text-white">
+            <p className="mr-2 block tracking-wide text-sm text-white">
               {"Name Of Department"}
             </p>
           </div>
@@ -40,7 +40,7 @@ export default function CultureReports(props: proptype) {
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Organism:{" "}
             </p>
-            <p className="mr-2 block uppercase tracking-wide text-sm text-white">
+            <p className="mr-2 block tracking-wide text-sm text-white">
               adsfsdfsd fsdfsdfsdf
             </p>
           </div>
@@ -51,18 +51,18 @@ export default function CultureReports(props: proptype) {
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Specimen:{" "}
             </p>
-            <p className="mr-2 block uppercase tracking-wide text-sm  text-white">
+            <p className="mr-2 block tracking-wide text-sm  text-white">
               sdsdfsdfsdfsdfsdsfsdf
             </p>
           </div>
 
           {/* 5 */}
 
-          <div className="flex flex-row justify-between">
-            <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
+          <div className="flex flex-row justify-between items-center">
+            <p className="mr-2 uppercase text-sm font-bold text-white">
               Multi Drug Resistant Organism:{" "}
             </p>
-            <p className="mr-2 block uppercase tracking-wide text-sm  text-white">
+            <p className="mr-2 block tracking-wide text-sm  text-white">
               sdfsdf ksjndfk
             </p>
           </div>
@@ -72,26 +72,8 @@ export default function CultureReports(props: proptype) {
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Resistance:{" "}
             </p>
-            <p className="mr-2 block uppercase tracking-wide text-sm  text-white">
+            <p className="mr-2 block tracking-wide text-sm  text-white">
               dfsdf sdf s df sdf
-            </p>
-          </div>
-
-          {/* 7 */}
-          <div className="flex flex-row justify-between">
-            <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
-              Imaging:{" "}
-            </p>
-            <p className="mr-2 block uppercase tracking-wide text-sm  text-white">
-              <label htmlFor="infection" className="font-medium block">
-                X ray
-              </label>
-              <p>
-                sdsdfsdf sd f sd f s dfsdfdsafsd f asdg adf g adf ga s
-                fdgadfgadfg adf g adf adfgdf gadfgadf g sdsdfsdf sd f sd f s
-                {/* dfsdfdsafsd f asdg adf g adf ga s fdgadfgadfg adf g adf adfgdf
-                gadfgadf g */}
-              </p>
             </p>
           </div>
         </div>
@@ -122,14 +104,32 @@ export default function CultureReports(props: proptype) {
             <label htmlFor="specimen" className="font-semibold text-white">
               Antibiotic Sensitivity:
             </label>
-            <div className="flex justify-between">
-              <div className="bg-slate-900/90 backdrop-blur-sm flex flex-row align-middle w-min rounded-md m-1 text-white">
+            <div className="flex justify-between flex-wrap">
+              <div className="bg-slate-800/90 backdrop-blur-sm h-fit align-middle w-min rounded-md m-1 p-1 text-white">
                 dsfsdf
               </div>
-              <div className="bg-slate-900/90 backdrop-blur-sm flex flex-row align-middle w-min rounded-md m-1 text-white">
+              <div className="bg-slate-800/90 backdrop-blur-sm h-fit align-middle w-min rounded-md m-1 p-1 text-white">
                 dsfsdf
               </div>
+             
             </div>
+          </div>
+           {/* 7 */}
+           <div className="flex flex-row justify-between">
+            <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
+              Imaging:{" "}
+            </p>
+            <p className="mr-2 block tracking-wide text-sm  text-white">
+              <label htmlFor="infection" className="font-medium block">
+                X ray
+              </label>
+              <div className="max-h-20 rounded-md overflow-scroll bg-slate-700/30 p-1">
+                sdsdfsdf sd f sd f s dfsdfdsafsd f asdg adf g adf ga s
+                fdgadfgadfg adf g adf adfgdf gadfgadf g sdsdfsdf sd f sd f s
+                dfsdfdsafsd f asdg adf g adf ga s fdgadfgadfg adf g adf adfgdf
+                gadfgadf gsaedfs df s df sd f sdfsdfsdf sd fs df
+              </div>
+            </p>
           </div>
         </div>
       </div>

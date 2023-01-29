@@ -13,7 +13,8 @@ export default function index() {
       <Diagnosis />
       <InfectionFocus />
       <AntibioticUsed />
-      <div className="flex flex-row overflow-auto my-3">
+      <div className="text-white font-medium mt-4 text-lg">Culture Reports</div>
+      <div className="flex flex-row overflow-auto mb-3 mt-1">
         <CultureReports id={34} />
         <CultureReports id={37} />
         <CultureReports id={32} />

@@ -5,8 +5,8 @@ export default function AntibioticUsed() {
     <div className="flex flex-col">
       <div className="text-lg text-white font-semibold">Antibiotic Used</div>
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8 py-2 inline-block min-w-full sm:px-2 lg:px-8">
-        <div className="overflow-auto">
-          <table className="min-w-full border-2 border-white rounded-lg">
+        <div className="overflow-auto border-2 border-white rounded-lg">
+          <table className="min-w-full  border-collapse">
             <thead className="bg-slate-500 text-white">
               <tr>
                 <th
