@@ -144,7 +144,7 @@ export default function CultureReport(props: proptype) {
             placeholder="Department"
           />
         </div>
-        <div className="w-full md:w-1/2 px-3 mb-2 md:mb-0">
+        <div className="w-full md:w-1/2 md:px-3 mb-2 md:mb-0">
           <label className="label-upper" htmlFor="email">
             Date and time of Culture Reported
           </label>
@@ -161,7 +161,7 @@ export default function CultureReport(props: proptype) {
       {/* Specimen */}
       <div className="flex flex-wrap mb-5">
         <div className="w-full md:w-1/3 mb-6 md:mb-0">
-          <label htmlFor="specimen" className="font-semibold text-white">
+          <label htmlFor="specimen" className="label-upper">
             Specimen:{" "}
           </label>
           <div className="relative">
@@ -199,7 +199,7 @@ export default function CultureReport(props: proptype) {
             </div>
           </div>
         </div>
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+        <div className="w-full md:w-1/3 md:px-3 mb-6 md:mb-0">
           <label className="label-upper" htmlFor="email">
             Site of collection
           </label>
@@ -212,7 +212,7 @@ export default function CultureReport(props: proptype) {
             placeholder="Department"
           />
         </div>
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+        <div className="w-full md:w-1/3 md:px-3 mb-6 md:mb-0">
           <label className="label-upper" htmlFor="email">
             Organism
           </label>
@@ -232,7 +232,7 @@ export default function CultureReport(props: proptype) {
           <label htmlFor="specimen" className="font-semibold text-white">
             Antibiotic Sensitivity:
           </label>
-          <div className="flex flex-wrap max-h-28 bg-gray-600 rounded-md overflow-scroll">
+          <div className="flex flex-wrap max-h-28 bg-gray-600 rounded-md">
             {antibioticList.map((antibiotic) => (
               <div
                 key={antibiotic}

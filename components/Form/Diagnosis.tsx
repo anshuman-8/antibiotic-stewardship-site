@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 
 export default function Diagnosis() {
   return (
-    <div className='form-component'>
-       {/* Diagnosis */}
-       <div className="text-xl text-white font-semibold mt-2 my-1">
+    <div className="form-component">
+      {/* Diagnosis */}
+      <div className="text-xl text-white font-semibold mt-2 my-1">
         Diagnosis{" "}
       </div>
       <div className="flex flex-wrap mb-5 mx-1">
@@ -21,7 +21,7 @@ export default function Diagnosis() {
           />
         </div>
 
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+        <div className="w-full md:w-1/3 sm:px-3 mb-6 md:mb-0">
           <label className="label-upper" htmlFor="email">
             Final diagnosis:
           </label>
@@ -34,7 +34,7 @@ export default function Diagnosis() {
           />
         </div>
 
-        <div className="w-full md:w-3/12 md:pl-3 md:pr-1 mb-6 md:mb-0">
+        <div className="w-full md:w-3/12 md:pr-1 mb-6 md:mb-0">
           <label className="label-upper" htmlFor="email">
             Syndromic diagnosis:
           </label>
@@ -79,5 +79,5 @@ export default function Diagnosis() {
         </div>
       </div>
     </div>
-  )
+  );
 }

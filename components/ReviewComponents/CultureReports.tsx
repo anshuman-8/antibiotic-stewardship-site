@@ -20,9 +20,7 @@ export default function CultureReports(props: proptype) {
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Culture Sent Before Antibiotics:{" "}
             </p>
-            <p className="mr-2 block tracking-wide text-sm text-white">
-              True
-            </p>
+            <p className="mr-2 block tracking-wide text-sm text-white">True</p>
           </div>
 
           {/* 2 */}
@@ -78,7 +76,7 @@ export default function CultureReports(props: proptype) {
           </div>
         </div>
         {/* right column */}
-        <div className="p-4 w-[30rem]">
+        <div className="p-4 max-w-sm space-y-3">
           {/* 8 */}
           <div className="flex flex-row justify-between">
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
@@ -111,11 +109,10 @@ export default function CultureReports(props: proptype) {
               <div className="bg-slate-800/90 backdrop-blur-sm h-fit align-middle w-min rounded-md m-1 p-1 text-white">
                 dsfsdf
               </div>
-             
             </div>
           </div>
-           {/* 7 */}
-           <div className="flex flex-row justify-between">
+          {/* 7 */}
+          <div className="flex flex-row justify-between">
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Imaging:{" "}
             </p>
@@ -123,7 +120,7 @@ export default function CultureReports(props: proptype) {
               <label htmlFor="infection" className="font-medium block">
                 X ray
               </label>
-              <div className="max-h-20 rounded-md overflow-scroll bg-slate-700/30 p-1">
+              <div className="max-h-20 rounded-md overflow-y-scroll overflow-x-hidden bg-slate-700/30 p-1">
                 sdsdfsdf sd f sd f s dfsdfdsafsd f asdg adf g adf ga s
                 fdgadfgadfg adf g adf adfgdf gadfgadf g sdsdfsdf sd f sd f s
                 dfsdfdsafsd f asdg adf g adf ga s fdgadfgadfg adf g adf adfgdf
