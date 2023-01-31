@@ -140,7 +140,7 @@ export default function DrugReview() {
           </label>
         </div>
 
-        <div className="sm:w-2/3 md:w-2/5 my-2 mx-2">
+        <div className="w-full md:w-2/5 my-2 mx-2">
           <label htmlFor="infection" className="ml-2">
             Score:{" "}
           </label>
@@ -150,7 +150,7 @@ export default function DrugReview() {
             type="text"
             name="infection"
             id="infection"
-            className="appearance-none  bg-gray-100 text-gray-700 border rounded py-1 px-2  leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+            className="appearance-none sm:w-full md:w-[50%] bg-gray-100 text-gray-700 border rounded py-1 px-2  leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
           />
         </div>
       </div>

@@ -8,7 +8,7 @@ export default function Diagnosis() {
         Diagnosis Report{" "}
       </div> */}
       <div className="flex flex-wrap mb-2 mx-1">
-        <div className="w-full md:w-1/3 mb-6 md:mb-0">
+        <div className="w-full md:w-1/3 md:px-3 mb-6 md:mb-0">
           <label className="label-upper" htmlFor="email">
             Provisional diagnosis:
           </label>
@@ -24,7 +24,7 @@ export default function Diagnosis() {
           </p>
         </div>
 
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+        <div className="w-full md:w-1/3 md:px-3 mb-6 md:mb-0">
           <label className="label-upper" htmlFor="email">
             Final diagnosis:
           </label>
@@ -40,7 +40,7 @@ export default function Diagnosis() {
           </p>
         </div>
 
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+        <div className="w-full md:w-1/3 md:px-3 mb-6 md:mb-0">
           <label className="label-upper" htmlFor="email">
             Syndromic diagnosis:{" "}
             <span className="bg-slate-300 text-slate-800 p-1 capitalize">
