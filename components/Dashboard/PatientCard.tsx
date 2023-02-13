@@ -3,11 +3,13 @@ import Link from "next/link";
 
 interface propType {}
 
-export default function patientCard() {
+export default function patientCard(props) {
+
+  const {fullName, mrdNumber,dateOfAdmission, department, cormorbodities, height, weight} = props;
   return (
     <div className="bg-slate-100/50 backdrop-blur-sm m-5 max-w-lg border min-w-min rounded-md p-2">
-      <div className="text-xl my-1">Anshuman Swain</div>
-      <div>MRD No: AER23434</div>
+      <div className="text-xl my-1">{fullName}</div>
+      <div>MRD No: {mrdNumber}</div>
       <div className="space-x-5">
         {" "}
         <span> Age: 19 </span> <span>Sex: M</span>
