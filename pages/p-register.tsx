@@ -3,18 +3,79 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
+import { useMutation, gql } from "@apollo/client";
+
+const registerPatientGQL = gql`
+  mutation ($input: PatientCreateInput!) {
+    RegisterPatient(inputs: $input) {
+      success
+      returning {
+        id
+        fullName
+        admittingDoctor
+        dateOfBirth
+        height
+      }
+    }
+  }
+`;
 
 function PRegister() {
   let date_ob: Date = new Date();
   var year: number = date_ob.getFullYear();
 
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [editDetail, setEditDetail] = useState(false);
+  const [patientLocation, setPatientLocation] = useState("Select Specialization");
+
+
+  const [registerPatient, { data, loading, error }] = useMutation(registerPatientGQL);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+
+    if (
+      !data.name ||
+      !data.MRDNumber ||
+      !data.dateOfBirth ||
+      !data.dateOfAdmission ||
+      !patientLocation
+    ) {
+      notify("Please fill necessary fields");
+      return;
+    }
+    if(patientLocation === "Select Specialization"){
+      notify("Please select patient location");
+      return;
+    }
+    registerPatient({
+      variables: {
+        input: {
+          fullName: data.name,
+          mrdNumber: data.MRDNumber,
+          dateOfBirth: data.dateOfBirth.toString(),
+          dateOfAdmission: data.dateOfAdmission.toString(),
+          patientLocation: patientLocation,
+          department: data.department,
+          admittingDoctor: data.doctor,
+          diagnostic: data.diagnostic,
+          cormorbodities: data.cormorbodities,
+          height: parseInt(data.height.toString()),
+          weight: parseInt(data.weight.toString()),
+        },
+      },
+      onCompleted: (data) => {
+        console.log(data);
+        successNotify("Patient Registered Successfully");
+      },
+      onError: (error) => {
+        console.log(error);
+        notify("Patient Registration Failed");
+      },
+    });
+  };
 
   const notify = (message: String) => toast.error(message);
+  const successNotify = (message: String) => toast.success(message);
 
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
@@ -39,7 +100,7 @@ function PRegister() {
             Back
           </button>
         </Link>
-        <form className="w-full">
+        <form className="w-full" onSubmit={(e)=>handleSubmit(e)}>
           <div className="my-5 mx-2 text-white font-semibold uppercase text-xl">
             Patient Details
           </div>
@@ -109,17 +170,19 @@ function PRegister() {
               <div className="relative">
                 <select
                   className="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  name="branch"
-                  id="grid-branch"
+                  name="patientLocation"
+                  id="patientLocation"
                   required
-                  defaultValue={"Select Specialization"}
+                  // defaultValue={"Select Specialization"}
+                  value={patientLocation}
+                  onChange={(e)=>setPatientLocation(e.target.value)}
                 >
                   <option value="Select Specialization" disabled>
                     Select Location
                   </option>
-                  <option value="General Medicine">ICU</option>
-                  <option value="General Surgery">Ward</option>
-                  <option value="Orthopaedics">NaN</option>
+                  <option value="ICU">ICU</option>
+                  <option value="Ward">Ward</option>
+                  <option value="Null">NaN</option>
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   <svg
@@ -133,10 +196,7 @@ function PRegister() {
               </div>
             </div>
             <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-              <label
-                className="label-upper"
-                htmlFor="email"
-              >
+              <label className="label-upper" htmlFor="email">
                 Department
               </label>
               <input
@@ -167,7 +227,7 @@ function PRegister() {
 
           {/* Department & Diagnostic */}
           <div className="flex flex-wrap -mx-3 mb-10">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-white text-sm font-bold mb-2"
                 htmlFor="phone-number"
@@ -184,21 +244,17 @@ function PRegister() {
               />
             </div>
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label
-                className="label-upper"
-                htmlFor="email"
-              >
+              <label className="label-upper" htmlFor="email">
                 Cormorbodities
               </label>
               <textarea
                 required
                 className="input-imp"
-                name="department"
-                id="department"
+                name="cormorbodities"
+                id="cormorbodities"
                 placeholder="Department"
               />
             </div>
-            
           </div>
 
           {/* DOB, Height, weight */}
@@ -227,8 +283,8 @@ function PRegister() {
               </label>
               <input
                 className="input-imp"
-                name="diagnostic"
-                id="diagnostic"
+                name="height"
+                id="height"
                 type="number"
                 step="0.01"
                 placeholder="Height"
@@ -243,8 +299,8 @@ function PRegister() {
               </label>
               <input
                 className="input-imp"
-                name="diagnostic"
-                id="diagnostic"
+                name="weight"
+                id="weight"
                 step="0.01"
                 type="number"
                 placeholder="Weight"
@@ -255,16 +311,12 @@ function PRegister() {
           {/* Address & Phone no */}
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label
-                className="label-upper"
-                htmlFor="email"
-              >
+              <label className="label-upper" htmlFor="email">
                 Address
               </label>
               <textarea
-                required
                 className="input-imp"
-                name="email"
+                name="address"
                 id="address"
                 cols={2}
                 placeholder="Residential Address"
@@ -278,7 +330,6 @@ function PRegister() {
                 Phone No.
               </label>
               <input
-                required
                 className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 name="phone"
                 id="phone-number"
@@ -294,7 +345,7 @@ function PRegister() {
               <button
                 type="submit"
                 className="px-5 py-3 bg-primary text-white rounded-md text-lg font-medium my-5"
-                onClick={() => notify("Form not yet completed!!")}
+                // onClick={(e) => handleSubmit(e)}
               >
                 Submit
               </button>

@@ -1,14 +1,18 @@
 import React from "react";
 import Link from "next/link";
+import {GrStatusGoodSmall} from "react-icons/gr";
 
 interface propType {}
 
 export default function patientCard(props) {
 
-  const {fullName, mrdNumber,dateOfAdmission, department, cormorbodities, height, weight} = props;
+  const {fullName, mrdNumber,dateOfAdmission, department, cormorbodities, height, weight,active} = props;
   return (
     <div className="bg-slate-100/50 backdrop-blur-sm m-5 max-w-lg border min-w-min rounded-md p-2">
+      <div className="flex flex-row items-center">
       <div className="text-xl my-1">{fullName}</div>
+        {active?<GrStatusGoodSmall className="fill-green-700 mx-1"/>:<GrStatusGoodSmall className="fill-red-700 mx-1"/>}
+      </div>
       <div>MRD No: {mrdNumber}</div>
       <div className="space-x-5">
         {" "}

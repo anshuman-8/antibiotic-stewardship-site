@@ -22,6 +22,7 @@ export default function DashboardIndex(s) {
         cormorbodities
         height
         weight
+        active
       }
     }
   `;
@@ -29,7 +30,6 @@ export default function DashboardIndex(s) {
     pollInterval: 10000,
   });
 
-  console.log(data);
   if (loading) return (<>
      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <PatientCardPlaceholder />
@@ -43,7 +43,7 @@ export default function DashboardIndex(s) {
       </div>
   </>);
 
-  if (error) return <p>Error {":("}</p>;
+  if (error ) return <p>Error {":("}</p>;
 
   const todaysDate = () => {
     const date = new Date();
@@ -86,6 +86,7 @@ export default function DashboardIndex(s) {
             cormorbodities={patient.cormorbodities}
             height={patient.height}
             weight={patient.weight}
+            active={patient.active}
           />
         ))}
         {/* <PatientCard Patient/> */}
