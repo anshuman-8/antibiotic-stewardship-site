@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { CiSquareRemove } from "react-icons/ci";
 import { BsTrashFill } from "react-icons/bs";
 
 interface proptype {
-  id: number,
-  deleteCultureReport: (id: number) => void,
-};
+  id: number;
+  deleteCultureReport: (id: number) => void;
+}
 
 export default function CultureReport(props: proptype) {
   const { id, deleteCultureReport } = props;
-  const [antibioticList, setAntibioticList] = useState<string[]>([]); // list of antibiotics selected
+  const [antibioticList, setAntibioticList] = useState<string[]>([]);
+
+  const checkbox = useRef();
 
   const handleAntibioticChange = (
     e: React.ChangeEvent<HTMLSelectElement>
@@ -75,14 +77,35 @@ export default function CultureReport(props: proptype) {
     { id: "DAPTO", name: "Daptomycin" },
   ];
 
+  const [imaging, setImaging] = useState({
+    xray: false,
+    ct: false,
+    mri: false,
+    ultrasound: false,
+    petmri: false,
+  });
+
+  const [showImpression, setShowImpression] = useState(false);
+  useEffect(() => {}, [showImpression]);
+  const imagingChange = (name: keyof typeof imaging) => {
+    let newImaging = { ...imaging, [name]: !imaging[name] };
+    setImaging(newImaging);
+
+    if (Object.values(newImaging).includes(true)) {
+      setShowImpression(true);
+    } else {
+      setShowImpression(false);
+    }
+  };
+
   return (
     <div className="border p-2 rounded-md mb-5">
-      <div className="flex flex-row">
+      <div className="flex flex-row justify-between">
         <div className="text-lg text-white font-semibold mt-3 my-5">
           Culture Report
         </div>
         <div
-          className="mx-3 px-2 hover:bg-slate-600 rounded-md my-auto p-2"
+          className="mx-3 px-2 hover:bg-slate-600 rounded-md my-auto p-2 hover:cursor-pointer border border-slate-300"
           onClick={() => deleteCultureReport(id)}
         >
           <BsTrashFill className=" fill-red-600 " size={24} fill="red" />
@@ -302,9 +325,15 @@ export default function CultureReport(props: proptype) {
               <option value="Select Specialization" disabled>
                 Select Resistance
               </option>
-              <option value="Blood">CRE (Carbapenem resistant enterobactereciae)</option>
-              <option value="Blood">CRAB (Carbapenem resistant acenetobacter)</option>
-              <option value="Sputum">VRE (Vancomycin resistant Enterococcus)</option>
+              <option value="Blood">
+                CRE (Carbapenem resistant enterobactereciae)
+              </option>
+              <option value="Blood">
+                CRAB (Carbapenem resistant acenetobacter)
+              </option>
+              <option value="Sputum">
+                VRE (Vancomycin resistant Enterococcus)
+              </option>
               <option value="">Col Re (colistin Resistant)</option>
               <option value="">ESBL (Extended spectrum Beta lactamase)</option>
               <option value="">
@@ -329,35 +358,84 @@ export default function CultureReport(props: proptype) {
         <div className="text-white text-base font-semibold">Imaging</div>
         <div className="w-full flex flex-wrap font-medium text-white">
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
-            <input type="checkbox" name="UTI" id="UTI" className="" />
+            <input
+              type="checkbox"
+              name="xray"
+              id="xray"
+              className=""
+              onChange={() => {
+                imagingChange("xray");
+              }}
+            />
             <label htmlFor="infection" className="ml-2">
               X ray
             </label>
           </div>
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
-            <input type="checkbox" name="UTI" id="UTI" className="" />
+            <input
+              type="checkbox"
+              name="UTI"
+              id="UTI"
+              className=""
+              onChange={() => {
+                imagingChange("ultrasound");
+              }}
+            />
             <label htmlFor="infection" className="ml-2">
               Ultra Sound
             </label>
           </div>
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
-            <input type="checkbox" name="UTI" id="UTI" className="" />
+            <input
+              type="checkbox"
+              name="CT"
+              id="CT"
+              className=""
+              onChange={() => {
+                imagingChange("ct");
+              }}
+            />
             <label htmlFor="infection" className="ml-2">
               CT
             </label>
           </div>
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
-            <input type="checkbox" name="UTI" id="UTI" className="" />
+            <input
+              type="checkbox"
+              name="MRI"
+              id="MRI"
+              className=""
+              onChange={() => {
+                imagingChange("mri");
+              }}
+            />
             <label htmlFor="infection" className="ml-2">
               MRI
             </label>
           </div>
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
-            <input type="checkbox" name="UTI" id="UTI" className="" />
+            <input
+              type="checkbox"
+              name="PET MRI"
+              id="PET MRI"
+              className=""
+              onChange={() => {
+                imagingChange("petmri");
+              }}
+            />
             <label htmlFor="infection" className="ml-2">
               PET MRI
             </label>
           </div>
+        </div>
+        <div className="md:w-1/3 my-2 mx-2">
+          <textarea
+            className={`px-2 py-1 rounded-md w-full impression ${
+              showImpression ? "" : "hidden"
+            }`}
+            placeholder="Impression..."
+            disabled={false}
+          />
         </div>
       </div>
     </div>

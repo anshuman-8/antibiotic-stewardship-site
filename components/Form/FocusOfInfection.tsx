@@ -84,12 +84,24 @@ export default function focusOfInfection() {
           <div className="w-1/2 sm:w-1/3 md:w-1/5 p-1">
             <input
               type="checkbox"
-              name="bacteremia"
-              id="bacteremia"
+              name="primaryBacteremia"
+              id="primaryBacteremia"
               className=""
             />
             <label htmlFor="infection" className="ml-2">
-              Bacteremia
+              Primary Bacteremia
+            </label>
+          </div>
+
+          <div className="w-1/2 sm:w-1/3 md:w-1/5 p-1">
+            <input
+              type="checkbox"
+              name="secondaryBacteremia"
+              id="secondaryBacteremia"
+              className=""
+            />
+            <label htmlFor="infection" className="ml-2">
+              Secondary Bacteremia
             </label>
           </div>
 

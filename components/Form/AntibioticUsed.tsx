@@ -1,14 +1,52 @@
-import React from "react";
-import { GrAddCircle } from "react-icons/gr";
+import React, { useState } from "react";
+import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 
-export default function AntibioticUsed() {
-  const [antibiotic, setAntibiotic] = React.useState([{}]);
-  const [antibioticCount, setAntibioticCount] = React.useState(1);
+const AntibioticsUsed: React.FC = () => {
+  const [rows, setRows] = useState([
+    {
+      id: "",
+      initDate: "",
+      antibiotic: "",
+      loadingDose: "",
+      maintenanceDose: "",
+      route: "",
+      frequency: "",
+      daysDuration: "",
+      endDate: "",
+    },
+  ]);
 
-  const addAntibiotic = () => {
-    setAntibioticCount(antibioticCount + 1);
-    setAntibiotic([...antibiotic, antibioticCount]);
+  const [count, setCount] = useState(1);
+
+  const addRow = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    setRows([
+      ...rows,
+      {
+        id: "",
+        initDate: "",
+        antibiotic: "",
+        loadingDose: "",
+        maintenanceDose: "",
+        route: "",
+        frequency: "",
+        daysDuration: "",
+        endDate: "",
+      },
+    ]);
+    setCount(count + 1);
   };
+
+  function deleteRow(index: number) {
+    if (count > 1) {
+      const newRows = [...rows];
+      newRows.splice(index, 1);
+      setRows(newRows);
+      setCount(count - 1);
+    }
+  }
+
+  //deleterow
 
   return (
     <div className="form-component" id="antibiotic-used">
@@ -16,129 +54,145 @@ export default function AntibioticUsed() {
         <div>Antibiotic Used </div>
         <div
           className="border-2 border-amber-400 p-1 mx-1 rounded-md hover:cursor-pointer"
-          onClick={addAntibiotic}
+          onClick={addRow}
         >
-          <GrAddCircle className="" fill="#ffffff" />
+          <GrAddCircle className="text-red-700 fill-red-400" fill="#ffffff" />
         </div>
       </div>
-      {antibiotic.map((d, i) => (
-        <div className="flex flex-wrap mb-0 mx-1" key={i}>
-              <div className="w-full  md:w-[11.12%] px-2 mb-4 md:mb-0">
-            <label className="label-upper" htmlFor="email">
-              init. Date:
-            </label>
-            <input
-              required
-              className="input-imp"
-              name=""
-              id=""
-              type="text"
-              placeholder=""
-            />
-          </div>
-
-          <div className="w-full md:w-[33%] mb-4 md:mb-0">
-            <label className="label-upper" htmlFor="email">
-              Antibiotic:
-            </label>
-            <input
-              required
-              className="input-imp"
-              name=""
-              id=""
-              type="text"
-              placeholder=""
-            />
-          </div>
-
-          <div className="w-full  md:w-[11.12%] px-2 mb-4 md:mb-0">
-            <label className="label-upper" htmlFor="email">
-              Loading Dose:
-            </label>
-            <input
-              required
-              className="input-imp"
-              name=""
-              id=""
-              type="text"
-              placeholder=""
-            />
-          </div>
-
-          <div className="w-full  md:w-[11.12%] px-2 mb-4 md:mb-0">
-            <label className="label-upper" htmlFor="email">
-            Maintenance Dose:
-            </label>
-            <input
-              required
-              className="input-imp"
-              name=""
-              id=""
-              type="text"
-              placeholder=""
-            />
-          </div>
-
-          <div className="w-full  md:w-[11.12%] px-2 mb-4 md:mb-0">
-            <label className="label-upper" htmlFor="email">
-              Route:
-            </label>
-            <input
-              required
-              className="input-imp"
-              name=""
-              id=""
-              type="text"
-              placeholder=""
-            />
-          </div>
-
-          <div className="w-full  md:w-[11.12%] px-2 mb-4 md:mb-0">
-            <label className="label-upper" htmlFor="email">
-              Frequency:
-            </label>
-            <input
-              required
-              className="input-imp"
-              name=""
-              id=""
-              type="text"
-              placeholder=""
-            />
-          </div>
-
-      
-
-          
-
-          <div className="w-full md:w-[11.12%] md:pl-3 md:pr-1 mb-4 md:mb-0">
-            <label className="label-upper" htmlFor="email">
-              Days (duration):
-            </label>
-            <input
-              required
-              className="input-imp"
-              name=""
-              id=""
-              type="text"
-              placeholder=""
-            />
-          </div>
-          <div className="w-full md:w-[11.12%] md:pl-3 md:pr-1 mb-4 md:mb-0">
-            <label className="label-upper" htmlFor="email">
-              End date:
-            </label>
-            <input
-              required
-              className="input-imp"
-              name=""
-              id=""
-              type="text"
-              placeholder=""
-            />
-          </div>
-        </div>
-      ))}
+      <div className="overflow-auto">
+        <table className="w-full">
+          <thead>
+            <tr className="text-white">
+              <th></th>
+              <th className="py-2">Initial Date</th>
+              <th className="py-2">Antibiotic</th>
+              <th className="py-2">Loading Dose</th>
+              <th className="py-2">Maintenance Dose</th>
+              <th className="py-2">Route</th>
+              <th className="py-2">Frequency</th>
+              <th className="py-2">Days (Duration)</th>
+              <th className="py-2">End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, index) => (
+              <tr key={index} className="">
+                <td>
+                  <div
+                    className="border-2 border-amber-400 py-2 px-4 mb-3 rounded-md hover:cursor-pointer"
+                    onClick={() => deleteRow(index)}
+                  >
+                    <GrSubtractCircle className="fill-orange-700 text-red-300" />
+                  </div>
+                </td>
+                <td className="">
+                  <input
+                    type="date"
+                    className="appearance-none bg-gray-100 text-gray-700 border rounded w-[10rem] py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
+                    value={row.initDate}
+                    onChange={(e) => {
+                      const newRows = [...rows];
+                      newRows[index].initDate = e.target.value;
+                      setRows(newRows);
+                    }}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    className="appearance-none bg-gray-100 text-gray-700 border rounded w-[20rem] py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
+                    value={row.antibiotic}
+                    onChange={(e) => {
+                      const newRows = [...rows];
+                      newRows[index].antibiotic = e.target.value;
+                      setRows(newRows);
+                    }}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    min="0"
+                    className="appearance-none bg-gray-100 text-gray-700 border rounded w-[5rem] py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
+                    value={row.loadingDose}
+                    onChange={(e) => {
+                      const newRows = [...rows];
+                      newRows[index].loadingDose = e.target.value;
+                      setRows(newRows);
+                    }}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    min="0"
+                    className="appearance-none bg-gray-100 text-gray-700 border rounded w-[7rem] py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
+                    value={row.maintenanceDose}
+                    onChange={(e) => {
+                      const newRows = [...rows];
+                      newRows[index].maintenanceDose = e.target.value;
+                      setRows(newRows);
+                    }}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    className="appearance-none bg-gray-100 text-gray-700 border rounded w-[7rem] py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
+                    value={row.route}
+                    onChange={(e) => {
+                      const newRows = [...rows];
+                      newRows[index].route = e.target.value;
+                      setRows(newRows);
+                    }}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    min="0"
+                    className="appearance-none bg-gray-100 text-gray-700 border rounded w-[7rem] py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
+                    value={row.frequency}
+                    onChange={(e) => {
+                      const newRows = [...rows];
+                      newRows[index].frequency = e.target.value;
+                      setRows(newRows);
+                    }}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    min="0"
+                    className="appearance-none bg-gray-100 text-gray-700 border rounded w-[7rem] py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
+                    value={row.daysDuration}
+                    onChange={(e) => {
+                      const newRows = [...rows];
+                      newRows[index].daysDuration = e.target.value;
+                      setRows(newRows);
+                    }}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="date"
+                    className="appearance-none bg-gray-100 text-gray-700 border rounded w-[10rem] py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
+                    value={row.endDate}
+                    onChange={(e) => {
+                      const newRows = [...rows];
+                      newRows[index].endDate = e.target.value;
+                      setRows(newRows);
+                    }}
+                  />
+                </td>
+                
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
-}
+};
+
+export default AntibioticsUsed;
