@@ -37,7 +37,7 @@ export default function Form() {
   const deleteCultureReport = (report: number) => {
     if (cultureSent) {
       setCultureReportList(
-        cultureReportList.filter((item) => item.report !== report)
+        cultureReportList.filter((item : CultureReportType) => item.report !== report)
       );
     }
     if (cultureReportList.length <= 1) {

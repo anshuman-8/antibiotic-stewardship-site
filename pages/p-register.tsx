@@ -248,7 +248,6 @@ function PRegister() {
                 Cormorbodities
               </label>
               <textarea
-                required
                 className="input-imp"
                 name="cormorbodities"
                 id="cormorbodities"
@@ -309,7 +308,7 @@ function PRegister() {
           </div>
 
           {/* Address & Phone no */}
-          <div className="flex flex-wrap -mx-3 mb-6">
+          {/* <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label className="label-upper" htmlFor="email">
                 Address
@@ -337,7 +336,7 @@ function PRegister() {
                 placeholder="Phone number"
               />
             </div>
-          </div>
+          </div> */}
 
           {/* Submit */}
           <div className="flex justify-end">

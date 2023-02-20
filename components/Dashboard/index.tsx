@@ -5,7 +5,7 @@ import PatientCard from "./PatientCard";
 import PatientCardPlaceholder from "./PatientCardPlaceholder";
 import HeaderBar from "./headerBar";
 import { useQuery, gql } from "@apollo/client";
-import DataFetch from "../../utils/dataFetch";
+// import DataFetch from "../../utils/dataFetch";
 
 export default function DashboardIndex(s) {
 
