@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
+import Router from "next/router";
 import { useMutation, gql } from "@apollo/client";
 
 const registerPatientGQL = gql`
@@ -66,6 +67,8 @@ function PRegister() {
       onCompleted: (data) => {
         console.log(data);
         successNotify("Patient Registered Successfully");
+        Router.push("/");
+
       },
       onError: (error) => {
         console.log(error);

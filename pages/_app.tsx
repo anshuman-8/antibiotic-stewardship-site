@@ -8,7 +8,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  const API_URL = 'http://localhost:8000/graphql/';
+  const API_URL = 'http://localhost:8000/api/';
 
   const client = new ApolloClient({
     uri: API_URL,
@@ -27,10 +27,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar/>
-      <ApolloProvider client={client}>
 
+      <ApolloProvider client={client}>
       <Component {...pageProps} />
       </ApolloProvider>
+      
     </React.Fragment>
   );
 }

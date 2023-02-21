@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { ClinicalSignType } from "../../utils/types";
+import { clinicalSignsPriority } from "../../utils/objectList";
 
-interface clinicalSignType {
-  date: Date;
-  temp: string;
-  bp: string;
-  procalcitonin: string;
-  wbc: string;
-  neutrophils: string;
-  screatinine: string;
-  cratinineClerance: string;
-  o2: string;
+interface ClinicalSignProps {
+  state: ClinicalSignType[] | [];
+  setState: React.Dispatch<
+    React.SetStateAction<ClinicalSignType[] | []>
+  >;
 }
 
-export default function ClinicalSign() {
-  const emptyClinicalSignsValue: clinicalSignType = {
+export default function ClinicalSign(props : ClinicalSignProps) {
+
+  const { state, setState } = props;
+
+  const emptyClinicalSignsValue: ClinicalSignType = {
     date: new Date(),
     temp: "",
     bp: "",
@@ -25,9 +25,9 @@ export default function ClinicalSign() {
     o2: "",
   };
 
-  const [clinicalSignsValue, setClinicalSignsValue] = useState<
-    clinicalSignType[] | []
-  >([]);
+  // const [clinicalSignsValue, setClinicalSignsValue] = useState<
+  //   ClinicalSignType[] | []
+  // >([]);
 
   useEffect(() => {
     const today: Date = new Date();
@@ -44,119 +44,8 @@ export default function ClinicalSign() {
         date,
       };
     });
-    setClinicalSignsValue(newClinicalSignsValue);
+    setState(newClinicalSignsValue);
   }, []);
-
-  const clinicalSigns = [
-    {
-      name: "Temp(F)",
-      id: "cstempf",
-      placeholder: "",
-    },
-    {
-      name: "Blood Pressure(mmHg)",
-      id: "csbp",
-      placeholder: "BP",
-    },
-    {
-      name: "O2 Saturation (%)",
-      id: "csosat",
-      placeholder: "",
-    },
-    {
-      name: "White Blood Cells (K/uL)",
-      id: "cswbc",
-      placeholder: "",
-    },
-    {
-      name: "CRP (mg/L)",
-      id: "cscrp",
-      placeholder: "",
-    },
-    {
-      name: "Procalcitonin (ng/ml)",
-      id: "csprocalc",
-      placeholder: "",
-    },
-    {
-      name: "Lactate (mmol/L)",
-      id: "cslactate",
-      placeholder: "",
-    },
-    {
-      name: "S.Creatinine(mg/dl)",
-      id: "cscreatinine",
-      placeholder: "",
-    },
-    {
-      name: "Neutrophils %",
-      id: "csneutrophils",
-      placeholder: "",
-    },
-    {
-      name: "Platelets (109/L)",
-      id: "csplatelets",
-      placeholder: "",
-    },
-    {
-      name: "Urine analysis",
-      id: "csurine",
-      placeholder: "",
-    },
-    {
-      name: "CSF study",
-      id: "csfstudy",
-      placeholder: "",
-    },
-    {
-      name: "Body fluid study",
-      id: "csbodyfluid",
-      placeholder: "",
-    },
-  ];
-
-  const clinicalSignsPriority = [
-    {
-      name: "Procalcitonin (ng/ml)",
-      id: "csprocalc",
-      placeholder: "",
-    },
-    {
-      name: "White Blood Cells (K/uL)",
-      id: "cswbc",
-      placeholder: "",
-    },
-    {
-      name: "Neutrophils %",
-      id: "csneutrophils",
-      placeholder: "",
-    },
-    {
-      name: "S.Creatinine(mg/dl)",
-      id: "cscreatinine",
-      placeholder: "",
-    },
-    {
-      name: "Cratinine Clearance (mL/min)",
-      id: "cratinineClearance",
-      placeholder: "",
-    },
-    {
-      name: "Temp(F)",
-      id: "cstempf",
-      placeholder: "",
-    },
-    {
-      name: "Blood Pressure(mmHg)",
-      id: "csbp",
-      placeholder: "",
-    },
-    {
-      name: "O2 Saturation (%)",
-      id: "csosat",
-      placeholder: "",
-    },
-  ];
 
   return (
     <div className="form-component">
@@ -179,7 +68,7 @@ export default function ClinicalSign() {
           })}
         </div>
         <div className="flex overflow-scroll px-2">
-          {clinicalSignsValue.map((item, index) => {
+          {state.map((item, index) => {
             return (
               <div className="flex flex-col striped" key={index}>
                 <div className="capitalize font-semibold h-10 w-[100%] text-white my-1 text-sm p-1 text-center align-middle">

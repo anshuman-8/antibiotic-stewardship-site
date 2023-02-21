@@ -10,39 +10,115 @@ import AntibioticUsed from "../components/Form/AntibioticUsed";
 import FormIntro from "../components/Form/FormIntro";
 import Diagnosis from "../components/Form/Diagnosis";
 import FocusOfInfection from "../components/Form/FocusOfInfection";
-
-interface CultureReportType {
-  report: number;
-}
+import { CultureReportType, AntibioticsUsedType, ClinicalSignType } from "../utils/types";
 
 export default function Form() {
   const [loading, setLoading] = useState(false);
   const [cultureSent, setCultureSent] = useState(false);
+
+  const [introState, setIntroState] = useState({
+    reviewDate: Date.now(),
+    reviewingDepartment: "",
+  });
+
+  const [diagnosisState, setDiagnosisState] = useState({
+    provisionalDiagnosis: "",
+    finalDiagnosis: "",
+    syndromicDiagnosis: "",
+    syndromicOptions: "",
+  });
+
+  const [focusOfInfectionState, setFocusOfInfectionState] = useState({
+    sepsis: false,
+    septicShock: false,
+    neutropenicSepsis: false,
+    pneumonia: false,
+    UTI: false,
+    CNS: false,
+    skinAndSoftTissue: false,
+    abdominal: false,
+    primaryBacteremia: false,
+    secondaryBacteremia: false,
+    catheterLinesStens: false,
+    other: "",
+  });
+
   const [cultureReportList, setCultureReportList] = useState<
     CultureReportType[] | []
   >([]);
 
+  const [antibioticUsedState, setAntibioticUsedState] = useState<AntibioticsUsedType[]| []>([
+    {
+      id: "",
+      initDate: "",
+      antibiotic: "",
+      loadingDose: "",
+      maintenanceDose: "",
+      route: "",
+      frequency: "",
+      daysDuration: "",
+      endDate: "",
+    }
+  ]);
+
+  const [clinicalSignsValue, setClinicalSignsValue] = useState<
+    ClinicalSignType[] | []
+  >([]);
+
   const notify = (message: String) => toast.error(message);
+
+  const emptyCultureReport = {
+    report: 1,
+    sentBeforeAntibiotics: false,
+    dateTimeSent: Date.now().toString(),
+    dateTimeReported: Date.now().toString(),
+    specimen: "",
+    organism: "",
+    siteOfCollection: "",
+    antibioticSensitivity: [""],
+    multiDrugResistance: "",
+    resistance: "",
+    isXRay: false,
+    isUltrasound: false,
+    isCTScan: false,
+    isMRI: false,
+    isPetMRI: false,
+    impression: "",
+  };
 
   const addCultureReport = () => {
     if (cultureSent) {
       const n = cultureReportList[cultureReportList.length - 1].report + 1;
-      setCultureReportList([...cultureReportList, { report: n }]);
+      const newReport: CultureReportType = emptyCultureReport;
+      newReport.report = n;
+      setCultureReportList([...cultureReportList, newReport]);
     } else {
       setCultureSent(true);
-      setCultureReportList([...cultureReportList, { report: 1 }]);
+      const newReport: CultureReportType = emptyCultureReport;
+      setCultureReportList([...cultureReportList, newReport]);
     }
   };
 
   const deleteCultureReport = (report: number) => {
     if (cultureSent) {
       setCultureReportList(
-        cultureReportList.filter((item : CultureReportType) => item.report !== report)
+        cultureReportList.filter(
+          (item: CultureReportType) => item.report !== report
+        )
       );
     }
     if (cultureReportList.length <= 1) {
       setCultureSent(false);
     }
+  };
+
+  const printAllData = () => {
+    console.log("introState", introState);
+    console.log("diagnosisState", diagnosisState);
+    console.log("focusOfInfectionState", focusOfInfectionState);
+    console.log("cultureReportList", cultureReportList);
+    console.log("antibioticUsedState", antibioticUsedState);
+    console.log("clinicalSignsValue", clinicalSignsValue);
   };
 
   return (
@@ -71,18 +147,21 @@ export default function Form() {
               </button>
             </Link>
             <div className="my-5 mx-2 text-slate-800 font-semibold uppercase text-2xl">
-                Data Review Form{" "}
-                {/* <span className="lowercase">(1123MRDnumber)</span> */}
-              </div>
+              Data Review Form{" "}
+              {/* <span className="lowercase">(1123MRDnumber)</span> */}
+            </div>
           </div>
           {/* Intro and Diagnosis */}
-          <FormIntro />
+          <FormIntro state={introState} setState={setIntroState} />
 
           {/* Diagnosis */}
-          <Diagnosis />
+          <Diagnosis state={diagnosisState} setState={setDiagnosisState} />
 
           {/* Suspected focus of infection*/}
-          <FocusOfInfection />
+          <FocusOfInfection
+            state={focusOfInfectionState}
+            setState={setFocusOfInfectionState}
+          />
 
           {/* Culture sent */}
           <div className="form-component">
@@ -123,6 +202,8 @@ export default function Form() {
                   <CultureReport
                     key={i}
                     id={li.report}
+                    state={cultureReportList}
+                    setState={setCultureReportList}
                     deleteCultureReport={deleteCultureReport}
                   />
                 ))}
@@ -143,19 +224,18 @@ export default function Form() {
           </div>
 
           {/* Antibiotic used*/}
-          <AntibioticUsed />
+          <AntibioticUsed rows={antibioticUsedState} setRows={setAntibioticUsedState}/>
 
           {/* Clinical Signs correlating with Antibiotic initiation(prior 48 hours) */}
-          <ClinicalSign />
+          <ClinicalSign state={clinicalSignsValue} setState={setClinicalSignsValue}/>
 
           {/* Comments */}
-          {/* <CommentsClassification submitButton={submitButton}/> */}
           <div className="flex justify-end mx-auto max-w-6xl mb-10">
             {!loading ? (
               <button
                 type="submit"
                 className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
-                onClick={() => notify("Form not yet completed!!")}
+                onClick={() => printAllData()}
               >
                 Submit
               </button>
