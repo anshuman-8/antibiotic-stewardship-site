@@ -4,13 +4,10 @@ import { clinicalSignsPriority } from "../../utils/objectList";
 
 interface ClinicalSignProps {
   state: ClinicalSignType[] | [];
-  setState: React.Dispatch<
-    React.SetStateAction<ClinicalSignType[] | []>
-  >;
+  setState: React.Dispatch<React.SetStateAction<ClinicalSignType[] | []>>;
 }
 
-export default function ClinicalSign(props : ClinicalSignProps) {
-
+export default function ClinicalSign(props: ClinicalSignProps) {
   const { state, setState } = props;
 
   const emptyClinicalSignsValue: ClinicalSignType = {
@@ -24,10 +21,6 @@ export default function ClinicalSign(props : ClinicalSignProps) {
     cratinineClerance: "",
     o2: "",
   };
-
-  // const [clinicalSignsValue, setClinicalSignsValue] = useState<
-  //   ClinicalSignType[] | []
-  // >([]);
 
   useEffect(() => {
     const today: Date = new Date();
@@ -76,12 +69,30 @@ export default function ClinicalSign(props : ClinicalSignProps) {
                     " " +
                     item.date.toLocaleDateString("en-US", { weekday: "short" })}
                 </div>
-                {clinicalSignsPriority.map((item, i) => {
+                {clinicalSignsPriority.map((fieldItem, i) => {
                   return (
-                    <div key={item.id}>
+                    <div key={fieldItem.id}>
                       <input
                         className="max-w-[10rem] p-1 m-1 h-10 rounded-sm"
                         placeholder={item.placeholder}
+                        name={fieldItem.id}
+                        type="text"
+                        // value={item.value}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          const newState = state.map((stateItem, index) => {
+                            if (item.date === stateItem.date) {
+                              console.log(fieldItem.id,"  ", value);
+                              return {
+                                ...stateItem,
+                                [fieldItem.id]: value,
+                              };
+                            }
+                            return stateItem;
+                          });
+                          console.log(newState);
+                          setState(newState);
+                        }}
                       />
                     </div>
                   );

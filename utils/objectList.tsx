@@ -91,42 +91,42 @@ export const resistanceOrganismList = [
 export const clinicalSignsPriority = [
   {
     name: "Procalcitonin (ng/ml)",
-    id: "csprocalc",
+    id: "procalcitonin",
     placeholder: "",
   },
   {
     name: "White Blood Cells (K/uL)",
-    id: "cswbc",
+    id: "wbc",
     placeholder: "",
   },
   {
     name: "Neutrophils %",
-    id: "csneutrophils",
+    id: "neutrophils",
     placeholder: "",
   },
   {
     name: "S.Creatinine(mg/dl)",
-    id: "cscreatinine",
+    id: "screatinine",
     placeholder: "",
   },
   {
     name: "Cratinine Clearance (mL/min)",
-    id: "cratinineClearance",
+    id: "cratinineClerance",
     placeholder: "",
   },
   {
     name: "Temp(F)",
-    id: "cstempf",
+    id: "temp",
     placeholder: "",
   },
   {
     name: "Blood Pressure(mmHg)",
-    id: "csbp",
+    id: "bp",
     placeholder: "",
   },
   {
     name: "O2 Saturation (%)",
-    id: "csosat",
+    id: "o2",
     placeholder: "",
   },
 ];

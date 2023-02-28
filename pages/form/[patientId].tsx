@@ -1,20 +1,27 @@
 import { ImSpinner2 } from "react-icons/im";
-import React, { useState, useEffect, } from "react";
+import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
+import { useMutation, gql } from "@apollo/client";
 
-import ClinicalSign from "../components/Form/ClinicalSign";
-import CultureReport from "../components/Form/CultureReport";
-import AntibioticUsed from "../components/Form/AntibioticUsed";
-import FormIntro from "../components/Form/FormIntro";
-import Diagnosis from "../components/Form/Diagnosis";
-import FocusOfInfection from "../components/Form/FocusOfInfection";
-import { CultureReportType, AntibioticsUsedType, ClinicalSignType } from "../utils/types";
+import ClinicalSign from "../../components/Form/ClinicalSign";
+import CultureReport from "../../components/Form/CultureReport";
+import AntibioticUsed from "../../components/Form/AntibioticUsed";
+import FormIntro from "../../components/Form/FormIntro";
+import Diagnosis from "../../components/Form/Diagnosis";
+import FocusOfInfection from "../../components/Form/FocusOfInfection";
+import {
+  CultureReportType,
+  AntibioticsUsedType,
+  ClinicalSignType,
+} from "../../utils/types";
+import { Router, useRouter } from "next/router";
 
-export default function Form({props}) {
+export default function Form() {
+  const { patientId } = useRouter().query;
+  console.log("patientId", patientId);
 
-  const [loading, setLoading] = useState(false);
   const [cultureSent, setCultureSent] = useState(false);
 
   const [introState, setIntroState] = useState({
@@ -48,7 +55,9 @@ export default function Form({props}) {
     CultureReportType[] | []
   >([]);
 
-  const [antibioticUsedState, setAntibioticUsedState] = useState<AntibioticsUsedType[]| []>([
+  const [antibioticUsedState, setAntibioticUsedState] = useState<
+    AntibioticsUsedType[] | []
+  >([
     {
       id: "",
       initDate: "",
@@ -59,7 +68,7 @@ export default function Form({props}) {
       frequency: "",
       daysDuration: "",
       endDate: "",
-    }
+    },
   ]);
 
   const [clinicalSignsValue, setClinicalSignsValue] = useState<
@@ -120,6 +129,111 @@ export default function Form({props}) {
     console.log("cultureReportList", cultureReportList);
     console.log("antibioticUsedState", antibioticUsedState);
     console.log("clinicalSignsValue", clinicalSignsValue);
+  };
+
+  const patientDataFormGQL = gql`
+    mutation ($input: PatientFormInput!) {
+      patientDataForm(inputs: $input) {
+        success
+        returning {
+          id
+          patient {
+            fullName
+            mrdNumber
+          }
+          reviewDate
+          reviewDepartment
+          provisionalDiagnosis
+          finalDiagnosis
+          syndromicDiagnosis
+          diagnosisChoice
+          sepsis {
+            id
+            isSepsis
+          }
+          focusOfInfection {
+            id
+            isAbdominal
+            isUTI
+            isPneumonia
+            other
+          }
+          iscultureReport
+          cultureReport {
+            specimenType
+            organism
+            siteOfCollection
+            timeReported
+          }
+          antibioticsUsed {
+            id
+            initialDate
+            loadingDose
+            maintenanceDose
+            route
+            duration
+          }
+          clinicalSigns {
+            date
+            whiteBloodCell
+            sCreatinine
+            temperature
+            o2Saturation
+          }
+        }
+      }
+    }
+  `;
+
+  const [patientFormData, { data, loading, error }] =
+    useMutation(patientDataFormGQL);
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    printAllData();
+    const input = {
+      patient: patientId,
+      reviewDate: introState.reviewDate,
+      reviewDepartment: introState.reviewingDepartment,
+      provisionalDiagnosis: diagnosisState.provisionalDiagnosis,
+      finalDiagnosis: diagnosisState.finalDiagnosis,
+      syndromicDiagnosis: diagnosisState.syndromicDiagnosis,
+      diagnosisChoice: diagnosisState.syndromicOptions,
+      sepsis: {
+        isSepsis: focusOfInfectionState.sepsis,
+        isSepticShock: focusOfInfectionState.septicShock,
+        isNeutropenicSepsis: focusOfInfectionState.neutropenicSepsis,
+      },
+      focusOfInfection: {
+        isPneumonia: focusOfInfectionState.pneumonia,
+        isUTI: focusOfInfectionState.UTI,
+        isCNS: focusOfInfectionState.CNS,
+        isSkin: focusOfInfectionState.skinAndSoftTissue,
+        isAbdominal: focusOfInfectionState.abdominal,
+        isPrimaryBacteraemia: focusOfInfectionState.primaryBacteremia,
+        isSecondaryBacteraemia: focusOfInfectionState.secondaryBacteremia,
+        isCatheterLinesStens: focusOfInfectionState.catheterLinesStens,
+        other: focusOfInfectionState.other,
+      },
+      iscultureReport: cultureSent,
+      cultureReport: cultureReportList,
+      antibioticsUsed: antibioticUsedState,
+      clinicalSigns: clinicalSignsValue,
+    };
+
+    console.log("the final input:", input);
+
+    patientFormData({
+      variables: {
+        input: input,
+      },
+      onCompleted: (data) => {
+        console.log(data);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    });
   };
 
   return (
@@ -225,24 +339,31 @@ export default function Form({props}) {
           </div>
 
           {/* Antibiotic used*/}
-          <AntibioticUsed rows={antibioticUsedState} setRows={setAntibioticUsedState}/>
+          <AntibioticUsed
+            rows={antibioticUsedState}
+            setRows={setAntibioticUsedState}
+          />
 
           {/* Clinical Signs correlating with Antibiotic initiation(prior 48 hours) */}
-          <ClinicalSign state={clinicalSignsValue} setState={setClinicalSignsValue}/>
+          <ClinicalSign
+            state={clinicalSignsValue}
+            setState={setClinicalSignsValue}
+          />
 
+          {/* Comments */}
           <div className="flex justify-end mx-auto max-w-6xl mb-10">
             {!loading ? (
               <button
                 type="submit"
                 className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
-                onClick={() => printAllData()}
+                onClick={(e) => submitForm(e)}
               >
                 Submit
               </button>
             ) : (
-              <div className="bg-slate-400/50 px-6 mt-3 ">
+              <div className="bg-primary/60 mt-3 w-28 h-12 rounded-md">
                 <ImSpinner2
-                  className="animate-spin my-3 fill-primary "
+                  className="animate-spin my-3 fill-slate-600 mx-auto"
                   size={30}
                 />
               </div>
