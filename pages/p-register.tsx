@@ -68,7 +68,7 @@ function PRegister() {
         console.log(data);
         successNotify("Patient Registered Successfully");
         Router.push("/");
-
+        
       },
       onError: (error) => {
         console.log(error);
@@ -82,20 +82,6 @@ function PRegister() {
 
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
-      <div className="fixed z-50 top-10">
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-      </div>
       <div className="w-11/12 mx-auto max-w-7xl my-6 pt-7 pb-10 bg-slate-700/80 flex flex-col z-10 shadow-xl rounded-lg p-5 backdrop-blur-md">
         <Link href={"/"} className="w-min">
           <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">

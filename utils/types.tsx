@@ -13,7 +13,7 @@ export interface CultureReportType {
   isUltrasound: boolean;
   isCTScan: boolean;
   isMRI: boolean;
-  isPetMRI: boolean;
+  isPETScan: boolean;
   impression: string;
 }
 

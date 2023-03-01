@@ -24,7 +24,7 @@ export default function CultureReport(props: proptype) {
     isCTScan: false,
     isMRI: false,
     isUltrasound: false,
-    isPetMRI: false,
+    isPETScan: false,
   });
 
   const [showImpression, setShowImpression] = useState(false);
@@ -423,11 +423,11 @@ export default function CultureReport(props: proptype) {
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
             <input
               type="checkbox"
-              name="isPetMRI"
-              id="isPetMRI"
+              name="isPETScan"
+              id="isPETScan"
               className=""
               onChange={() => {
-                imagingChange("isPetMRI");
+                imagingChange("isPETScan");
               }}
             />
             <label htmlFor="infection" className="ml-2">

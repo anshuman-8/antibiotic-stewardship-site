@@ -11,16 +11,16 @@ import AntibioticUsed from "../../components/Form/AntibioticUsed";
 import FormIntro from "../../components/Form/FormIntro";
 import Diagnosis from "../../components/Form/Diagnosis";
 import FocusOfInfection from "../../components/Form/FocusOfInfection";
+import { useRouter } from "next/router";
 import {
   CultureReportType,
   AntibioticsUsedType,
   ClinicalSignType,
 } from "../../utils/types";
-import { Router, useRouter } from "next/router";
 
 export default function Form() {
   const { patientId } = useRouter().query;
-  console.log("patientId", patientId);
+  const router = useRouter();
 
   const [cultureSent, setCultureSent] = useState(false);
 
@@ -47,7 +47,7 @@ export default function Form() {
     abdominal: false,
     primaryBacteremia: false,
     secondaryBacteremia: false,
-    catheterLinesStens: false,
+    catheterLinesStents: false,
     other: "",
   });
 
@@ -75,7 +75,8 @@ export default function Form() {
     ClinicalSignType[] | []
   >([]);
 
-  const notify = (message: String) => toast.error(message);
+  const notifyError = (message: String) => toast.error(message);
+  const notifySuccess = (message: String) => toast.success(message);
 
   const emptyCultureReport = {
     report: 1,
@@ -92,7 +93,7 @@ export default function Form() {
     isUltrasound: false,
     isCTScan: false,
     isMRI: false,
-    isPetMRI: false,
+    isPETScan: false,
     impression: "",
   };
 
@@ -191,8 +192,63 @@ export default function Form() {
   const submitForm = (e) => {
     e.preventDefault();
     printAllData();
+
+    const cultureReport = cultureReportList.map((item) => {
+      return {
+        sentBeforeAntibiotic: item.sentBeforeAntibiotics==="true",
+        specimenType: item.specimen,
+        organism: item.organism,
+        siteOfCollection: item.siteOfCollection,
+        timeReported: item.dateTimeReported,
+        timeSent: item.dateTimeSent,
+        resistance: item.resistance,
+        antibioticSensitivity: item.antibioticSensitivity.map(
+          (antibioticObj) => {
+            return { antibiotic: antibioticObj };
+          }
+        ),
+        Imaging: {
+          isxRay: item.isXRay,
+          isUltraSound: item.isUltrasound,
+          isCTScan: item.isCTScan,
+          isMRI: item.isMRI,
+          isPETScan: item.isPETScan,
+          impression: item.impression,
+        },
+      };
+    });
+
+    const antibioticsUsed = antibioticUsedState.map((item) => {
+      return {
+        initialDate: item.initDate,
+        loadingDose: parseInt( item.loadingDose),
+        maintenanceDose:  parseInt(item.maintenanceDose),
+        route: item.route,
+        frequency:  parseInt(item.frequency),
+        duration:  parseInt(item.daysDuration),
+        antibiotic: item.antibiotic,
+        endDate: item.endDate,
+      };
+    });
+
+    const clinicalSign = clinicalSignsValue.map((item) => {
+      return {
+        date: item.date,
+        // patient: parseInt(patientId?.toString() || "0"),
+        procalcitonin: item.procalcitonin,
+        sCreatinine: item.screatinine,
+        temperature: item.temp,
+        o2Saturation: item.o2,
+        whiteBloodCell: item.wbc,
+        neutrophil: item.neutrophils,
+        cratinineClearance: item.cratinineClerance,
+        bloodPressure: item.bp,
+      };
+    });
+
     const input = {
-      patient: patientId,
+      // convert patientId to int
+      patient: parseInt(patientId?.toString() || "0"),
       reviewDate: introState.reviewDate,
       reviewDepartment: introState.reviewingDepartment,
       provisionalDiagnosis: diagnosisState.provisionalDiagnosis,
@@ -212,13 +268,13 @@ export default function Form() {
         isAbdominal: focusOfInfectionState.abdominal,
         isPrimaryBacteraemia: focusOfInfectionState.primaryBacteremia,
         isSecondaryBacteraemia: focusOfInfectionState.secondaryBacteremia,
-        isCatheterLinesStens: focusOfInfectionState.catheterLinesStens,
+        isCatheterLinesStents: focusOfInfectionState.catheterLinesStents,
         other: focusOfInfectionState.other,
       },
-      iscultureReport: cultureSent,
-      cultureReport: cultureReportList,
-      antibioticsUsed: antibioticUsedState,
-      clinicalSigns: clinicalSignsValue,
+      // TODO: add logic to check if culture report are ment to be sent
+      cultureReport: cultureReport,
+      antibioticUsed: antibioticsUsed,
+      clinicalSign: clinicalSign,
     };
 
     console.log("the final input:", input);
@@ -229,29 +285,18 @@ export default function Form() {
       },
       onCompleted: (data) => {
         console.log(data);
+        notifySuccess("Form Submitted Successfully!");
+        router.push("/")
       },
       onError: (error) => {
         console.log(error);
+        notifyError("Form Submission Failed!");
       },
     });
   };
 
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
-      <div className="fixed z-50 top-10">
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-      </div>
       <div className="">
         <form className="w-full">
           <div className="max-w-7xl mx-auto mt-3 flex flex-row items-center space-x-10">

@@ -24,7 +24,7 @@ export default function DashboardIndex(s) {
     }
   `;
   const { loading, error, data } = useQuery(getActivePatient, {
-    pollInterval: 10000,
+    pollInterval: 1000,
   });
 
   if (loading) return (<>

@@ -83,7 +83,7 @@ export default function Form({props}) {
     isUltrasound: false,
     isCTScan: false,
     isMRI: false,
-    isPetMRI: false,
+    isPETScan: false,
     impression: "",
   };
 
