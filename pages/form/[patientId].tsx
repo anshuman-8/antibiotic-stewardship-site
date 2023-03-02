@@ -204,7 +204,7 @@ export default function Form() {
         resistance: item.resistance,
         antibioticSensitivity: item.antibioticSensitivity.map(
           (antibioticObj) => {
-            return { antibiotic: antibioticObj };
+            return antibioticObj;
           }
         ),
         Imaging: {
@@ -217,6 +217,9 @@ export default function Form() {
         },
       };
     });
+
+    console.log("cultureReport check", cultureReport);
+    
 
     const antibioticsUsed = antibioticUsedState.map((item) => {
       return {

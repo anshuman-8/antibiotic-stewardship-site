@@ -4,7 +4,7 @@ import PatientCard from "./PatientCard";
 import { useQuery, gql } from "@apollo/client";
 import PatientCardPlaceholder from "./PatientCardPlaceholder";
 
-export default function DashboardIndex(s) {
+export default function DashboardIndex() {
 
   const getActivePatient = gql`
     query {

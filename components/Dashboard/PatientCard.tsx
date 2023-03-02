@@ -40,7 +40,7 @@ export default function patientCard(props) {
             Patient Form
           </button>
         </Link>
-        <Link href="/analysis">
+        <Link href={"/analysis/"+id}>
           <button className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400">
             Analysis Form
           </button>

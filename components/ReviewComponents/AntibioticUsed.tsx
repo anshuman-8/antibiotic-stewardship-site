@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function AntibioticUsed() {
+export default function AntibioticUsed({ data }) {
   return (
     <div className="flex flex-col">
       <div className="text-lg text-white font-semibold">Antibiotic Used</div>
@@ -60,110 +60,37 @@ export default function AntibioticUsed() {
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b bg-white">
-                <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  23/23/2334
-                </td>
-                <td className="text-sm text-gray-900 font-medium px-2 py-4 whitespace-nowrap">
-                  The Antibiotic used
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  23 lm
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  23 lm
-                </td>
-                <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  IV
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  24
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  100
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  234/23/242
-                </td>
-              </tr>
-              <tr className="border-b bg-white">
-                <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  23/23/2334
-                </td>
-                <td className="text-sm text-gray-900 font-medium px-2 py-4 whitespace-nowrap">
-                  The Antibiotic used
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  23 lm
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  23 lm
-                </td>
-                <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  IV
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  24
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  100
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  234/23/242
-                </td>
-              </tr>
-              <tr className="border-b bg-white">
-                <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  23/23/2334
-                </td>
-                <td className="text-sm text-gray-900 font-medium px-2 py-4 whitespace-nowrap">
-                  The Antibiotic used
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  23 lm
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  23 lm
-                </td>
-                <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  IV
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  24
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  100
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  234/23/242
-                </td>
-              </tr>
-              <tr className="border-b bg-white">
-                <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  23/23/2334
-                </td>
-                <td className="text-sm text-gray-900 font-medium px-2 py-4 whitespace-nowrap">
-                  The Antibiotic used
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  23 lm
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  23 lm
-                </td>
-                <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  IV
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  24
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  100
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  234/23/242
-                </td>
-              </tr>
+              {data.map((val, i) => {
+                return (
+                  <tr className="border-b bg-white" key={i}>
+                    <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {val.initialDate}
+                    </td>
+                    <td className="text-sm text-gray-900 font-medium px-2 py-4 whitespace-nowrap">
+                      {val.antibiotic}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
+                    {val.loadingDose}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
+                      {val.maintenanceDose}
+                    </td>
+                    <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {val.route}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
+                      {val.frequency}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
+                      {val.duration}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
+                      {val.endDate}
+                    </td>
+                  </tr>
+                );
+              })}
+
             </tbody>
           </table>
         </div>

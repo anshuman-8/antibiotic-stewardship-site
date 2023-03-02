@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Introduction() {
+export default function Introduction({data}) {
   const to_dd_mm_yyyy = (date: Date) => {
     let dd = date.getDate();
     let mm = date.getMonth() + 1;
@@ -20,9 +20,9 @@ export default function Introduction() {
       <div className="text-white font-semibold text-lg space-y-2 my-5">
         <div>
           {" "}
-          <span className="text-2xl px-1">{" Anshuman Swain"}</span>
+          <span className="text-2xl px-1">{data.fullName}</span>
         </div>
-        <div>MRD No: {"1123MRDnumber"}</div>
+        <div>MRD No: {data.mrdNumber}</div>
         <div>Age : {"19"}</div>
       </div>
 
