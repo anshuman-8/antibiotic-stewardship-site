@@ -96,11 +96,11 @@ export default function Analysis() {
   const { loading, error, data } = useQuery(getFormDetails, {
     variables: {
       patientId: patientId,
-      date: "2023-03-14",
+      date: "2023-03-03",
     },
   });
   if (loading) return <div>Loading...</div>;
-  console.log("dadadatata", data.patientsForm[0]);
+  console.log("dadadatata", data);
   if (error) return <p>Error :(</p>;
 
   return (

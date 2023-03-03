@@ -156,7 +156,7 @@ export default function CultureReport(props: proptype) {
             name="dateTimeSent"
             id="dateTimeSent"
             type="datetime-local"
-            placeholder="Department"
+            placeholder=""
           />
         </div>
         <div className="w-full md:w-1/2 px-3 mb-2 md:mb-0">
@@ -169,7 +169,7 @@ export default function CultureReport(props: proptype) {
             name="dateTimeReported"
             id="dateTimeReported"
             type="datetime-local"
-            placeholder="Department"
+            placeholder=""
           />
         </div>
       </div>
