@@ -3,6 +3,8 @@ import HeaderBar from "./headerBar";
 import PatientCard from "./PatientCard";
 import { useQuery, gql } from "@apollo/client";
 import PatientCardPlaceholder from "./PatientCardPlaceholder";
+import PatientTable from "./patientTable";
+import TablePlaceholder from "./tablePlaceholder";
 
 export default function DashboardIndex() {
 
@@ -16,6 +18,7 @@ export default function DashboardIndex() {
         dateOfBirth
         dateOfAdmission
         department
+        patientLocation
         cormorbodities
         height
         weight
@@ -24,19 +27,20 @@ export default function DashboardIndex() {
     }
   `;
   const { loading, error, data } = useQuery(getActivePatient, {
-    pollInterval: 1000,
+    pollInterval: 10000,
   });
 
   if (loading) return (<>
      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {/* <PatientCardPlaceholder />
         <PatientCardPlaceholder />
         <PatientCardPlaceholder />
         <PatientCardPlaceholder />
         <PatientCardPlaceholder />
         <PatientCardPlaceholder />
         <PatientCardPlaceholder />
-        <PatientCardPlaceholder />
-        <PatientCardPlaceholder />
+        <PatientCardPlaceholder /> */}
+        <TablePlaceholder />
       </div>
   </>);
 
@@ -70,7 +74,7 @@ export default function DashboardIndex() {
 
       <div className="mx-5 mt-2 font-semibold text-xl">Pending Review:</div>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {/* <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {data.patients.map((patient) => (
           <PatientCard
             key={patient.id}
@@ -86,8 +90,8 @@ export default function DashboardIndex() {
             active={patient.active}
           />
         ))}
-        {/* <PatientCard Patient/> */}
-      </div>
+      </div> */}
+      <PatientTable data={data.patients}/>
     </div>
   );
 }

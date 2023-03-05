@@ -195,13 +195,14 @@ export default function Form() {
 
     const cultureReport = cultureReportList.map((item) => {
       return {
+        timeReported: item.dateTimeReported,
+        timeSent: item.dateTimeSent,
         sentBeforeAntibiotic: item.sentBeforeAntibiotics==="true",
         specimenType: item.specimen,
         organism: item.organism,
         siteOfCollection: item.siteOfCollection,
-        timeReported: item.dateTimeReported,
-        timeSent: item.dateTimeSent,
         resistance: item.resistance,
+        multiDrugResistance:item.multiDrugResistance,
         antibioticSensitivity: item.antibioticSensitivity.map(
           (antibioticObj) => {
             return antibioticObj;

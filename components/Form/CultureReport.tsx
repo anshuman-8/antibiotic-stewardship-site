@@ -74,6 +74,7 @@ export default function CultureReport(props: proptype) {
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
+    console.log(name,value);
     const newCultureReport = state.map((report) => {
       if (report.report === id) {
         return { ...report, [name]: value };
@@ -309,7 +310,7 @@ export default function CultureReport(props: proptype) {
               <option value="MDR">MDR</option>
               <option value="NoMDR">No MDR</option>
               <option value="PanSensitive">PS (Pan Sensitive)</option>
-              <option value="None">NA (No Organism)</option>
+              <option value="NA(No Organism)">NA (No Organism)</option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg
