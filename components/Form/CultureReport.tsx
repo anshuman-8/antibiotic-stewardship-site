@@ -68,20 +68,17 @@ export default function CultureReport(props: proptype) {
       }
       return report;
     });
-    console.log(newCultureReport);
     setState(newCultureReport);
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
-    console.log(name,value);
     const newCultureReport = state.map((report) => {
       if (report.report === id) {
         return { ...report, [name]: value };
       }
       return report;
     });
-    console.log(newCultureReport);
 
     setState(newCultureReport);
   };
@@ -95,7 +92,6 @@ export default function CultureReport(props: proptype) {
       }
       return report;
     });
-    console.log(newCultureReport);
 
     setState(newCultureReport);
 

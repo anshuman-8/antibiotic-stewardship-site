@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-interface recommendationValuetype{
+interface recommendationValuetype {
   name: string;
   id: string;
   placeholder: string;
@@ -8,7 +8,6 @@ interface recommendationValuetype{
 }
 
 export default function Recommendation() {
-
   const [checkBoxList, setCheckBoxList] = useState<Object>({
     rightIndication: false,
     rightDrug: false,
@@ -17,7 +16,7 @@ export default function Recommendation() {
     rightMaintenanceDose: false,
   });
 
-  const recommendationInitialValue  = [
+  const recommendationInitialValue = [
     {
       name: "Indication",
       id: "rightIndication",
@@ -56,9 +55,9 @@ export default function Recommendation() {
     },
   ];
 
-  const [recommendationList, setRecommendationList] = useState<recommendationValuetype[]>(
-    recommendationInitialValue
-  );
+  const [recommendationList, setRecommendationList] = useState<
+    recommendationValuetype[]
+  >(recommendationInitialValue);
 
   const setChecked = (id: string) => {
     const newRecommendationList = recommendationList.map((item: any) => {
@@ -91,11 +90,16 @@ export default function Recommendation() {
                 {value.name}
               </label>
             </div>
-            <textarea
+            {/* <textarea
               disabled={!value.checked}
               // placeholder={"recommendation..."}
               className="px-2 py-1 text-gray-700 border rounded-lg focus:outline-none mr-2"
-            />
+            /> */}
+            {value.checked ? (
+              <textarea className="px-2 py-1 text-gray-700 border rounded-lg focus:outline-none mr-2"></textarea>
+            ) : (
+              <textarea className="px-2 py-1 text-gray-700 border rounded-lg bg-gray-200 focus:outline-none mr-2" disabled></textarea>
+            )}
           </div>
         ))}
       </div>

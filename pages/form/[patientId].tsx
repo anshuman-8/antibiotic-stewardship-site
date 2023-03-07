@@ -281,19 +281,16 @@ export default function Form() {
       clinicalSign: clinicalSign,
     };
 
-    console.log("the final input:", input);
 
     patientFormData({
       variables: {
         input: input,
       },
       onCompleted: (data) => {
-        console.log(data);
         notifySuccess("Form Submitted Successfully!");
         router.push("/")
       },
       onError: (error) => {
-        console.log(error);
         notifyError("Form Submission Failed!");
       },
     });

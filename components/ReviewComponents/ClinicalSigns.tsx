@@ -4,7 +4,6 @@ import { clinicalSignsPriority } from "../../utils/objectList";
 
 export default function ClinicalSigns({data}) {
 
-  console.log("datatat waal",data);
 
   const [clinicalSignList, setClinicalSignList] = React.useState([data]);
 

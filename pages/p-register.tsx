@@ -65,13 +65,11 @@ function PRegister() {
         },
       },
       onCompleted: (data) => {
-        console.log(data);
         successNotify("Patient Registered Successfully");
         Router.push("/");
         
       },
       onError: (error) => {
-        console.log(error);
         notify("Patient Registration Failed");
       },
     });

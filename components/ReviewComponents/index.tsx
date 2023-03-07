@@ -4,6 +4,7 @@ import InfectionFocus from "./InfectionFocus";
 import AntibioticUsed from "./AntibioticUsed";
 import CultureReports from "./CultureReports";
 import ClinicalSigns from "./ClinicalSigns";
+import Carousel from "flowbite-react";
 
 export default function index({ data }) {
   return (
@@ -19,9 +20,13 @@ export default function index({ data }) {
         <CultureReports id={37} />
         <CultureReports id={32} />
         <CultureReports id={31} /> */}
-        {data.cultureReport.map((report, i) => {
-          return <CultureReports key={i} report={report} />;
-        })}
+        <div>
+
+          {data.cultureReport.map((report, i) => {
+            return <CultureReports key={i} id={i} report={report} />;
+          })}
+
+        </div>
       </div>
       <ClinicalSigns data={data.clinicalSigns}/>
     </div>

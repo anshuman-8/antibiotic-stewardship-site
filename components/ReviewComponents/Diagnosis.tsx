@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Diagnosis({data}) {
-  console.log("check kar le:",data);
   
   return (
     <div className="" id="Diagnosis">

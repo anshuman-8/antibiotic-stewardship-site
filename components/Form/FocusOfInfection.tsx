@@ -6,7 +6,6 @@ export default function focusOfInfection(props) {
   
   const handleChange = (e) => {
     const name = e.target.name;
-    // console.log({ ...state, [name]: e.target.checked });
  
     setState({ ...state, [name]: e.target.checked });
   };

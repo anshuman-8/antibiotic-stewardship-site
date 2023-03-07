@@ -8,44 +8,50 @@ import {
   usePagination,
 } from "react-table";
 
-export default function PatientTable({ data }) {
-  // Define the columns for the table
-
+export default function AnalysisTable({ data }) {
+    
   const columns = useMemo(
     () => [
       {
         Header: "Patient Name",
-        accessor: "fullName",
+        accessor: "patient.fullName",
       },
       {
         Header: "MRD Number",
-        accessor: "mrdNumber",
+        accessor: "patient.mrdNumber",
       },
       {
         Header: "Age",
         // accessor: "age",
         Cell: ({ row }) => (
-          <span>{calculate_age(row.original.dateOfBirth) + " Years"}</span>
+          <span>{calculate_age(row.original.patient.dateOfBirth) + " Years"}</span>
         ),
       },
       {
-        Header: "Location",
-        accessor: "patientLocation",
+        Header: "Review id#",
+        // accessor: "age",
+        Cell: ({ row }) => (
+          <span>{row.original.id}</span>
+        ),
       },
       {
-        Header: "Last reviewed",
+        Header: "Reviewing Department",
+        accessor: "reviewDepartment",
+      },
+      {
+        Header: "Review Date",
         // accessor: "lastReviewDate",
         Cell: ({ row }) => (
-          <span>{row.original.lastReviewDate==null?"Never":row.original.lastReviewDate}</span>
+          <span>{row.original.reviewDate}</span>
         ),
       },
       {
         Header: " ",
         Cell: ({ row }) => (
           <div>
-           <Link href={"/form/"+row.original.id}>
+           <Link href={"/analysis/"+row.original.id}>
           <button className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400">
-            Review
+            Analysis
           </button>
         </Link>
           </div>

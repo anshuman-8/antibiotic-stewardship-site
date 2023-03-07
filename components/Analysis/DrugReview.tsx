@@ -25,9 +25,7 @@ export default function DrugReview() {
 
   const handleClick = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
-    console.log(checked);
     await setCheckBoxList({ ...checkBoxList, [name]: checked });
-    console.log(checkBoxList);
   };
 
   return (

@@ -11,7 +11,6 @@ export default function Diagnosis(props) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // console.log({ ...state, [name]: value });
     
     setState({ ...state, [name]: value });
   };

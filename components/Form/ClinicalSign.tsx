@@ -30,7 +30,6 @@ export default function ClinicalSign(props: ClinicalSignProps) {
     for (let d = today; d >= pastSixDays; d.setDate(d.getDate() - 1)) {
       dates.push(new Date(d));
     }
-    console.log(dates);
     const newClinicalSignsValue = dates.map((date) => {
       return {
         ...emptyClinicalSignsValue,
@@ -82,7 +81,6 @@ export default function ClinicalSign(props: ClinicalSignProps) {
                           const value = e.target.value;
                           const newState = state.map((stateItem, index) => {
                             if (item.date === stateItem.date) {
-                              console.log(fieldItem.id,"  ", value);
                               return {
                                 ...stateItem,
                                 [fieldItem.id]: value,
@@ -90,7 +88,6 @@ export default function ClinicalSign(props: ClinicalSignProps) {
                             }
                             return stateItem;
                           });
-                          console.log(newState);
                           setState(newState);
                         }}
                       />

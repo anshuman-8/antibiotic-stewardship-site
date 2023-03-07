@@ -13,14 +13,14 @@ import ReviewComponents from "../../components/ReviewComponents";
 import { useRouter } from "next/router";
 
 export default function Analysis() {
-  const { patientId } = useRouter().query;
+  const { formId } = useRouter().query;
   const [cultureSent, setCultureSent] = useState(false);
 
   const notifyError = (message: String) => toast.error(message);
-
+  
   const getFormDetails = gql`
-    query ($patientId: ID!, $date: String!) {
-      patientsForm(patientId: $patientId, date: $date) {
+    query ($id: ID!) {
+      form(id: $id) {
         id
         patient {
           fullName
@@ -95,12 +95,10 @@ export default function Analysis() {
 
   const { loading, error, data } = useQuery(getFormDetails, {
     variables: {
-      patientId: patientId,
-      date: "2023-03-03",
+      id: formId,
     },
   });
   if (loading) return <div>Loading...</div>;
-  console.log("dadadatata", data);
   if (error) return <p>Error :(</p>;
 
   return (
@@ -115,13 +113,12 @@ export default function Analysis() {
           </Link>
           <div className="my-5 mx-2 text-slate-800 font-semibold uppercase text-2xl">
             Analysis Form{" "}
-            {/* <span className="lowercase">(1123MRDnumber)</span> */}
           </div>
         </div>
         <form className="w-full">
-          <Introduction data={data.patientsForm[0].patient} />
+         <Introduction data={data.form.patient} />
 
-          <ReviewComponents data={data.patientsForm[0]} />
+          <ReviewComponents data={data.form} /> 
 
           <DrugReview />
 
