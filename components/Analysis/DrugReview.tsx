@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-export default function DrugReview() {
+export default function DrugReview(props) {
+  const {state, setState} = props;
+  
   const [score, setScore] = React.useState(0);
   const [checkBoxList, setCheckBoxList] = useState<Object>({
     rightIndication: false,

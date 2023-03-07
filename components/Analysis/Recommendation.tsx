@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {recommendationInitialValue} from "../../utils/objectList";
 
 interface recommendationValuetype {
   name: string;
@@ -7,53 +8,9 @@ interface recommendationValuetype {
   checked: boolean;
 }
 
-export default function Recommendation() {
-  const [checkBoxList, setCheckBoxList] = useState<Object>({
-    rightIndication: false,
-    rightDrug: false,
-    rightFrequency: false,
-    rightDuration: false,
-    rightMaintenanceDose: false,
-  });
+export default function Recommendation(props) {
+  const {state, setState} = props;
 
-  const recommendationInitialValue = [
-    {
-      name: "Indication",
-      id: "rightIndication",
-      placeholder: "",
-      checked: false,
-    },
-    {
-      name: "Drug",
-      id: "rightDrug",
-      placeholder: "",
-      checked: false,
-    },
-    {
-      name: "Frequency",
-      id: "rightFrequency",
-      placeholder: "",
-      checked: false,
-    },
-    {
-      name: "Dose",
-      id: "rightDose",
-      placeholder: "",
-      checked: false,
-    },
-    {
-      name: "Duration",
-      id: "rightDuration",
-      placeholder: "",
-      checked: false,
-    },
-    {
-      name: "De Escalation",
-      id: "rightDeEscalation",
-      placeholder: "",
-      checked: false,
-    },
-  ];
 
   const [recommendationList, setRecommendationList] = useState<
     recommendationValuetype[]
@@ -98,7 +55,7 @@ export default function Recommendation() {
             {value.checked ? (
               <textarea className="px-2 py-1 text-gray-700 border rounded-lg focus:outline-none mr-2"></textarea>
             ) : (
-              <textarea className="px-2 py-1 text-gray-700 border rounded-lg bg-gray-200 focus:outline-none mr-2" disabled></textarea>
+              <textarea className="px-2 py-1 text-gray-700 border rounded-lg bg-gray-200 focus:outline-none mr-2 cursor-not-allowed" disabled></textarea>
             )}
           </div>
         ))}

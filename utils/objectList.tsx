@@ -198,3 +198,77 @@ export const clinicalSigns = [
     placeholder: "",
   },
 ];
+
+export const drugAdministeredCheck = [
+  {
+    name: "isRightDocumentation",
+    label: "Right Documentation",
+  },
+  {
+    name: "isRightDrug",
+    label: "Right Drug",
+  },
+  {
+    name: "isRightDose",
+    label: "Right Dose",
+  },
+  {
+    name: "isRightRoute",
+    label: "Right Route",
+  },
+  {
+    name: "isRightFrequency",
+    label: "Right Frequency",
+  },
+  {
+    name: "isRightDuration",
+    label: "Right Duration",
+  },
+  {
+    name: "isRightIndication",
+    label: "Right Indication",
+  },
+  {
+    name: "isAppropriate",
+    label: "Appropriate",
+  },
+];
+
+export const recommendationInitialValue = [
+  {
+    name: "Indication",
+    id: "rightIndication",
+    placeholder: "",
+    checked: false,
+  },
+  {
+    name: "Drug",
+    id: "rightDrug",
+    placeholder: "",
+    checked: false,
+  },
+  {
+    name: "Frequency",
+    id: "rightFrequency",
+    placeholder: "",
+    checked: false,
+  },
+  {
+    name: "Dose",
+    id: "rightDose",
+    placeholder: "",
+    checked: false,
+  },
+  {
+    name: "Duration",
+    id: "rightDuration",
+    placeholder: "",
+    checked: false,
+  },
+  {
+    name: "De Escalation",
+    id: "rightDeEscalation",
+    placeholder: "",
+    checked: false,
+  },
+];

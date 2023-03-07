@@ -1,6 +1,9 @@
 import React from "react";
 
-export default function Introduction({data}) {
+export default function Introduction(props) {
+
+  const {data,reviewer,setReviewer} =props
+
   const to_dd_mm_yyyy = (date: Date) => {
     let dd = date.getDate();
     let mm = date.getMonth() + 1;
@@ -41,6 +44,11 @@ export default function Introduction({data}) {
           id="reviewing-doctor"
           type="text"
           placeholder="Dr."
+          onChange={
+            (e) => {
+              setReviewer(e.target.value)
+            }
+          }
         />
       </div>
     </div>

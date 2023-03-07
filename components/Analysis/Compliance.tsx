@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default function Compliance() {
+export default function Compliance(props) {
+  const {state, setState} = props;
+
   return (
     <div className="form-component">
     <div className="text-white my-3 text-xl font-semibold">Compliance</div>
