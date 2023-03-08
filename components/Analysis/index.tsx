@@ -7,14 +7,21 @@ import Compliance from "./Compliance";
 import ReviewComponents from "../ReviewComponents";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { useMutation, gql } from "@apollo/client";
 import { ImSpinner2 } from "react-icons/im";
+import { useRouter } from "next/router";
+import { toyyyymmdd } from "../../utils/functions";
 
-export default function Analysis({ data }) {
+export default function Analysis({ reportData }) {
   const notifyError = (message: String) => toast.error(message);
+  const notifySuccess = (message: String) => toast.success(message);
+
+  const router = useRouter();
+
 
   const [reviewer, setReviewer] = useState("");
   const [drugAdministeredCheck, setDrugAdministeredCheck] = useState({
-    isDrugAdministered: false,
+    isRightDocumentation: false,
     isRightDrug: false,
     isRightDose: false,
     isRightRoute: false,
@@ -45,15 +52,60 @@ export default function Analysis({ data }) {
     isAntibioticChanged: false,
     isComplance: false,
     isDuration: false,
-    isAntibiotisculture_reporticDoseChanged: false,
-    serum_creatinine: 0,
-    procalcitonin: 0,
+    isAntibiotisDoseChanged: false,
+    serumCreatinine: 0,
+    // procalcitonin: 0,
   });
   const [patientOutcome, setPatientOutcome] = useState({
-    lenght_of_stay: 0,
-    date_of_discharge: "",
-    outcome : "Alive",
+    lenghtOfStay: 0,
+    dateOfDischarge: "",
+    outcome: "Alive",
   });
+
+  const AnalysisDataFormGQL = gql`
+    mutation ($input: AnalysisFormInput!) {
+      analysisDataForm(inputs: $input) {
+        success
+        returning {
+          id
+          doctor
+        }
+      }
+    }
+  `;
+
+  const [analysisFormData, { data, loading, error }] =
+    useMutation(AnalysisDataFormGQL);
+
+  const submitForm = (e)=>{
+    e.preventDefault();
+
+    const input = {
+      // date = toyyyymmdd(Date.now())
+      doctor : reviewer,
+      patient : reportData.form.patient.id,
+      patientForm : reportData.form.id,
+      drugAdministeredReview : drugAdministeredCheck,
+      patientOutcome : patientOutcome,
+      compliance : compliance,
+      recommendation : recommendation
+    }
+    console.log(input);
+
+    analysisFormData({
+      variables: {
+        input: input,
+      },
+      onCompleted: (data) => {
+        notifySuccess("Form Submitted Successfully!");
+        router.push("/")
+      },
+      onError: (error) => {
+        notifyError("Form Submission Failed!");
+      },
+    });
+    
+  }
 
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
@@ -70,25 +122,32 @@ export default function Analysis({ data }) {
           </div>
         </div>
         <form className="w-full">
-          <Introduction data={data.form.patient} state={reviewer} setState={setReviewer}/>
+          <Introduction
+            data={reportData.form.patient}
+            state={reviewer}
+            setState={setReviewer}
+          />
 
-          <ReviewComponents data={data.form} />
+          <ReviewComponents data={reportData.form} />
 
-          <DrugReview state={drugAdministeredCheck} setState={setDrugAdministeredCheck}/>
+          <DrugReview
+            state={drugAdministeredCheck}
+            setState={setDrugAdministeredCheck}
+          />
 
-          <Recommendation state={recommendation} setState={setRecommendation}/>
+          <Recommendation state={recommendation} setState={setRecommendation} />
 
-          <Compliance state={compliance} setState={setCompliance}/>
+          <Compliance state={compliance} setState={setCompliance} />
 
-          <PatientOutcome state={patientOutcome} setState={setPatientOutcome}/>
+          <PatientOutcome state={patientOutcome} setState={setPatientOutcome} />
 
           {/* Submit */}
           <div className="flex justify-end max-w-6xl mx-auto mb-10">
-            {/* {!loading ? (
+            {!loading ? (
             <button
               type="submit"
               className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
-              onClick={() => notifyError("Form Not implemented")}
+              onClick={(e) => submitForm(e)}
             >
               Submit
             </button>
@@ -99,7 +158,7 @@ export default function Analysis({ data }) {
                 size={30}
               />
             </div>
-          )} */}
+          )}
           </div>
         </form>
       </div>

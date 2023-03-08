@@ -275,14 +275,7 @@ export const recommendationInitialValue = [
 
 
 export const complianceList = [
-  // {
-  //   label: "Serum Creatinine",
-  //   name: "serum_creatinine",
-  // },
-  // {
-  //   label: "Procalcitonin",
-  //   name: "procalcitonin",
-  // },
+
   {
     label: "Appropriate",
     name: "isAppropriate",

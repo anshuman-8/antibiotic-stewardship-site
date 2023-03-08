@@ -16,6 +16,7 @@ export default function AnalysisPage() {
       form(id: $id) {
         id
         patient {
+          id
           fullName
           dateOfBirth
           active
@@ -95,6 +96,6 @@ export default function AnalysisPage() {
   if (error) return <p>Error :(</p>;
 
   return (
-    <Analysis data={data}/>
+    <Analysis reportData={data}/>
   );
 }

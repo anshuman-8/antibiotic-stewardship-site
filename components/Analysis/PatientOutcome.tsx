@@ -1,20 +1,14 @@
 import React, { useState } from "react";
+import { toyyyymmdd } from "../../utils/functions";
 
 export default function OtherAnalysis(props) {
   const {state, setState} = props;
 
-  const stringtoyyyymmdd = (date) => {
-    let d = date.getDate();
-    let m = date.getMonth() + 1;
-    let y = date.getFullYear();
-    return y + "-" + m + "-" + d;
-  };
   return (
     <div className="form-component">
       <div className="text-white my-3 text-xl font-semibold">
         Patient Outcome
       </div>
-      {/* give a checkbox options with 5 in a row asking for different infections */}
       <div className="w-full flex flex-wrap font-medium text-white px-5">
         <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
           <label
@@ -25,12 +19,11 @@ export default function OtherAnalysis(props) {
           </label>
           <input
             type="number"
-            name="lenght_of_stay"
-            id="lenght_of_stay"
+            name="lenghtOfStay"
+            id="lenghtOfStay"
             className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
             onChange={(e) => {
-              console.log({...state, lenght_of_stay: parseInt(e.target.value)});
-              setState({...state, lenght_of_stay: parseInt(e.target.value)});
+              setState({...state, lenghtOfStay: parseInt(e.target.value)});
             }
             }
           />
@@ -45,13 +38,11 @@ export default function OtherAnalysis(props) {
           </label>
           <input
             type="date"
-            name="date_of_discharge"
-            id="date_of_discharge"
+            name="dateOfDischarge"
+            id="dateOfDischarge"
             className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
             onChange={(e) => {
-              console.log({...state, date_of_discharge: e.target.value});
-              // save date_of_discharge as  yyyy-mm-dd
-              setState({...state, date_of_discharge: e.target.value});
+              setState({...state, dateOfDischarge: toyyyymmdd(e.target.valueAsDate)});
             }
             }
           />

@@ -48,11 +48,11 @@ export default function Compliance(props) {
           </label>
           <input
             type="number"
-            name="serum_creatinine"
-            id="serum_creatinine"
+            name="serumCreatinine"
+            id="serumCreatinine"
             className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-1 px-4 leading-tight focus:outline-none focus:bg-white max-w-[120px]"
             onChange={(e) => (
-              setState({ ...state, serum_creatinine: parseInt(e.target.value)  })
+              setState({ ...state, serumCreatinine: parseInt(e.target.value)  })
             )}
           />
         </div>
@@ -66,9 +66,9 @@ export default function Compliance(props) {
             name="procalcitonin"
             id="procalcitonin"
             className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-1 px-4 leading-tight focus:outline-none focus:bg-white max-w-[120px]"
-            onChange={(e) => (
-              setState({ ...state, procalcitonin: parseInt(e.target.value) })
-            )}
+            // onChange={(e) => (
+            //   setState({ ...state, procalcitonin: parseInt(e.target.value) })
+            // )}
           />
         </div>
       </div>
