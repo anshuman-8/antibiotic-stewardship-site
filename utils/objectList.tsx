@@ -236,39 +236,79 @@ export const drugAdministeredCheck = [
 
 export const recommendationInitialValue = [
   {
-    name: "Indication",
-    id: "rightIndication",
+    label: "Indication",
+    name: "indication",
     placeholder: "",
     checked: false,
   },
   {
-    name: "Drug",
-    id: "rightDrug",
+    label: "Drug",
+    name: "drug",
     placeholder: "",
     checked: false,
   },
   {
-    name: "Frequency",
-    id: "rightFrequency",
+    label: "Frequency",
+    name: "frequency",
     placeholder: "",
     checked: false,
   },
   {
-    name: "Dose",
-    id: "rightDose",
+    label: "Dose",
+    name: "dose",
     placeholder: "",
     checked: false,
   },
   {
-    name: "Duration",
-    id: "rightDuration",
+    label: "Duration",
+    name: "duration",
     placeholder: "",
     checked: false,
   },
   {
-    name: "De Escalation",
-    id: "rightDeEscalation",
+    label: "De Escalation",
+    name: "deEscalation",
     placeholder: "",
     checked: false,
+  },
+];
+
+
+export const complianceList = [
+  // {
+  //   label: "Serum Creatinine",
+  //   name: "serum_creatinine",
+  // },
+  // {
+  //   label: "Procalcitonin",
+  //   name: "procalcitonin",
+  // },
+  {
+    label: "Appropriate",
+    name: "isAppropriate",
+  },
+  {
+    label: "Right Documentation",
+    name: "isRightDocumentation",
+  },
+  // {
+  //   label: "Recommendation Filed",
+  //   name: "isRecommendationFiled",
+  // },
+  {
+    label: "Antibiotic Changed",
+    name: "isAntibioticChanged",
+  },
+  {
+    label: "Complance",
+    name: "isComplance",
+  },
+  {
+    label: "Duration",
+    name: "isDuration",
+  },
+  {
+    label: "Antibiotic Dose Changed",
+    name: "isAntibiotisDoseChanged",
   },
 ];

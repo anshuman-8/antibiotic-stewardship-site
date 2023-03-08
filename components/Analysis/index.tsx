@@ -41,7 +41,7 @@ export default function Analysis({ data }) {
   const [compliance, setCompliance] = useState({
     isAppropriate: false,
     isRightDocumentation: false,
-    isRecommendationFiled: false,
+    isRecommendationFiled: true,
     isAntibioticChanged: false,
     isComplance: false,
     isDuration: false,

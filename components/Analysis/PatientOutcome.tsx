@@ -3,6 +3,12 @@ import React, { useState } from "react";
 export default function OtherAnalysis(props) {
   const {state, setState} = props;
 
+  const stringtoyyyymmdd = (date) => {
+    let d = date.getDate();
+    let m = date.getMonth() + 1;
+    let y = date.getFullYear();
+    return y + "-" + m + "-" + d;
+  };
   return (
     <div className="form-component">
       <div className="text-white my-3 text-xl font-semibold">
@@ -19,9 +25,14 @@ export default function OtherAnalysis(props) {
           </label>
           <input
             type="number"
-            name="stay-length"
-            id="bacteremia"
+            name="lenght_of_stay"
+            id="lenght_of_stay"
             className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
+            onChange={(e) => {
+              console.log({...state, lenght_of_stay: parseInt(e.target.value)});
+              setState({...state, lenght_of_stay: parseInt(e.target.value)});
+            }
+            }
           />
         </div>
 
@@ -34,9 +45,15 @@ export default function OtherAnalysis(props) {
           </label>
           <input
             type="date"
-            name="rightMaintenanceDose"
-            id="bacteremia"
+            name="date_of_discharge"
+            id="date_of_discharge"
             className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
+            onChange={(e) => {
+              console.log({...state, date_of_discharge: e.target.value});
+              // save date_of_discharge as  yyyy-mm-dd
+              setState({...state, date_of_discharge: e.target.value});
+            }
+            }
           />
         </div>
 
@@ -50,13 +67,17 @@ export default function OtherAnalysis(props) {
           <div className="relative ">
             <select
               className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
-              name="branch"
-              id="grid-branch"
+              name="outcome"
+              id="outcome"
               required
               defaultValue={"Select Specialization"}
+              onChange={(e) => {                
+                setState({...state, outcome: e.target.value});
+              }
+              }
             >
-              <option value="Blood">Alive</option>
-              <option value="Blood">Dead</option>
+              <option value="Alive">Alive</option>
+              <option value="Dead">Dead</option>
             </select>
             {/* <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 ">
               <svg

@@ -124,10 +124,10 @@ export default function CultureReports(props) {
               Antibiotic Sensitivity:
             </label>
             <div className="flex justify-between flex-wrap">
-              {report.antibioticSensitivity.map((antibiotic) => {
+              {report.antibioticSensitivity.map((antibiotic,i) => {
                 return (
                   <div
-                    key={antibiotic}
+                    key={antibiotic+i}
                     className="bg-slate-800/90 backdrop-blur-sm h-fit align-middle w-min rounded-md m-1 p-0.5 text-white"
                   >
                     {antibiotic.antibiotic}

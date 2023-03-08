@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Introduction(props) {
 
-  const {data,reviewer,setReviewer} =props
+  const {data,state,setState} =props
 
   const to_dd_mm_yyyy = (date: Date) => {
     let dd = date.getDate();
@@ -46,7 +46,7 @@ export default function Introduction(props) {
           placeholder="Dr."
           onChange={
             (e) => {
-              setReviewer(e.target.value)
+              setState(e.target.value)
             }
           }
         />
