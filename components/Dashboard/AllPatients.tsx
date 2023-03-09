@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import Link from "next/link";
+import { useQuery, gql } from "@apollo/client";
+import TablePlaceholder from "./TablePlaceholder";
 import {
   useTable,
   useGlobalFilter,
@@ -8,8 +9,29 @@ import {
   usePagination,
 } from "react-table";
 
-export default function PatientTable({ data }) {
-  // Define the columns for the table
+export default function AllPatientTable() {
+  
+  const getActivePatient = gql`
+    query {
+      patients {
+        id
+        fullName
+        admittingDoctor
+        mrdNumber
+        dateOfBirth
+        dateOfAdmission
+        department
+        patientLocation
+        cormorbodities
+        height
+        weight
+        active
+      }
+    }
+  `;
+  const { loading, error, data } = useQuery(getActivePatient, {
+    pollInterval: 10000,
+  });
 
   const columns = useMemo(
     () => [
@@ -33,21 +55,11 @@ export default function PatientTable({ data }) {
         accessor: "patientLocation",
       },
       {
-        Header: "Last reviewed",
-        // accessor: "lastReviewDate",
-        Cell: ({ row }) => (
-          <span>{row.original.lastReviewDate==null?"Never":row.original.lastReviewDate}</span>
-        ),
-      },
-      {
-        Header: " ",
+        Header: "Action",
         Cell: ({ row }) => (
           <div>
-           <Link href={"/form/"+row.original.id}>
-          <button className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400">
-            Review
-          </button>
-        </Link>
+            <button>Edit</button>
+            <button>Delete</button>
           </div>
         ),
       },
@@ -95,6 +107,11 @@ export default function PatientTable({ data }) {
     }
     return age_now;
   };
+
+  if(loading){
+    return <TablePlaceholder/>
+  }
+  
 
   return (
     <div className="">

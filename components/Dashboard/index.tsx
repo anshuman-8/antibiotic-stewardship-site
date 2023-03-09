@@ -1,33 +1,19 @@
 import React, { useRef, useState } from "react";
-import HeaderBar from "./headerBar";
+import HeaderBar from "./HeaderBar";
 import PatientCard from "./PatientCard";
 import { useQuery, gql } from "@apollo/client";
 import PatientCardPlaceholder from "./PatientCardPlaceholder";
-import PatientTable from "./patientTable";
-import TablePlaceholder from "./tablePlaceholder";
-import AnalysisTab from "./analysisTab";
-import AllPatientTable from "./allPatients";
+import PatientTable from "./PatientTable";
+import TablePlaceholder from "./TablePlaceholder";
+import AnalysisTab from "./AnalysisTab";
+import ActivePatientsTab from "./ActivePatientsTab";
+import AllPatientTable from "./AllPatients";
 import { Tabs, Button, TabsRef } from "flowbite-react";
+import {AiFillCalendar} from "react-icons/ai"
+import {TbReportSearch} from "react-icons/tb"
+import {BsPeopleFill} from "react-icons/bs"
 
 export default function DashboardIndex() {
-  const getActivePatient = gql`
-    query {
-      patients {
-        id
-        fullName
-        admittingDoctor
-        mrdNumber
-        dateOfBirth
-        dateOfAdmission
-        department
-        patientLocation
-        cormorbodities
-        height
-        weight
-        active
-      }
-    }
-  `;
 
   const getTodaysReviewList = gql`
     query {
@@ -58,7 +44,7 @@ export default function DashboardIndex() {
       </>
     );
 
-  if (error) return <p>Error {":("}</p>;
+  if (error) return <p className="m-10">Not Connected to Internet or Database {":("}</p>;
 
   const todaysDate = () => {
     const date = new Date();
@@ -90,7 +76,7 @@ export default function DashboardIndex() {
         <Tabs.Item
           active={true}
           title="Today's Review"
-          // icon={HiUserCircle}
+          icon={AiFillCalendar}
         >
           <div className="mx-5 mt-2 font-semibold text-xl">Pending Review:</div>
 
@@ -98,32 +84,15 @@ export default function DashboardIndex() {
         </Tabs.Item>
         <Tabs.Item
           title="Analysis"
-          // icon={MdDashboard}
+          icon={TbReportSearch}
         >
-          {/* <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {data.todayPatientList.map((patient) => (
-              <PatientCard
-                key={patient.id}
-                id={patient.id}
-                fullName={patient.fullName}
-                mrdNumber={patient.mrdNumber}
-                dateOfBirth={patient.dateOfBirth}
-                dateOfAdmission={patient.dateOfAdmission}
-                department={patient.department}
-                cormorbodities={patient.cormorbodities}
-                height={patient.height}
-                weight={patient.weight}
-                active={patient.active}
-              />
-            ))}
-          </div> */}
           <AnalysisTab/>
         </Tabs.Item>
         <Tabs.Item
           title="Active Patients"
-          // icon={HiAdjustments}
+          icon={BsPeopleFill}
         >
-          {/* <AllPatientTable/> */}
+          <ActivePatientsTab/>
         </Tabs.Item>
         <Tabs.Item disabled={true} title="All Patients">
           All Patients

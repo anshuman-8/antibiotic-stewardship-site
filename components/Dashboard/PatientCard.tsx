@@ -4,7 +4,7 @@ import { GrStatusGoodSmall } from "react-icons/gr";
 
 interface propType {}
 
-export default function patientCard(props) {
+export default function PatientCard(props) {
   
   const {
     id,

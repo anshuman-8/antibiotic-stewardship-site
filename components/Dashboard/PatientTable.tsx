@@ -8,50 +8,44 @@ import {
   usePagination,
 } from "react-table";
 
-export default function AnalysisTable({ data }) {
-    
+export default function PatientTable({ data }) {
+  // Define the columns for the table
+
   const columns = useMemo(
     () => [
       {
         Header: "Patient Name",
-        accessor: "patient.fullName",
+        accessor: "fullName",
       },
       {
         Header: "MRD Number",
-        accessor: "patient.mrdNumber",
+        accessor: "mrdNumber",
       },
       {
         Header: "Age",
         // accessor: "age",
         Cell: ({ row }) => (
-          <span>{calculate_age(row.original.patient.dateOfBirth) + " Years"}</span>
+          <span>{calculate_age(row.original.dateOfBirth) + " Years"}</span>
         ),
       },
       {
-        Header: "Review id#",
-        // accessor: "age",
-        Cell: ({ row }) => (
-          <span>{row.original.id}</span>
-        ),
+        Header: "Location",
+        accessor: "patientLocation",
       },
       {
-        Header: "Reviewing Department",
-        accessor: "reviewDepartment",
-      },
-      {
-        Header: "Review Date",
+        Header: "Last reviewed",
         // accessor: "lastReviewDate",
         Cell: ({ row }) => (
-          <span>{row.original.reviewDate}</span>
+          <span>{row.original.lastReviewDate==null?"Never":row.original.lastReviewDate}</span>
         ),
       },
       {
         Header: " ",
         Cell: ({ row }) => (
           <div>
-           <Link href={"/analysis/"+row.original.id}>
+           <Link href={"/form/"+row.original.id}>
           <button className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400">
-            Analysis
+            Review
           </button>
         </Link>
           </div>
@@ -104,7 +98,7 @@ export default function AnalysisTable({ data }) {
 
   return (
     <div className="">
-      <div className="table max-w-5xl md:max-w-7xl mx-auto border-2 rounded-xl py-2 my-3 bg-gray-50">
+      {data.length!==0?<div className="table max-w-5xl md:max-w-7xl mx-auto border-2 rounded-xl py-2 my-3 bg-gray-50">
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
         <table {...getTableProps()} className="table-fixed">
           <thead>
@@ -197,7 +191,11 @@ export default function AnalysisTable({ data }) {
             {">>"}
           </button>
         </div>
+      </div>:
+      <div className="bg-gray-50 m-5 p-5">
+        No Patient For Review !
       </div>
+      }
     </div>
   );
 }

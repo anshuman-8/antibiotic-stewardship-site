@@ -1,7 +1,7 @@
 import React from "react";
-import AnalysisTable from "./analysisTable";
+import AnalysisTable from "./AnalysisTable";
 import { useQuery, gql } from "@apollo/client";
-import TablePlaceholder from "./tablePlaceholder";
+import TablePlaceholder from "./TablePlaceholder";
 
 export default function AnalysisTab() {
   const getFormsForAnalysis = gql`
