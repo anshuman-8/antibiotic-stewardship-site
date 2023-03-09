@@ -1,6 +1,7 @@
 import React from "react";
 
-export default function Diagnosis() {
+export default function Diagnosis({data}) {
+  
   return (
     <div className="" id="Diagnosis">
       {/* Diagnosis */}
@@ -13,14 +14,7 @@ export default function Diagnosis() {
             Provisional diagnosis:
           </label>
           <p className="analytics-TextBox max-h-44">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            fermentum commodo leo, vel molestie velit tincidunt imperdiet. Ut
-            cursus libero nisl. Proin sit amet lobortis dolor, ac efficitur
-            diam. Vestibulum sit amet elit id est sollicitudin commodo hendrerit
-            sed nisl. Donec ut placerat sem. Phasellus vel augue viverra,
-            efficitur lacus quis, congue nisi. Mauris posuere condimentum nisi.
-            Ut tristique lobortis est, in vulputate justo hendrerit vel. Donec
-            vehicula facilisis iaculis.{" "}
+            {data.provisionalDiagnosis}
           </p>
         </div>
 
@@ -29,14 +23,7 @@ export default function Diagnosis() {
             Final diagnosis:
           </label>
           <p className="analytics-TextBox max-h-44">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            fermentum commodo leo, vel molestie velit tincidunt imperdiet. Ut
-            cursus libero nisl. Proin sit amet lobortis dolor, ac efficitur
-            diam. Vestibulum sit amet elit id est sollicitudin commodo hendrerit
-            sed nisl. Donec ut placerat sem. Phasellus vel augue viverra,
-            efficitur lacus quis, congue nisi. Mauris posuere condimentum nisi.
-            Ut tristique lobortis est, in vulputate justo hendrerit vel. Donec
-            vehicula facilisis iaculis.{" "}
+            {data.finalDiagnosis}
           </p>
         </div>
 
@@ -44,18 +31,11 @@ export default function Diagnosis() {
           <label className="label-upper" htmlFor="email">
             Syndromic diagnosis:{" "}
             <span className="bg-slate-300 text-slate-800 p-1 capitalize">
-              Definite
+              {data.diagnosisChoice}
             </span>
           </label>
           <p className="analytics-TextBox max-h-44">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            fermentum commodo leo, vel molestie velit tincidunt imperdiet. Ut
-            cursus libero nisl. Proin sit amet lobortis dolor, ac efficitur
-            diam. Vestibulum sit amet elit id est sollicitudin commodo hendrerit
-            sed nisl. Donec ut placerat sem. Phasellus vel augue viverra,
-            efficitur lacus quis, congue nisi. Mauris posuere condimentum nisi.
-            Ut tristique lobortis est, in vulputate justo hendrerit vel. Donec
-            vehicula facilisis iaculis.{" "}
+            {data.syndromicDiagnosis}
           </p>
         </div>
       </div>

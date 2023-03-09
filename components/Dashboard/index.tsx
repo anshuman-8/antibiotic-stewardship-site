@@ -1,41 +1,103 @@
-import React from 'react'
-import PatientCard from './PatientCard'
-import PatientCardPlaceholder from './PatientCardPlaceholder'
-import HeaderBar from './headerBar'
+import React, { useRef, useState } from "react";
+import HeaderBar from "./HeaderBar";
+import PatientCard from "./PatientCard";
+import { useQuery, gql } from "@apollo/client";
+import PatientCardPlaceholder from "./PatientCardPlaceholder";
+import PatientTable from "./PatientTable";
+import TablePlaceholder from "./TablePlaceholder";
+import AnalysisTab from "./AnalysisTab";
+import ActivePatientsTab from "./ActivePatientsTab";
+import AllPatientTable from "./AllPatients";
+import { Tabs, Button, TabsRef } from "flowbite-react";
+import {AiFillCalendar} from "react-icons/ai"
+import {TbReportSearch} from "react-icons/tb"
+import {BsPeopleFill} from "react-icons/bs"
 
-export default function index() {
+export default function DashboardIndex() {
 
-  const todaysDate = ()=> {
+  const getTodaysReviewList = gql`
+    query {
+      todayPatientList {
+        id
+        fullName
+        admittingDoctor
+        mrdNumber
+        dateOfBirth
+        dateOfAdmission
+        department
+        patientLocation
+        lastReviewDate
+        active
+      }
+    }
+  `;
+  const { loading, error, data } = useQuery(getTodaysReviewList, {
+    pollInterval: 10000,
+  });
+
+  if (loading)
+    return (
+      <>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <TablePlaceholder />
+        </div>
+      </>
+    );
+
+  if (error) return <p className="m-10">Not Connected to Internet or Database {":("}</p>;
+
+  const todaysDate = () => {
     const date = new Date();
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  return `${day} ${months[month]} ${year}`;
-  }
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return `${day} ${months[month]} ${year}`;
+  };
 
   return (
-    <div className=''>
-      {/* <div className='m-5 font-semibold text-xl'>
-        {todaysDate()}
-      </div> */}
+    <div className="">
       <HeaderBar />
 
-      <div className='mx-5 mt-2 font-semibold text-xl'>
-        Pending Review:
-      </div>
+      <Tabs.Group aria-label="Tabs with icons" style="underline">
+        <Tabs.Item
+          active={true}
+          title="Today's Review"
+          icon={AiFillCalendar}
+        >
+          <div className="mx-5 mt-2 font-semibold text-xl">Pending Review:</div>
 
-      <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-      <PatientCard />
-        <PatientCardPlaceholder />
-        <PatientCardPlaceholder />
-        <PatientCardPlaceholder />
-        <PatientCardPlaceholder />
-        <PatientCardPlaceholder />
-        <PatientCardPlaceholder />
-        <PatientCardPlaceholder />
-      </div>
-
+          <PatientTable data={data.todayPatientList} />
+        </Tabs.Item>
+        <Tabs.Item
+          title="Analysis"
+          icon={TbReportSearch}
+        >
+          <AnalysisTab/>
+        </Tabs.Item>
+        <Tabs.Item
+          title="Active Patients"
+          icon={BsPeopleFill}
+        >
+          <ActivePatientsTab/>
+        </Tabs.Item>
+        <Tabs.Item disabled={true} title="All Patients">
+          All Patients
+        </Tabs.Item>
+      </Tabs.Group>
     </div>
-  )
+  );
 }

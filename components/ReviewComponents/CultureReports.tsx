@@ -1,14 +1,33 @@
 import { useEffect, useState } from "react";
 import { CiSquareRemove } from "react-icons/ci";
-import { BsTrashFill } from "react-icons/bs";
 
-interface proptype {
-  id: number;
-}
+// interface proptype {
+//   id: number;
+// }
 
-export default function CultureReports(props: proptype) {
-  const { id } = props;
+export default function CultureReports(props) {
+  const { report } = props;
   const [antibioticList, setAntibioticList] = useState<string[]>([]);
+
+  const dateToddmmyyyy = (date: Date) => {
+    const d = new Date(date);
+    const day = d.getDate();
+    const month = d.getMonth() + 1;
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const dateTohhmmAP = (date: Date) => {
+    const d = new Date(date);
+    const hours = d.getHours();
+    const minutes = d.getMinutes();
+    const ampm = hours >= 12 ? "pm" : "am";
+    const hours12 = hours % 12;
+    const hours12Str = hours12 ? hours12.toString() : "12";
+    const minutesStr =
+      minutes < 10 ? "0" + minutes.toString() : minutes.toString();
+    return `${hours12Str}:${minutesStr} ${ampm}`;
+  };
 
   return (
     <div className="border p-2 rounded-md mb-5 min-w-fit mx-3 bg-slate-600 py-4 ">
@@ -21,7 +40,7 @@ export default function CultureReports(props: proptype) {
               Culture Sent Before Antibiotics:{" "}
             </p>
             <p className="mr-2 block tracking-wide text-sm text-white">
-              True
+              {report.sentBeforeAntibiotic ? "Yes" : "No"}
             </p>
           </div>
 
@@ -31,7 +50,7 @@ export default function CultureReports(props: proptype) {
               Site of collection:{" "}
             </p>
             <p className="mr-2 block tracking-wide text-sm text-white">
-              {"Name Of Department"}
+              {report.siteOfCollection}
             </p>
           </div>
 
@@ -41,7 +60,7 @@ export default function CultureReports(props: proptype) {
               Organism:{" "}
             </p>
             <p className="mr-2 block tracking-wide text-sm text-white">
-              adsfsdfsd fsdfsdfsdf
+              {report.organism}
             </p>
           </div>
 
@@ -52,7 +71,7 @@ export default function CultureReports(props: proptype) {
               Specimen:{" "}
             </p>
             <p className="mr-2 block tracking-wide text-sm  text-white">
-              sdsdfsdfsdfsdfsdsfsdf
+              {report.specimenType}
             </p>
           </div>
 
@@ -63,7 +82,7 @@ export default function CultureReports(props: proptype) {
               Multi Drug Resistant Organism:{" "}
             </p>
             <p className="mr-2 block tracking-wide text-sm  text-white">
-              sdfsdf ksjndfk
+              {report.multiDrugResistant}
             </p>
           </div>
 
@@ -73,20 +92,20 @@ export default function CultureReports(props: proptype) {
               Resistance:{" "}
             </p>
             <p className="mr-2 block tracking-wide text-sm  text-white">
-              dfsdf sdf s df sdf
+              {report.resistance}
             </p>
           </div>
         </div>
         {/* right column */}
         <div className="p-4 w-[30rem]">
           {/* 8 */}
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-row justify-between my-1">
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Culture Sent :
             </p>
             <div className="flex flex-col text-white">
-              <p>23/24/5455</p>
-              <p>34:344 PM</p>
+              <p>{dateToddmmyyyy(report.timeSent)}</p>
+              <p>{dateTohhmmAP(report.timeSent)}</p>
             </div>
           </div>
           {/* 9 */}
@@ -95,8 +114,8 @@ export default function CultureReports(props: proptype) {
               Culture Reported :
             </p>
             <div className="flex flex-col text-white">
-              <p>23/24/5455</p>
-              <p>34:344 PM</p>
+              <p>{dateToddmmyyyy(report.timeReported)}</p>
+              <p>{dateTohhmmAP(report.timeReported)}</p>
             </div>
           </div>
           {/* 10 */}
@@ -105,29 +124,33 @@ export default function CultureReports(props: proptype) {
               Antibiotic Sensitivity:
             </label>
             <div className="flex justify-between flex-wrap">
-              <div className="bg-slate-800/90 backdrop-blur-sm h-fit align-middle w-min rounded-md m-1 p-1 text-white">
-                dsfsdf
-              </div>
-              <div className="bg-slate-800/90 backdrop-blur-sm h-fit align-middle w-min rounded-md m-1 p-1 text-white">
-                dsfsdf
-              </div>
-             
+              {report.antibioticSensitivity.map((antibiotic,i) => {
+                return (
+                  <div
+                    key={antibiotic+i}
+                    className="bg-slate-800/90 backdrop-blur-sm h-fit align-middle w-min rounded-md m-1 p-0.5 text-white"
+                  >
+                    {antibiotic.antibiotic}
+                  </div>
+                );
+              })}
             </div>
           </div>
-           {/* 7 */}
-           <div className="flex flex-row justify-between">
+          {/* 7 */}
+          <div className="flex flex-row justify-between my-1">
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Imaging:{" "}
             </p>
             <p className="mr-2 block tracking-wide text-sm  text-white">
               <label htmlFor="infection" className="font-medium block">
-                X ray
+                {Object.keys(report.Imaging).map((key, i) => {
+                  if (report.Imaging[key] === true) {
+                    return <span className="p-1 bg-slate-700 rounded-md mx-1" key={i}>{key}</span>;
+                  }
+                })}
               </label>
-              <div className="max-h-20 rounded-md overflow-scroll bg-slate-700/30 p-1">
-                sdsdfsdf sd f sd f s dfsdfdsafsd f asdg adf g adf ga s
-                fdgadfgadfg adf g adf adfgdf gadfgadf g sdsdfsdf sd f sd f s
-                dfsdfdsafsd f asdg adf g adf ga s fdgadfgadfg adf g adf adfgdf
-                gadfgadf gsaedfs df s df sd f sdfsdfsdf sd fs df
+              <div className="max-h-20 rounded-md overflow-scroll bg-slate-700/30 p-1 min-w-[200px]">
+                {report.Imaging.impression}
               </div>
             </p>
           </div>

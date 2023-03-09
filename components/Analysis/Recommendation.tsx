@@ -1,73 +1,50 @@
 import React, { useState } from "react";
+import { recommendationInitialValue } from "../../utils/objectList";
 
-interface recommendationValuetype{
+interface recommendationValuetype {
   name: string;
-  id: string;
+  label: string;
   placeholder: string;
   checked: boolean;
 }
 
-export default function Recommendation() {
+export default function Recommendation(props) {
+  const { state, setState } = props;
 
-  const [checkBoxList, setCheckBoxList] = useState<Object>({
-    rightIndication: false,
-    rightDrug: false,
-    rightFrequency: false,
-    rightDuration: false,
-    rightMaintenanceDose: false,
-  });
+  // const [recommendationList, setRecommendationList] = useState<
+  //   recommendationValuetype[]
+  // >(recommendationInitialValue);
 
-  const recommendationInitialValue  = [
-    {
-      name: "Indication",
-      id: "rightIndication",
-      placeholder: "",
-      checked: false,
-    },
-    {
-      name: "Drug",
-      id: "rightDrug",
-      placeholder: "",
-      checked: false,
-    },
-    {
-      name: "Frequency",
-      id: "rightFrequency",
-      placeholder: "",
-      checked: false,
-    },
-    {
-      name: "Dose",
-      id: "rightDose",
-      placeholder: "",
-      checked: false,
-    },
-    {
-      name: "Duration",
-      id: "rightDuration",
-      placeholder: "",
-      checked: false,
-    },
-    {
-      name: "De Escalation",
-      id: "rightDeEscalation",
-      placeholder: "",
-      checked: false,
-    },
-  ];
+  const [recommendationContent, setRecommendationContent] = useState({
+    drug:false,
+    indication:false,
+    frequency:false,
+    dose:false,
+    duration:false,
+    deEscalation:false
+  })
 
-  const [recommendationList, setRecommendationList] = useState<recommendationValuetype[]>(
-    recommendationInitialValue
-  );
+  const setChecked = (e) => {
+    const { name, checked } = e.target;
 
-  const setChecked = (id: string) => {
-    const newRecommendationList = recommendationList.map((item: any) => {
-      if (item.id === id) {
-        item.checked = !item.checked;
-      }
-      return item;
-    });
-    setRecommendationList(newRecommendationList);
+    // const newRecommendationList = recommendationList.map((item: any) => {
+    //   if (item.name === name) {
+    //     item.checked = checked;
+    //   }
+    //   return item;
+    // });
+    const newName = "is" + name;
+    setState({ ...state, [newName]: checked });
+    setRecommendationContent({...recommendationContent, [name]:checked})
+    console.log({ ...state, [newName]: checked });
+    // console.log("newRecommendationList", newRecommendationList);
+    
+    // setRecommendationList(newRecommendationList);
+  };
+
+  const setContent = (name: string, e) => {
+    setState({ ...state, [name]: e.target.value });
+    console.log(state);
   };
 
   return (
@@ -75,27 +52,37 @@ export default function Recommendation() {
       <div className="text-white my-3 text-xl font-semibold">
         Recommendation
       </div>
-      {/* give a checkbox options with 5 in a row asking for different infections */}
       <div className="w-full flex flex-wrap font-medium text-white px-5">
-        {recommendationList.map((value, i) => (
+        {recommendationInitialValue.map((value, i) => (
           <div key={i} className="w-1/2 sm:w-1/3 p-1 flex flex-col">
             <div className="">
               <input
                 type="checkbox"
                 name={value.name}
-                id={value.id}
+                id={value.name}
                 className=""
-                onChange={() => setChecked(value.id)}
+                onChange={(e) => setChecked(e)}
               />
               <label htmlFor="infection" className="ml-2">
-                {value.name}
+                {value.label}
               </label>
             </div>
-            <textarea
+            {/* <textarea
               disabled={!value.checked}
               // placeholder={"recommendation..."}
               className="px-2 py-1 text-gray-700 border rounded-lg focus:outline-none mr-2"
-            />
+            /> */}
+            {recommendationContent[value.name]? (
+              <textarea
+                className="px-2 py-1 text-gray-700 border rounded-lg focus:outline-none mr-2"
+                onChange={(e) => setContent(value.name, e)}
+              ></textarea>
+            ) : (
+              <textarea
+                className="px-2 py-1 text-gray-700 border rounded-lg bg-gray-200 focus:outline-none mr-2 cursor-not-allowed"
+                disabled
+              ></textarea>
+            )}
           </div>
         ))}
       </div>

@@ -1,24 +1,50 @@
 import { useEffect, useState, useRef } from "react";
 import { CiSquareRemove } from "react-icons/ci";
 import { BsTrashFill } from "react-icons/bs";
+import { CultureReportType } from "../../utils/types";
+import {
+  antibioticFullList,
+  specimenList,
+  resistanceOrganismList,
+} from "../../utils/objectList";
 
 interface proptype {
   id: number;
   deleteCultureReport: (id: number) => void;
+  state: CultureReportType[] | [];
+  setState: (state: CultureReportType[] | []) => void;
 }
 
 export default function CultureReport(props: proptype) {
-  const { id, deleteCultureReport } = props;
+  const { id, deleteCultureReport, state, setState } = props;
   const [antibioticList, setAntibioticList] = useState<string[]>([]);
 
-  const checkbox = useRef();
+  const [imaging, setImaging] = useState({
+    isXRay: false,
+    isCTScan: false,
+    isMRI: false,
+    isUltrasound: false,
+    isPETScan: false,
+  });
+
+  const [showImpression, setShowImpression] = useState(false);
+
+  useEffect(() => {}, [showImpression]);
 
   const handleAntibioticChange = (
     e: React.ChangeEvent<HTMLSelectElement>
   ): void => {
     const name = e.target.value;
     if (!antibioticList.includes(name)) {
-      setAntibioticList([...antibioticList, name]);
+      const newList = [...antibioticList, name];
+      setAntibioticList(newList);
+      const newCultureReport = state.map((report) => {
+        if (report.report === id) {
+          return { ...report, antibioticSensitivity: newList };
+        }
+        return report;
+      });
+      setState(newCultureReport);
     }
   };
 
@@ -29,67 +55,45 @@ export default function CultureReport(props: proptype) {
     setAntibioticList(newAntibioticList);
   };
 
-  const antibioticFullList = [
-    { id: "AMX_CLAV", name: "Amoxicillin/Clavulanate" },
-    { id: "AMP", name: "Ampicillin" },
-    { id: "GEN", name: "Gentamicin" },
-    { id: "COTRI", name: "Co-trimoxazole" },
-    { id: "CIP", name: "Ciprofloxacin" },
-    { id: "CLOX", name: "Cloxacillin" },
-    { id: "CFX", name: "CEFIXIME" },
-    { id: "TET", name: "Tetracycline" },
-    { id: "LEV", name: "Levofloxacin" },
-    { id: "DOXY", name: "Doxycycline" },
-    { id: "NOR", name: "Norfloxacin" },
-    { id: "PEN", name: "Penicillin" },
-    { id: "ERY", name: "Erythromycin" },
-    { id: "LIN", name: "Linezolid" },
-    { id: "VAN", name: "Vancomycin" },
-    { id: "IMP", name: "Imipenem" },
-    { id: "MOX", name: "Moxifloxacin" },
-    { id: "CTX", name: "Cefotaxime" },
-    { id: "CEFIPIME", name: "Cefepime" },
-    { id: "AMK", name: "Amikacin" },
-    { id: "OF", name: "Ofloxacin" },
-    { id: "PIP", name: "Piperacillin" },
-    { id: "PIP_TAX", name: "Piperacillin Tazobactam" },
-    { id: "CEF_SUB", name: "Cefaperazone Sulbactam" },
-    { id: "MEM", name: "Meropenem" },
-    { id: "CHL", name: "Chloramphenicol" },
-    { id: "TICAR_CALV", name: "Ticarcillin/Clavulanic " },
-    { id: "ERTA", name: "Ertapenem" },
-    { id: "COL", name: "Colistin" },
-    { id: "TGC", name: "Tigecycline" },
-    { id: "RIF", name: "Rifampin" },
-    { id: "TEICO", name: "Teicoplanin" },
-    { id: "TOB", name: "Tobramycin" },
-    { id: "AZTERO", name: "Aztreonam" },
-    { id: "NF", name: "Nitrofurantoin" },
-    { id: "CEFOTAXIME", name: "Cefotaxime" },
-    { id: "AZITHRO", name: "Azithromycin" },
-    { id: "FLUCO", name: "Fluconazole" },
-    { id: "AMPHO", name: "Amphotericin B" },
-    { id: "CLINDA", name: "Clindamycin" },
-    { id: "MICA", name: "Micafungin" },
-    { id: "ANIDUL", name: "Anidulafungin" },
-    { id: "CASPO", name: "Caspofungin" },
-    { id: "OXAC", name: "Oxacillin" },
-    { id: "DAPTO", name: "Daptomycin" },
-  ];
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
 
-  const [imaging, setImaging] = useState({
-    xray: false,
-    ct: false,
-    mri: false,
-    ultrasound: false,
-    petmri: false,
-  });
+    const newCultureReport = state.map((report) => {
+      if (report.report === id) {
+        return { ...report, [name]: value };
+      }
+      return report;
+    });
+    setState(newCultureReport);
+  };
 
-  const [showImpression, setShowImpression] = useState(false);
-  useEffect(() => {}, [showImpression]);
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    const newCultureReport = state.map((report) => {
+      if (report.report === id) {
+        return { ...report, [name]: value };
+      }
+      return report;
+    });
+
+    setState(newCultureReport);
+  };
+
   const imagingChange = (name: keyof typeof imaging) => {
     let newImaging = { ...imaging, [name]: !imaging[name] };
     setImaging(newImaging);
+    const newCultureReport = state.map((report) => {
+      if (report.report === id) {
+        return { ...report, [name]: !imaging[name] };
+      }
+      return report;
+    });
+
+    setState(newCultureReport);
 
     if (Object.values(newImaging).includes(true)) {
       setShowImpression(true);
@@ -118,15 +122,22 @@ export default function CultureReport(props: proptype) {
           </label>
           <input
             type="radio"
-            name="sentWhen"
+            name="sentBeforeAntibiotics"
             value="true"
+            onChange={handleChange}
             className=""
             required
           />
           <label className="mr-6 my-auto ml-2 text-sm font-semibold text-white">
             Yes
           </label>
-          <input type="radio" name="sentWhen" value="false" required />
+          <input
+            type="radio"
+            name="sentBeforeAntibiotics"
+            onChange={handleChange}
+            value="false"
+            required
+          />
           <label className="mx-2 text-sm font-semibold text-white">No</label>
         </div>
       </div>
@@ -138,10 +149,11 @@ export default function CultureReport(props: proptype) {
           </label>
           <input
             className="input-imp"
-            name="department"
-            id="department"
+            onChange={handleChange}
+            name="dateTimeSent"
+            id="dateTimeSent"
             type="datetime-local"
-            placeholder="Department"
+            placeholder=""
           />
         </div>
         <div className="w-full md:w-1/2 px-3 mb-2 md:mb-0">
@@ -150,10 +162,11 @@ export default function CultureReport(props: proptype) {
           </label>
           <input
             className="input-imp"
-            name="department"
-            id="department"
+            onChange={handleChange}
+            name="dateTimeReported"
+            id="dateTimeReported"
             type="datetime-local"
-            placeholder="Department"
+            placeholder=""
           />
         </div>
       </div>
@@ -167,26 +180,20 @@ export default function CultureReport(props: proptype) {
           <div className="relative">
             <select
               className=" appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              name="branch"
-              id="grid-branch"
+              name="specimen"
+              id="specimen"
               required
+              onChange={handleSelectChange}
               defaultValue={"Select Specialization"}
             >
               <option value="Select Specialization" disabled>
                 Select Specimen
               </option>
-              <option value="Blood">Blood</option>
-              <option value="Sputum">Sputum</option>
-              <option value="">Urine</option>
-              <option value="">CSF</option>
-              <option value="">Wound</option>
-              <option value="">Pus</option>
-              <option value="">BAL</option>
-              <option value="">Stool</option>
-              <option value="">Mini Bal</option>
-              <option value="">Ascetic fluid</option>
-              <option value="">Pleural fluid</option>
-              <option value="Orthopaedics">Tissue</option>
+              {specimenList.map((specimen) => (
+                <option key={specimen.id} value={specimen.value}>
+                  {specimen.name}
+                </option>
+              ))}
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg
@@ -206,8 +213,9 @@ export default function CultureReport(props: proptype) {
           <input
             required
             className="input-imp"
-            name="department"
-            id="department"
+            name="siteOfCollection"
+            onChange={handleChange}
+            id="siteOfCollection"
             type="text"
             placeholder="Department"
           />
@@ -219,8 +227,9 @@ export default function CultureReport(props: proptype) {
           <input
             required
             className="input-imp"
-            name="department"
-            id="department"
+            name="organism"
+            id="organism"
+            onChange={handleChange}
             type="text"
             placeholder="Organism"
           />
@@ -285,18 +294,19 @@ export default function CultureReport(props: proptype) {
           <div className="relative">
             <select
               className=" appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              name="branch"
-              id="grid-branch"
+              name="multiDrugResistance"
+              id="multiDrugResistance"
+              onChange={handleSelectChange}
               required
               defaultValue={"Select Specialization"}
             >
               <option value="Select Specialization" disabled>
                 Select if MDR
               </option>
-              <option value="Blood">MDR</option>
-              <option value="Sputum">No MDR</option>
-              <option value="Blood">PS (Pan Sensitive)</option>
-              <option value="Blood">NA (No Organism)</option>
+              <option value="MDR">MDR</option>
+              <option value="NoMDR">No MDR</option>
+              <option value="PanSensitive">PS (Pan Sensitive)</option>
+              <option value="NA(No Organism)">NA (No Organism)</option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg
@@ -317,29 +327,23 @@ export default function CultureReport(props: proptype) {
           <div className="relative">
             <select
               className=" appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              name="branch"
-              id="grid-branch"
+              name="resistance"
+              id="resistance"
+              onChange={handleSelectChange}
               required
               defaultValue={"Select Specialization"}
             >
               <option value="Select Specialization" disabled>
                 Select Resistance
               </option>
-              <option value="Blood">
-                CRE (Carbapenem resistant enterobactereciae)
-              </option>
-              <option value="Blood">
-                CRAB (Carbapenem resistant acenetobacter)
-              </option>
-              <option value="Sputum">
-                VRE (Vancomycin resistant Enterococcus)
-              </option>
-              <option value="">Col Re (colistin Resistant)</option>
-              <option value="">ESBL (Extended spectrum Beta lactamase)</option>
-              <option value="">
-                MRSA (Methicillin resistant Staph Aureus){" "}
-              </option>
-              <option value="">NA- None of the above are applicable</option>
+              {resistanceOrganismList.map((resistanceOrganism) => (
+                <option
+                  key={resistanceOrganism.id}
+                  value={resistanceOrganism.name}
+                >
+                  {resistanceOrganism.name}
+                </option>
+              ))}
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg
@@ -360,11 +364,11 @@ export default function CultureReport(props: proptype) {
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
             <input
               type="checkbox"
-              name="xray"
-              id="xray"
+              name="isXRay"
+              id="isXRay"
               className=""
               onChange={() => {
-                imagingChange("xray");
+                imagingChange("isXRay");
               }}
             />
             <label htmlFor="infection" className="ml-2">
@@ -374,11 +378,11 @@ export default function CultureReport(props: proptype) {
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
             <input
               type="checkbox"
-              name="UTI"
-              id="UTI"
+              name="isUltrasound"
+              id="isUltrasound"
               className=""
               onChange={() => {
-                imagingChange("ultrasound");
+                imagingChange("isUltrasound");
               }}
             />
             <label htmlFor="infection" className="ml-2">
@@ -388,11 +392,11 @@ export default function CultureReport(props: proptype) {
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
             <input
               type="checkbox"
-              name="CT"
-              id="CT"
+              name="isCTScan"
+              id="isCTScan"
               className=""
               onChange={() => {
-                imagingChange("ct");
+                imagingChange("isCTScan");
               }}
             />
             <label htmlFor="infection" className="ml-2">
@@ -402,11 +406,11 @@ export default function CultureReport(props: proptype) {
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
             <input
               type="checkbox"
-              name="MRI"
-              id="MRI"
+              name="isMRI"
+              id="isMRI"
               className=""
               onChange={() => {
-                imagingChange("mri");
+                imagingChange("isMRI");
               }}
             />
             <label htmlFor="infection" className="ml-2">
@@ -416,11 +420,11 @@ export default function CultureReport(props: proptype) {
           <div className="w-1/3 sm:w-1/4 md:w-1/6 p-1">
             <input
               type="checkbox"
-              name="PET MRI"
-              id="PET MRI"
+              name="isPETScan"
+              id="isPETScan"
               className=""
               onChange={() => {
-                imagingChange("petmri");
+                imagingChange("isPETScan");
               }}
             />
             <label htmlFor="infection" className="ml-2">
@@ -433,6 +437,9 @@ export default function CultureReport(props: proptype) {
             className={`px-2 py-1 rounded-md w-full impression ${
               showImpression ? "" : "hidden"
             }`}
+            name="impression"
+            id="impression"
+            onChange={handleChange}
             placeholder="Impression..."
             disabled={false}
           />

@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
+import { AntibioticsUsedType } from "../../utils/types";
 
-const AntibioticsUsed: React.FC = () => {
-  const [rows, setRows] = useState([
-    {
-      id: "",
-      initDate: "",
-      antibiotic: "",
-      loadingDose: "",
-      maintenanceDose: "",
-      route: "",
-      frequency: "",
-      daysDuration: "",
-      endDate: "",
-    },
-  ]);
+interface AntibioticsUsedProps {
+  rows: AntibioticsUsedType[] | [];
+  setRows: React.Dispatch<React.SetStateAction<AntibioticsUsedType[]|[]>>;
+}
+
+export default function AntibioticsUsed(props:AntibioticsUsedProps){
+
+  const {rows, setRows} = props;
+
+  // useEffect(() => {
+  //   console.log("rows", rows);
+  // }, [rows]);
 
   const [count, setCount] = useState(1);
 
@@ -46,7 +45,6 @@ const AntibioticsUsed: React.FC = () => {
     }
   }
 
-  //deleterow
 
   return (
     <div className="form-component" id="antibiotic-used">
@@ -195,4 +193,3 @@ const AntibioticsUsed: React.FC = () => {
   );
 };
 
-export default AntibioticsUsed;

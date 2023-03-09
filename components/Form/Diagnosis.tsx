@@ -1,6 +1,20 @@
 import React from 'react'
 
-export default function Diagnosis() {
+interface DiagnosisProps {
+  state: any;
+  setState: any;
+}
+
+export default function Diagnosis(props) {
+
+  const { state, setState } = props;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    
+    setState({ ...state, [name]: value });
+  };
+
   return (
     <div className='form-component'>
        {/* Diagnosis */}
@@ -14,9 +28,11 @@ export default function Diagnosis() {
           </label>
           <textarea
             required
+            value={state.provisionalDiagnosis}
+            onChange={handleChange}
             className="input-imp"
-            name="provisional_diagnosis"
-            id="provisional_diagnosis"
+            name="provisionalDiagnosis"
+            id="provisionalDiagnosis"
             placeholder=""
           />
         </div>
@@ -27,9 +43,11 @@ export default function Diagnosis() {
           </label>
           <textarea
             required
+            value={state.finalDiagnosis}
+            onChange={handleChange}
             className="input-imp"
-            name="final_diagnosis"
-            id="provisional_diagnosis"
+            name="finalDiagnosis"
+            id="finalDiagnosis"
             placeholder=""
           />
         </div>
@@ -40,9 +58,11 @@ export default function Diagnosis() {
           </label>
           <textarea
             required
+            value={state.syndromicDiagnosis}
+            onChange={handleChange}
             className="input-imp"
-            name="syndromic_diagnosis"
-            id="syndromic_diagnosis"
+            name="syndromicDiagnosis"
+            id="syndromicDiagnosis"
             placeholder=""
           />
         </div>
@@ -54,17 +74,20 @@ export default function Diagnosis() {
           ></label>
           <div className="relative mt-7">
             <select
-              className=" input-imp"
-              name="branch"
-              id="grid-branch"
+              onChange={handleChange}
+              // value={state.syndromicOptions}
+              value={state.syndromicOptions}
+              className="input-imp"
+              name="syndromicOptions"
+              id="syndromicOptions"
               required
-              defaultValue={"Select Specialization"}
+              defaultValue={""}
             >
-              <option value="Select Specialization" disabled>
+              <option value="" disabled>
                 Select
               </option>
-              <option value="Blood">Probable</option>
-              <option value="Blood">Definite</option>
+              <option value="probable">Probable</option>
+              <option value="definite">Definite</option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg
