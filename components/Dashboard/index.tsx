@@ -39,7 +39,7 @@ export default function DashboardIndex() {
     return (
       <>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          <TablePlaceholder />
+          Loading ...
         </div>
       </>
     );
@@ -78,7 +78,7 @@ export default function DashboardIndex() {
           title="Today's Review"
           icon={AiFillCalendar}
         >
-          <div className="mx-5 mt-2 font-semibold text-xl">Pending Review:</div>
+          <div className="mx-20 mt-2 font-semibold text-xl">Today{"'"}s Pending Review:</div>
 
           <PatientTable data={data.todayPatientList} />
         </Tabs.Item>
@@ -86,6 +86,7 @@ export default function DashboardIndex() {
           title="Analysis"
           icon={TbReportSearch}
         >
+          <div className="mx-20 mt-2 font-semibold text-xl">Pending Analysis:</div>
           <AnalysisTab/>
         </Tabs.Item>
         <Tabs.Item

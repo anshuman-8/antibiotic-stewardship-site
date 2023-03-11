@@ -136,12 +136,11 @@ export default function CultureReports(props) {
               })}
             </div>
           </div>
-          {/* 7 */}
           <div className="flex flex-row justify-between my-1">
             <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
               Imaging:{" "}
             </p>
-            <p className="mr-2 block tracking-wide text-sm  text-white">
+            <div className="mr-2 block tracking-wide text-sm  text-white">
               <label htmlFor="infection" className="font-medium block">
                 {Object.keys(report.Imaging).map((key, i) => {
                   if (report.Imaging[key] === true) {
@@ -152,7 +151,7 @@ export default function CultureReports(props) {
               <div className="max-h-20 rounded-md overflow-scroll bg-slate-700/30 p-1 min-w-[200px]">
                 {report.Imaging.impression}
               </div>
-            </p>
+            </div>
           </div>
         </div>
       </div>
