@@ -7,6 +7,8 @@ import ClinicalSigns from "./ClinicalSigns";
 import Carousel from "flowbite-react";
 
 export default function index({ data }) {
+  console.log("for review,",data);
+  
   return (
     <div className="analytics-card">
       {/* <div>Report</div> */}

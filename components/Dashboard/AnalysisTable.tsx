@@ -102,7 +102,7 @@ export default function AnalysisTable({ data }) {
   return (
     <div className="">
       {data.length !== 0 ? (
-        <div className="table max-w-5xl md:max-w-7xl mx-auto border-2 rounded-xl py-2 my-3 bg-gray-50">
+        <div className="table max-w-5xl md:max-w-7xl mx-auto border-2 rounded-xl py-2 my-3 bg-gray-50 md:mx-20">
           <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
           <table {...getTableProps()} className="table-fixed">
             <thead>
@@ -197,7 +197,7 @@ export default function AnalysisTable({ data }) {
           </div>
         </div>
       ) : (
-        <div className="bg-gray-50 m-5 p-5">No Report For Analysis !</div>
+        <div className="bg-gray-50 m-5 mx-20 p-5">No Report For Analysis !</div>
       )}
     </div>
   );

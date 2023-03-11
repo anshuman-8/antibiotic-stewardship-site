@@ -72,11 +72,11 @@ export default function ClinicalSign(props: ClinicalSignProps) {
                   return (
                     <div key={fieldItem.id}>
                       <input
-                        className="max-w-[10rem] p-1 m-1 h-10 rounded-sm"
+                        className="max-w-[8rem] p-1 m-1 h-10 rounded-sm"
                         placeholder={item.placeholder}
                         name={fieldItem.id}
+                        title = {fieldItem.id}
                         type="text"
-                        // value={item.value}
                         onChange={(e) => {
                           const value = e.target.value;
                           const newState = state.map((stateItem, index) => {

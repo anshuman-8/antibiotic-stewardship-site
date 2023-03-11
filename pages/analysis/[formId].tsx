@@ -40,6 +40,7 @@ export default function AnalysisPage() {
           isPrimaryBacteraemia
           isCatheterLinesStents
           isSecondaryBacteraemia
+          other
         }
         iscultureReport
         cultureReport {

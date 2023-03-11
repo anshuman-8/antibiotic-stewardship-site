@@ -85,7 +85,7 @@ export const resistanceOrganismList = [
     name: "MRSA (Methicillin resistant Staph Aureus)",
     value: "mrsa",
   },
-  { id: "NA", name: "NA- None of the above are applicable", value: "na" },
+  { id: "NA", name: "NA", value: "NA" },
 ];
 
 export const clinicalSignsPriority = [
@@ -273,9 +273,7 @@ export const recommendationInitialValue = [
   },
 ];
 
-
 export const complianceList = [
-
   {
     label: "Appropriate",
     name: "isAppropriate",
