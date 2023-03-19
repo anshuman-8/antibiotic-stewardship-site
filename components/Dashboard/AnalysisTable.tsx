@@ -7,6 +7,7 @@ import {
   useFilters,
   usePagination,
 } from "react-table";
+import {toStringDate} from "../../utils/functions";
 
 export default function AnalysisTable({ data }) {
   const columns = useMemo(
@@ -40,7 +41,7 @@ export default function AnalysisTable({ data }) {
       {
         Header: "Review Date",
         // accessor: "lastReviewDate",
-        Cell: ({ row }) => <span>{row.original.reviewDate}</span>,
+        Cell: ({ row }) => <span>{toStringDate(row.original.reviewDate)}</span>,
       },
       {
         Header: " ",

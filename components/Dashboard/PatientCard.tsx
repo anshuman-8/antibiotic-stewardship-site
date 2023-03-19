@@ -1,11 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { GrStatusGoodSmall } from "react-icons/gr";
+import { useMutation, gql } from "@apollo/client";
 
 interface propType {}
 
 export default function PatientCard(props) {
-  
   const {
     id,
     fullName,
@@ -17,6 +17,21 @@ export default function PatientCard(props) {
     weight,
     active,
   } = props;
+
+  const dischargePatientGQL = gql`
+    mutation ($id: ID) {
+      dischargePatient(id: $id)
+    }
+  `;
+  const [dischargePatient, { data, loading, error }] =
+    useMutation(dischargePatientGQL);
+
+  const dischargeButton = () => {
+    console.log("discharge");
+    if(confirm("Sure? discharge " + fullName)){
+      dischargePatient({ variables: { id: id } });
+    }
+  };
 
   return (
     <div className="bg-slate-100/50 backdrop-blur-sm m-5 max-w-lg border min-w-min rounded-md p-2">
@@ -45,7 +60,10 @@ export default function PatientCard(props) {
             Analysis Form
           </button>
         </Link> */}
-        <div className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400 cursor-pointer" onClick={()=>confirm("Sure?, discharge "+fullName)}>
+        <div
+          className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400 cursor-pointer"
+          onClick={dischargeButton}
+        >
           Discharge
         </div>
         <div className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400">

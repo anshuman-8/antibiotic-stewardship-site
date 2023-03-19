@@ -22,18 +22,18 @@ export default function ClinicalSigns({data}) {
           {clinicalSignsPriority.map((item, index) => {
             return (
               <div className="" key={index}>
-                <div className="capitalize font-semibold h-8 w-[100%] text-white my-1 text-sm flex items-center">
+                <div className="capitalize font-semibold h-6 w-[100%] text-white my-1 text-sm flex items-center">
                   {item.name}
                 </div>
               </div>
             );
           })}
         </div>
-        <div className="flex overflow-scroll px-2">
+        <div className="flex overflow-x-scroll px-2">
           {clinicalSignList.map((item, index) => {
             return (
               <div className="flex flex-col striped" key={index}>
-                <div className="capitalize font-semibold h-10 w-[100%] text-white my-1 text-sm p-1 text-center align-middle">
+                <div className="capitalize font-semibold h-8 w-[100%] text-white my-1 text-sm p-1 text-center align-middle">
                   {/* {item.date.toLocaleDateString() +
                     " " +
                     item.date.toLocaleDateString("en-US", { weekday: "short" })} */}
@@ -41,10 +41,10 @@ export default function ClinicalSigns({data}) {
                 </div>
                 {clinicalSignsPriority.map((fieldItem, i) => {
                   return (
-                    <div key={fieldItem.id}>
-                      <span
-                        className="max-w-[10rem] p-1 m-1 h-10 rounded-sm"
-                      />
+                    <div key={fieldItem.id} className=''>
+                      <div
+                        className="max-w-[10rem] m-1 h-6 rounded-sm text-white"
+                      >34.05</div>
                     </div>
                   );
                 })}

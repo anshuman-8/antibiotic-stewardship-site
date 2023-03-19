@@ -59,7 +59,7 @@ export default function ClinicalSign(props: ClinicalSignProps) {
             );
           })}
         </div>
-        <div className="flex overflow-y-scroll px-2">
+        <div className="flex overflow-x-scroll px-2">
           {state.map((item, index) => {
             return (
               <div className="flex flex-col striped" key={index}>
