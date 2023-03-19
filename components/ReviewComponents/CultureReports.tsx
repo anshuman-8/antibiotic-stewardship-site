@@ -148,7 +148,7 @@ export default function CultureReports(props) {
                   }
                 })}
               </label>
-              <div className="max-h-20 rounded-md overflow-scroll bg-slate-700/30 p-1 min-w-[200px]">
+              <div className="max-h-20 rounded-md overflow-y-scroll bg-slate-700/30 p-1 min-w-[200px]">
                 {report.Imaging.impression}
               </div>
             </div>

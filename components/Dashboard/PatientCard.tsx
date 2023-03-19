@@ -35,7 +35,7 @@ export default function PatientCard(props) {
       </div>
 
       <div className="space-x-5 mt-5 mb-2 flex flex-row">
-        <Link href={"/form/"+id}>
+        {/* <Link href={"/form/"+id}>
           <button className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400">
             Patient Form
           </button>
@@ -44,7 +44,13 @@ export default function PatientCard(props) {
           <button className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400">
             Analysis Form
           </button>
-        </Link>
+        </Link> */}
+        <div className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400 cursor-pointer" onClick={()=>confirm("Sure?, discharge "+fullName)}>
+          Discharge
+        </div>
+        <div className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400">
+          Download Reports
+        </div>
       </div>
     </div>
   );

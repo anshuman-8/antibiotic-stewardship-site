@@ -98,7 +98,7 @@ export default function PatientTable({ data }) {
 
   return (
     <div className="">
-      {data.length!==0?<div className="table max-w-5xl md:max-w-7xl mx-auto border-2 rounded-xl py-2 my-3 bg-gray-50">
+      {data.length!==0?<div className="table max-w-5xl md:max-w-7xl mx-auto border-2 rounded-xl py-2 my-3 bg-gray-50 md:mx-20">
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
         <table {...getTableProps()} className="table-fixed">
           <thead>
