@@ -7,6 +7,8 @@ import ClinicalSigns from "./ClinicalSigns";
 import Carousel from "flowbite-react";
 
 export default function index({ data }) {
+  console.log("for review,",data);
+  
   return (
     <div className="analytics-card">
       {/* <div>Report</div> */}
@@ -16,10 +18,6 @@ export default function index({ data }) {
       <AntibioticUsed data={data.antibioticsUsed} />
       <div className="text-white font-medium mt-4 text-lg">Culture Reports</div>
       <div className="flex flex-row overflow-auto mb-3 mt-1">
-        {/* <CultureReports id={34} />
-        <CultureReports id={37} />
-        <CultureReports id={32} />
-        <CultureReports id={31} /> */}
         <div>
 
           {data.cultureReport.map((report, i) => {

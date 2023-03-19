@@ -9,7 +9,7 @@ import {
 } from "react-table";
 import {toStringDate} from "../../utils/functions";
 
-export default function AnalysisTable({ data }) {
+export default function AnalysisReportTable({ data }) {
   const columns = useMemo(
     () => [
       {
@@ -22,7 +22,6 @@ export default function AnalysisTable({ data }) {
       },
       {
         Header: "Age",
-        // accessor: "age",
         Cell: ({ row }) => (
           <span>
             {calculate_age(row.original.patient.dateOfBirth) + " Years"}
@@ -30,34 +29,29 @@ export default function AnalysisTable({ data }) {
         ),
       },
       {
-        Header: "Review id#",
-        // accessor: "age",
-        Cell: ({ row }) => <span>{row.original.id}</span>,
-      },
-      {
-        Header: "Reviewing Department",
-        accessor: "reviewDepartment",
+        Header: "Reviewing Doctor",
+        accessor: "doctor",
       },
       {
         Header: "Review Date",
         // accessor: "lastReviewDate",
-        Cell: ({ row }) => <span>{toStringDate(row.original.reviewDate)}</span>,
+        Cell: ({ row }) => <span>{toStringDate(row.original.patientForm.reviewDate)}</span>,
       },
       {
-        Header: " ",
-        Cell: ({ row }) => (
-          <div>
-            <Link href={"/analysis/" + row.original.id}>
-              <button className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400">
-                Analysis
-              </button>
-            </Link>
-          </div>
-        ),
+        Header: "Analysis Date",
+        // accessor: "lastReviewDate",
+        Cell: ({ row }) => <span>{toStringDate(row.original.date)}</span>,
       },
+      
     ],
     []
   );
+
+  // convert string object like "2023-03-09 15:15:55.492456+00:00" to date object
+    // const convertToDate = (dateString) => {
+    //     const date = new Date(dateString);
+    //     return date;
+    // }
 
   const tableInstance = useTable(
     {

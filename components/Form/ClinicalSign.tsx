@@ -59,7 +59,7 @@ export default function ClinicalSign(props: ClinicalSignProps) {
             );
           })}
         </div>
-        <div className="flex overflow-scroll px-2">
+        <div className="flex overflow-x-scroll px-2">
           {state.map((item, index) => {
             return (
               <div className="flex flex-col striped" key={index}>
@@ -72,11 +72,11 @@ export default function ClinicalSign(props: ClinicalSignProps) {
                   return (
                     <div key={fieldItem.id}>
                       <input
-                        className="max-w-[10rem] p-1 m-1 h-10 rounded-sm"
+                        className="max-w-[8rem] p-1 m-1 h-10 rounded-sm"
                         placeholder={item.placeholder}
                         name={fieldItem.id}
+                        title = {fieldItem.id}
                         type="text"
-                        // value={item.value}
                         onChange={(e) => {
                           const value = e.target.value;
                           const newState = state.map((stateItem, index) => {

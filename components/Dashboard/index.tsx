@@ -7,14 +7,14 @@ import PatientTable from "./PatientTable";
 import TablePlaceholder from "./TablePlaceholder";
 import AnalysisTab from "./AnalysisTab";
 import ActivePatientsTab from "./ActivePatientsTab";
+import AnalysisReportTab from "./AnalysisReportTab";
 import AllPatientTable from "./AllPatients";
 import { Tabs, Button, TabsRef } from "flowbite-react";
-import {AiFillCalendar} from "react-icons/ai"
-import {TbReportSearch} from "react-icons/tb"
-import {BsPeopleFill} from "react-icons/bs"
+import { AiFillCalendar } from "react-icons/ai";
+import { TbReportSearch, TbReport } from "react-icons/tb";
+import { BsPeopleFill } from "react-icons/bs";
 
 export default function DashboardIndex() {
-
   const getTodaysReviewList = gql`
     query {
       todayPatientList {
@@ -39,12 +39,13 @@ export default function DashboardIndex() {
     return (
       <>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          <TablePlaceholder />
+          Loading ...
         </div>
       </>
     );
 
-  if (error) return <p className="m-10">Not Connected to Internet or Database {":("}</p>;
+  if (error)
+    return <p className="m-10">Not Connected to Internet or Database {":("}</p>;
 
   const todaysDate = () => {
     const date = new Date();
@@ -73,27 +74,32 @@ export default function DashboardIndex() {
       <HeaderBar />
 
       <Tabs.Group aria-label="Tabs with icons" style="underline">
-        <Tabs.Item
-          active={true}
-          title="Today's Review"
-          icon={AiFillCalendar}
-        >
-          <div className="mx-5 mt-2 font-semibold text-xl">Pending Review:</div>
+        <Tabs.Item active={true} title="Today's Review" icon={AiFillCalendar}>
+          <div className="mx-20 mt-2 font-semibold text-xl">
+            Today{"'"}s Pending Review:
+          </div>
 
           <PatientTable data={data.todayPatientList} />
         </Tabs.Item>
-        <Tabs.Item
-          title="Analysis"
-          icon={TbReportSearch}
-        >
-          <AnalysisTab/>
+
+        <Tabs.Item title="Analysis" icon={TbReport}>
+          <div className="mx-20 mt-2 font-semibold text-xl">
+            Pending Analysis:
+          </div>
+          <AnalysisTab />
         </Tabs.Item>
-        <Tabs.Item
-          title="Active Patients"
-          icon={BsPeopleFill}
-        >
-          <ActivePatientsTab/>
+
+        <Tabs.Item title="Completed Analysis" icon={TbReportSearch}>
+          <div className="mx-20 mt-2 font-semibold text-xl">
+            All Completed Analysis:
+          </div>
+          <AnalysisReportTab />
         </Tabs.Item>
+
+        <Tabs.Item title="Active Patients" icon={BsPeopleFill}>
+          <ActivePatientsTab />
+        </Tabs.Item>
+
         <Tabs.Item disabled={true} title="All Patients">
           All Patients
         </Tabs.Item>

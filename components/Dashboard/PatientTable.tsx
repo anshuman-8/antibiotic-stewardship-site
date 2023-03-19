@@ -7,6 +7,7 @@ import {
   useFilters,
   usePagination,
 } from "react-table";
+import { toStringDate } from "../../utils/functions";
 
 export default function PatientTable({ data }) {
   // Define the columns for the table
@@ -36,7 +37,7 @@ export default function PatientTable({ data }) {
         Header: "Last reviewed",
         // accessor: "lastReviewDate",
         Cell: ({ row }) => (
-          <span>{row.original.lastReviewDate==null?"Never":row.original.lastReviewDate}</span>
+          <span>{row.original.lastReviewDate==null?"Never":toStringDate(row.original.lastReviewDate)}</span>
         ),
       },
       {
@@ -98,7 +99,7 @@ export default function PatientTable({ data }) {
 
   return (
     <div className="">
-      {data.length!==0?<div className="table max-w-5xl md:max-w-7xl mx-auto border-2 rounded-xl py-2 my-3 bg-gray-50">
+      {data.length!==0?<div className="table max-w-5xl md:max-w-7xl mx-auto border-2 rounded-xl py-2 my-3 bg-gray-50 md:mx-20">
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
         <table {...getTableProps()} className="table-fixed">
           <thead>

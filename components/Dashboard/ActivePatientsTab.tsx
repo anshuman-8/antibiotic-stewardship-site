@@ -6,7 +6,7 @@ import PatientCardPlaceholder from "./PatientCardPlaceholder";
 export default function ActivePatientsTab() {
   const getActivePatient = gql`
     query {
-      patients {
+      activePatients {
         id
         fullName
         admittingDoctor
@@ -45,9 +45,9 @@ export default function ActivePatientsTab() {
 
   return (
     <div>
-      {data.patients.lenght !== 0 ? (
+      {data.activePatients.lenght !== 0 ? (
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {data.patients.map((patient) => (
+          {data.activePatients.map((patient) => (
             <PatientCard
               key={patient.id}
               id={patient.id}
