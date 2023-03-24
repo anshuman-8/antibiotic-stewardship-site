@@ -73,7 +73,19 @@ export default function Form() {
 
   const [clinicalSignsValue, setClinicalSignsValue] = useState<
     ClinicalSignType[] | []
-  >([]);
+  >([
+    {
+      date: new Date(),
+      temp: "",
+      bp: "",
+      procalcitonin: "",
+      wbc: "",
+      neutrophils: "",
+      screatinine: "",
+      cratinineClerance: "",
+      o2: "",
+    },
+  ]);
 
   const notifyError = (message: String) => toast.error(message);
   const notifySuccess = (message: String) => toast.success(message);
@@ -197,12 +209,12 @@ export default function Form() {
       return {
         timeReported: item.dateTimeReported,
         timeSent: item.dateTimeSent,
-        sentBeforeAntibiotic: item.sentBeforeAntibiotics==="true",
+        sentBeforeAntibiotic: item.sentBeforeAntibiotics === "true",
         specimenType: item.specimen,
         organism: item.organism,
         siteOfCollection: item.siteOfCollection,
         resistance: item.resistance,
-        multiDrugResistance:item.multiDrugResistance,
+        multiDrugResistance: item.multiDrugResistance,
         antibioticSensitivity: item.antibioticSensitivity.map(
           (antibioticObj) => {
             return antibioticObj;
@@ -220,16 +232,15 @@ export default function Form() {
     });
 
     console.log("cultureReport check", cultureReport);
-    
 
     const antibioticsUsed = antibioticUsedState.map((item) => {
       return {
         initialDate: item.initDate,
-        loadingDose: parseInt( item.loadingDose),
-        maintenanceDose:  parseInt(item.maintenanceDose),
+        loadingDose: parseInt(item.loadingDose),
+        maintenanceDose: parseInt(item.maintenanceDose),
         route: item.route,
-        frequency:  parseInt(item.frequency),
-        duration:  parseInt(item.daysDuration),
+        frequency: parseInt(item.frequency),
+        duration: parseInt(item.daysDuration),
         antibiotic: item.antibiotic,
         endDate: item.endDate,
       };
@@ -281,14 +292,13 @@ export default function Form() {
       clinicalSign: clinicalSign,
     };
 
-
     patientFormData({
       variables: {
         input: input,
       },
       onCompleted: (data) => {
         notifySuccess("Form Submitted Successfully!");
-        router.push("/")
+        router.push("/");
       },
       onError: (error) => {
         notifyError("Form Submission Failed!");
