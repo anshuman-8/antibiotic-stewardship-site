@@ -26,7 +26,7 @@ export default function index({ data }) {
 
         </div>
       </div>
-      <ClinicalSigns data={data.clinicalSigns}/>
+      <ClinicalSigns date={data.reviewDate} patient={data.patient.id}/>
     </div>
   );
 }

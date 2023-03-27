@@ -15,6 +15,7 @@ export default function AnalysisPage() {
     query ($id: ID!) {
       form(id: $id) {
         id
+        reviewDate
         patient {
           id
           fullName
