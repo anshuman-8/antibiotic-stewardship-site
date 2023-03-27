@@ -2,6 +2,7 @@ import React from "react";
 import { ClinicalSignType } from "../../utils/types";
 import { clinicalSignsPriority } from "../../utils/objectList";
 import { GrAdd } from "react-icons/gr";
+import { toyyyymmdd } from "../../utils/functions";
 
 interface ClinicalSignProps {
   state: ClinicalSignType[] | [];
@@ -92,8 +93,8 @@ export default function ClinicalSign(props: ClinicalSignProps) {
                         title={fieldItem}
                         type={fieldItem==="date"?"date":"text"}
                         onChange={(e) => {
-                          const value = e.target.value;
                           const name = e.target.name;
+                          const value = e.target.value;
                           const updatedState = [...state];
                           updatedState[index][name] = value;
                           setState(updatedState);
