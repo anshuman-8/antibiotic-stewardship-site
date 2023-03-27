@@ -75,15 +75,6 @@ export default function AnalysisPage() {
           maintenanceDose
           endDate
         }
-        clinicalSigns {
-          date
-          temperature
-          procalcitonin
-          cratinineClearance
-          sCreatinine
-          bloodPressure
-          neutrophil
-        }
       }
     }
   `;

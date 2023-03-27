@@ -1,5 +1,5 @@
 export const toyyyymmdd = (date: Date) => {
-  date = new Date(date);
+  // date = new Date(date);
 
   let dd = date.getDate();
   let mm = date.getMonth() + 1;

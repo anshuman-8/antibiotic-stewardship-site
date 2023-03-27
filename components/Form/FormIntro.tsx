@@ -19,8 +19,6 @@ export default function FormIntro(props) {
     return (yyyy + "-" + mm + "-" + dd).toString();
   };
 
-  const todaysDate = toDateString(new Date());
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -45,8 +43,8 @@ export default function FormIntro(props) {
           <input
             required
             onChange={handleInputChange}
-            // value={toDateString(state.reviewDate)}
             name="reviewDate"
+            defaultValue={""}
             id="reviewDate"
             className="appearance-none max-w-xs block w-full bg-gray-100 text-gray-700 border rounded py-2  px-3 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
             type="date"

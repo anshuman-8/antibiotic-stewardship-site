@@ -51,10 +51,9 @@ export default function AntibioticsUsed(props:AntibioticsUsedProps){
       <div className="text-xl text-white font-semibold mt-2 mb-2 my-1 flex flex-row">
         <div>Antibiotic Used </div>
         <div
-          className="border-2 border-amber-400 p-1 mx-1 rounded-md hover:cursor-pointer"
           onClick={addRow}
         >
-          <GrAddCircle className="text-red-700 fill-red-400" fill="#ffffff" />
+          <GrAddCircle className="bg-white/60 h-7 w-7 rounded-md hover shadow-lg active:shadow-none border-2 border-stone-100 mx-3" fill="#ffffff"/>
         </div>
       </div>
       <div className="overflow-auto">

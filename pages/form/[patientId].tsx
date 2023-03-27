@@ -17,6 +17,7 @@ import {
   AntibioticsUsedType,
   ClinicalSignType,
 } from "../../utils/types";
+import { toyyyymmdd } from "../../utils/functions";
 
 export default function Form() {
   const { patientId } = useRouter().query;
@@ -25,7 +26,7 @@ export default function Form() {
   const [cultureSent, setCultureSent] = useState(false);
 
   const [introState, setIntroState] = useState({
-    reviewDate: Date.now(),
+    reviewDate: toyyyymmdd(new Date()),
     reviewingDepartment: "",
   });
 
@@ -73,7 +74,19 @@ export default function Form() {
 
   const [clinicalSignsValue, setClinicalSignsValue] = useState<
     ClinicalSignType[] | []
-  >([]);
+  >([
+    {
+      date: new Date(),
+      temp: "",
+      bp: "",
+      procalcitonin: "",
+      wbc: "",
+      neutrophils: "",
+      screatinine: "",
+      cratinineClerance: "",
+      o2: "",
+    },
+  ]);
 
   const notifyError = (message: String) => toast.error(message);
   const notifySuccess = (message: String) => toast.success(message);
@@ -143,44 +156,7 @@ export default function Form() {
             mrdNumber
           }
           reviewDate
-          reviewDepartment
-          provisionalDiagnosis
-          finalDiagnosis
-          syndromicDiagnosis
-          diagnosisChoice
-          sepsis {
-            id
-            isSepsis
-          }
-          focusOfInfection {
-            id
-            isAbdominal
-            isUTI
-            isPneumonia
-            other
-          }
           iscultureReport
-          cultureReport {
-            specimenType
-            organism
-            siteOfCollection
-            timeReported
-          }
-          antibioticsUsed {
-            id
-            initialDate
-            loadingDose
-            maintenanceDose
-            route
-            duration
-          }
-          clinicalSigns {
-            date
-            whiteBloodCell
-            sCreatinine
-            temperature
-            o2Saturation
-          }
         }
       }
     }
@@ -193,43 +169,43 @@ export default function Form() {
     e.preventDefault();
     printAllData();
 
-    const cultureReport = cultureReportList.map((item) => {
-      return {
-        timeReported: item.dateTimeReported,
-        timeSent: item.dateTimeSent,
-        sentBeforeAntibiotic: item.sentBeforeAntibiotics==="true",
-        specimenType: item.specimen,
-        organism: item.organism,
-        siteOfCollection: item.siteOfCollection,
-        resistance: item.resistance,
-        multiDrugResistance:item.multiDrugResistance,
-        antibioticSensitivity: item.antibioticSensitivity.map(
-          (antibioticObj) => {
-            return antibioticObj;
-          }
-        ),
-        Imaging: {
-          isxRay: item.isXRay,
-          isUltraSound: item.isUltrasound,
-          isCTScan: item.isCTScan,
-          isMRI: item.isMRI,
-          isPETScan: item.isPETScan,
-          impression: item.impression,
-        },
-      };
-    });
-
-    console.log("cultureReport check", cultureReport);
-    
+    const cultureReport =
+      cultureSent === false
+        ? []
+        : cultureReportList.map((item) => {
+            return {
+              timeReported: item.dateTimeReported,
+              timeSent: item.dateTimeSent,
+              sentBeforeAntibiotic: item.sentBeforeAntibiotics === "true",
+              specimenType: item.specimen,
+              organism: item.organism,
+              siteOfCollection: item.siteOfCollection,
+              resistance: item.resistance,
+              multiDrugResistance: item.multiDrugResistance,
+              antibioticSensitivity: item.antibioticSensitivity.map(
+                (antibioticObj) => {
+                  return antibioticObj;
+                }
+              ),
+              Imaging: {
+                isxRay: item.isXRay,
+                isUltraSound: item.isUltrasound,
+                isCTScan: item.isCTScan,
+                isMRI: item.isMRI,
+                isPETScan: item.isPETScan,
+                impression: item.impression,
+              },
+            };
+          });
 
     const antibioticsUsed = antibioticUsedState.map((item) => {
       return {
         initialDate: item.initDate,
-        loadingDose: parseInt( item.loadingDose),
-        maintenanceDose:  parseInt(item.maintenanceDose),
+        loadingDose: parseInt(item.loadingDose),
+        maintenanceDose: parseInt(item.maintenanceDose),
         route: item.route,
-        frequency:  parseInt(item.frequency),
-        duration:  parseInt(item.daysDuration),
+        frequency: parseInt(item.frequency),
+        duration: parseInt(item.daysDuration),
         antibiotic: item.antibiotic,
         endDate: item.endDate,
       };
@@ -237,8 +213,7 @@ export default function Form() {
 
     const clinicalSign = clinicalSignsValue.map((item) => {
       return {
-        date: item.date,
-        // patient: parseInt(patientId?.toString() || "0"),
+        date: toyyyymmdd(new Date(item.date)),
         procalcitonin: item.procalcitonin,
         sCreatinine: item.screatinine,
         temperature: item.temp,
@@ -249,6 +224,11 @@ export default function Form() {
         bloodPressure: item.bp,
       };
     });
+
+    if (introState.reviewingDepartment.trim() === "") {
+      notifyError("Please enter reviewing department");
+      return;
+    }
 
     const input = {
       // convert patientId to int
@@ -275,12 +255,10 @@ export default function Form() {
         isCatheterLinesStents: focusOfInfectionState.catheterLinesStents,
         other: focusOfInfectionState.other,
       },
-      // TODO: add logic to check if culture report are ment to be sent
       cultureReport: cultureReport,
       antibioticUsed: antibioticsUsed,
       clinicalSign: clinicalSign,
     };
-
 
     patientFormData({
       variables: {
@@ -288,7 +266,7 @@ export default function Form() {
       },
       onCompleted: (data) => {
         notifySuccess("Form Submitted Successfully!");
-        router.push("/")
+        router.push("/");
       },
       onError: (error) => {
         notifyError("Form Submission Failed!");
@@ -299,7 +277,7 @@ export default function Form() {
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
       <div className="">
-        <form className="w-full">
+        <form className="w-full" onSubmit={() => printAllData}>
           <div className="max-w-7xl mx-auto mt-3 flex flex-row items-center space-x-10">
             <Link href={"/"} className="w-auto">
               <button className="bg-gray-500/80 backdrop-blur-md text-white px-3 py-2 rounded-md">
