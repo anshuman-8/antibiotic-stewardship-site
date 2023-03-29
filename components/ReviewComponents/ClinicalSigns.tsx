@@ -3,8 +3,7 @@ import { clinicalSignsPriority } from "../../utils/objectList";
 import { useQuery, gql } from "@apollo/client";
 import { toyyyymmdd } from "../../utils/functions";
 
-export default function ClinicalSigns({ date , patient}) {
-
+export default function ClinicalSigns({ date, patient }) {
   const GET_CLINICAL_SIGN = gql`
     query ($patient: ID!, $startDate: String!, $endDate: String!) {
       getClinicalSigns(
@@ -21,6 +20,11 @@ export default function ClinicalSigns({ date , patient}) {
         bloodPressure
         o2Saturation
         date
+        procalcitonin
+        whiteBloodCell
+        sCreatinine
+        cratinineClearance
+        temperature
       }
     }
   `;
@@ -37,28 +41,28 @@ export default function ClinicalSigns({ date , patient}) {
     return toyyyymmdd(oneDay);
   };
 
-const { loading, error, data } = useQuery(GET_CLINICAL_SIGN, {
-  variables: {
-    patient : patient,
-    startDate :  sevenDaysPriorClinicalSigns(date),
-    endDate : addOneDay(date)
-  },
-});
+  const { loading, error, data } = useQuery(GET_CLINICAL_SIGN, {
+    variables: {
+      patient: patient,
+      startDate: sevenDaysPriorClinicalSigns(date),
+      endDate: addOneDay(date),
+    },
+  });
 
-console.log("dates", sevenDaysPriorClinicalSigns(date), addOneDay(date));
+  console.log("dates", sevenDaysPriorClinicalSigns(date), addOneDay(date));
 
+  console.log("clinical signs", data);
 
-console.log("clinical signs", data);
+  if (loading) return <p>Loading ...</p>;
 
-if (loading) return <p>Loading ...</p>;
-
-if (error) return <p>Error :(</p>;
+  if (error) return <p>Error :(</p>;
 
   return (
-    <div className="form-component">
-      <div className="text-xl text-white font-semibold my-4 ">
-        Clinical Signs correlating with Antibiotic initiation(prior 48 hours){" "}
+    <>
+      <div className="text-white font-medium mt-4 text-lg">
+        Clinical Signs (of past 7 days submitted){" "}
       </div>
+    <div className="form-component">
       <div className="flex flex-row mb-5 mx-1">
         <div className="flex flex-col striped">
           <div className="capitalize font-semibold h-8 w-[100%] text-white my-1 text-sm p-1 flex items-center">
@@ -77,7 +81,7 @@ if (error) return <p>Error :(</p>;
         <div className="flex overflow-x-scroll px-2">
           {data.getClinicalSigns.map((item, index) => {
             return (
-              <div className="flex flex-col striped" key={index}>
+              <div className="flex flex-col striped px-1" key={index}>
                 <div className="capitalize font-semibold h-8 w-[100%] text-white my-1 text-sm p-1 text-center align-middle">
                   {item.date}
                 </div>
@@ -85,7 +89,7 @@ if (error) return <p>Error :(</p>;
                   return (
                     <div key={fieldItem.id} className="">
                       <div className="max-w-[10rem] m-1 h-6 rounded-sm text-white">
-                        {item[fieldItem.name]}
+                        {item[fieldItem.id]}
                       </div>
                     </div>
                   );
@@ -96,5 +100,6 @@ if (error) return <p>Error :(</p>;
         </div>
       </div>
     </div>
+    </>
   );
 }

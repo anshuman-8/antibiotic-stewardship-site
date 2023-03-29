@@ -2,7 +2,6 @@ import React from "react";
 import { ClinicalSignType } from "../../utils/types";
 import { clinicalSignsPriority } from "../../utils/objectList";
 import { GrAdd } from "react-icons/gr";
-import { toyyyymmdd } from "../../utils/functions";
 
 interface ClinicalSignProps {
   state: ClinicalSignType[] | [];
@@ -12,45 +11,34 @@ interface ClinicalSignProps {
 export default function ClinicalSign(props: ClinicalSignProps) {
   const { state, setState } = props;
 
-  const emptyClinicalSignsValue: ClinicalSignType = {
-    date: new Date(),
-    temp: "",
-    bp: "",
-    procalcitonin: "",
-    wbc: "",
-    neutrophils: "",
-    screatinine: "",
-    cratinineClerance: "",
-    o2: "",
-  };
 
   const addColumn = () => {
     setState([
       ...state,
       {
         date: new Date(),
-        temp: "",
-        bp: "",
         procalcitonin: "",
-        wbc: "",
-        neutrophils: "",
-        screatinine: "",
-        cratinineClerance: "",
-        o2: "",
+        neutrophil : "",
+        bloodPressure : "",
+        o2Saturation : "",
+        whiteBloodCell : "",
+        sCreatinine : "",
+        cratinineClearance : "",
+        temperature : "",
       },
     ]);
   };
 
   const listName = [
     "date",
-    "temp",
-    "bp",
+    "temperature",
+    "bloodPressure",
     "procalcitonin",
-    "wbc",
-    "neutrophils",
-    "screatinine",
-    "cratinineClerance",
-    "o2",
+    "whiteBloodCell",
+    "neutrophil",
+    "sCreatinine",
+    "cratinineClearance",
+    "o2Saturation",
   ];
 
 
