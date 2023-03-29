@@ -96,37 +96,37 @@ export const clinicalSignsPriority = [
   },
   {
     name: "White Blood Cells (K/uL)",
-    id: "wbc",
+    id: "whiteBloodCell",
     placeholder: "",
   },
   {
     name: "Neutrophils %",
-    id: "neutrophils",
+    id: "neutrophil",
     placeholder: "",
   },
   {
     name: "S.Creatinine(mg/dl)",
-    id: "screatinine",
+    id: "sCreatinine",
     placeholder: "",
   },
   {
     name: "Cratinine Clearance (mL/min)",
-    id: "cratinineClerance",
+    id: "cratinineClearance",
     placeholder: "",
   },
   {
     name: "Temp(F)",
-    id: "temp",
+    id: "temperature",
     placeholder: "",
   },
   {
     name: "Blood Pressure(mmHg)",
-    id: "bp",
+    id: "bloodPressure",
     placeholder: "",
   },
   {
     name: "O2 Saturation (%)",
-    id: "o2",
+    id: "o2Saturation",
     placeholder: "",
   },
 ];

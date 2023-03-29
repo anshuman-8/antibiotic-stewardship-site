@@ -77,14 +77,14 @@ export default function Form() {
   >([
     {
       date: new Date(),
-      temp: "",
-      bp: "",
       procalcitonin: "",
-      wbc: "",
-      neutrophils: "",
-      screatinine: "",
-      cratinineClerance: "",
-      o2: "",
+      neutrophil : "",
+      bloodPressure : "",
+      o2Saturation : "",
+      whiteBloodCell : "",
+      sCreatinine : "",
+      cratinineClearance : "",
+      temperature : "",
     },
   ]);
 
@@ -215,13 +215,13 @@ export default function Form() {
       return {
         date: toyyyymmdd(new Date(item.date)),
         procalcitonin: item.procalcitonin,
-        sCreatinine: item.screatinine,
-        temperature: item.temp,
-        o2Saturation: item.o2,
-        whiteBloodCell: item.wbc,
-        neutrophil: item.neutrophils,
-        cratinineClearance: item.cratinineClerance,
-        bloodPressure: item.bp,
+        sCreatinine: item.sCreatinine,
+        temperature: item.temperature,
+        o2Saturation: item.o2Saturation,
+        whiteBloodCell: item.whiteBloodCell,
+        neutrophil: item.neutrophil,
+        cratinineClearance: item.cratinineClearance,
+        bloodPressure: item.bloodPressure,
       };
     });
 

@@ -31,12 +31,12 @@ export interface AntibioticsUsedType {
 
 export interface ClinicalSignType {
   date: Date;
-  temp: string;
-  bp: string;
-  procalcitonin: string;
-  wbc: string;
-  neutrophils: string;
-  screatinine: string;
-  cratinineClerance: string;
-  o2: string;
+  neutrophil: string;
+  bloodPressure : string;
+  o2Saturation : string;
+  procalcitonin : string;
+  whiteBloodCell : string;
+  sCreatinine : string;
+  cratinineClearance : string;
+  temperature : string;
 }
