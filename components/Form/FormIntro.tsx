@@ -1,23 +1,33 @@
 import React from "react";
+import { gql, useQuery } from "@apollo/client";
 
+
+// interface FormIntroProps {
+//   state: FormIntroType;
+//   setState: React.Dispatch<React.SetStateAction<FormIntroType>>;
+//   patientId: string;
+// }
 export default function FormIntro(props) {
-  const { state, setState } = props;
+  const { state, setState, patientId } = props;
 
-  const toDateString = (date: Date): string => {
-    date = new Date(date);
+  const GET_PATIENT = gql`
+    query ($id: ID!) {
+      patient(id: $id) {
+        id
+        fullName
+        mrdNumber
+      }
+    }
+  `;
 
-    let dd = date.getDate();
-    let mm = date.getMonth() + 1;
-    const yyyy = date.getFullYear();
-    if (dd < 10) {
-      dd = 0 + dd;
-    }
-    if (mm < 10) {
-      mm = 0 + mm;
-    }
-    // return dd + "/" + mm + "/" + yyyy;
-    return (yyyy + "-" + mm + "-" + dd).toString();
-  };
+  const { loading, error, data } = useQuery(GET_PATIENT, {
+    variables: {
+      id: patientId,
+    },
+  });
+  
+  console.log("patient", data);
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,15 +35,47 @@ export default function FormIntro(props) {
     setState({ ...state, [name]: value });
   };
 
+  if (loading) return  <div className="form-component">
+  {/* to display patient data */}
+  <div className="text-white font-semibold text-lg space-y-2 my-5">
+    <div>
+      {" "}
+      <span className="text-2xl px-1">.......</span>
+    </div>
+    <div>MRD No: </div>
+    <div>Age : </div>
+  </div>
+
+  <div className="flex flex-row space-x-10 items-center">
+    <div className="mb-6 md:mb-5">
+      <label className="label-upper">Review Date: </label>
+      <div
+        className="appearance-none max-w-xs block w-full h-10 bg-gray-100 text-gray-700 border rounded py-2  px-3 mb-3 leading-tight focus:outline-none invalid:border-red-500 focus:bg-white"
+      />
+    </div>
+
+    <div className=" md:w-1/3 mb-6 md:mb-5">
+      <label className="label-upper" htmlFor="">
+        Reviewing Department
+      </label>
+      <div
+        className="input-imp h-10"
+      ></div>
+    </div>
+  </div>
+</div>;
+
+  if (error) return <p>Error :(</p>;
+
   return (
     <div className="form-component">
       {/* to display patient data */}
       <div className="text-white font-semibold text-lg space-y-2 my-5">
         <div>
           {" "}
-          <span className="text-2xl px-1">{" Anshuman Swain"}</span>
+          <span className="text-2xl px-1">{data.patient.fullName}</span>
         </div>
-        <div>MRD No: {"1123MRDnumber"}</div>
+        <div>MRD No: {data.patient.mrdNumber}</div>
         <div>Age : {"19"}</div>
       </div>
 
