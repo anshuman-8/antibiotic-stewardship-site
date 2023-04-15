@@ -396,7 +396,6 @@ export default function Form() {
               </div>
             )}
           </div>
-          {/* Submit */}
         </form>
       </div>
     </div>

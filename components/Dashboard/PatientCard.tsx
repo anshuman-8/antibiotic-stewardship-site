@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import Link from "next/link";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { useMutation, gql, useLazyQuery } from "@apollo/client";
-import { CSVLink } from "react-csv";
+import { ExportToCsv } from "export-to-csv";
+import { toast } from "react-toastify";
+
 
 export default function PatientCard(props) {
   const {
@@ -16,6 +17,9 @@ export default function PatientCard(props) {
     weight,
     active,
   } = props;
+
+  const notifyError = (message: String) => toast.error(message);
+  const notifySuccess = (message: String) => toast.success(message);
 
   const dischargePatientGQL = gql`
     mutation ($id: ID) {
@@ -153,32 +157,33 @@ export default function PatientCard(props) {
       dischargePatient({ variables: { id: id } });
     }
   };
+  const options = {
+    fieldSeparator: ",",
+    quoteStrings: '"',
+    decimalSeparator: ".",
+    showLabels: true,
+    showTitle: true,
+    title: "My Awesome CSV",
+    useTextFile: false,
+    useBom: true,
+    useKeysAsHeaders: true,
+  };
+
+  const csvExporter = new ExportToCsv(options);
 
   const downloadReport = () => {
     console.log(id);
 
-    getPatientReportData({ variables: { id: id } });
-    console.log("loading");
-    // if (!reportDataLoading && !reportDataError && patientReportData) {
-    //   console.log(patientReportData.patientAnalysisForms)
-    // }
+    getPatientReportData({ variables: { id: id } }).then(
+      (res) => {
+       
+        if(res.data.patientAnalysisForms.length!==0)
+        csvExporter.generateCsv(res.data.patientAnalysisForms);
+        
+      }
+    );
   };
-
-  // useEffect(() => {
-  //   console.log(!reportDataLoading && !reportDataError);
-
-  //   if (!reportDataLoading && !reportDataError && patientReportData) {
-  //     console.log(patientReportData.patientAnalysisForms);
-  //   }
-  // }, [patientReportData, reportDataError, reportDataLoading]);
-
-  const downloadCSV = () => {
-    console.log(reportData);
-  };
-
-  // function getReportData() {
-  //   return "hello world";
-  // };
+  
 
   return (
     <div className="bg-slate-100/50 backdrop-blur-sm m-5 max-w-lg border min-w-min rounded-md p-2">
@@ -205,14 +210,7 @@ export default function PatientCard(props) {
         </div>
         <div
           className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400"
-          // data={patientReportData.patientAnalysisForms || []}
-          // asyncOnClick={true}
-          // onClick={(event, done) => {
-          //   dischargePatient({ variables: { id: id } });
-
-          //   done(!reportDataLoading || patientReportData.patientAnalysisForms.lenght!==0);
-          // }}
-          // filename={"report.csv"}
+          onClick={downloadReport}
         >
           {reportDataLoading ? "Loading ..." : "Download Report"}
         </div>
