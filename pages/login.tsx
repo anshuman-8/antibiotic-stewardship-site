@@ -7,13 +7,12 @@ import { useRouter } from "next/router";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { gql, useMutation } from "@apollo/client";
 import Cookie from "js-cookie";
-import {AuthContext} from '../context/authContext';
-
+import { AuthContext } from "../context/authContext";
 
 export default function Authentication() {
   const router = useRouter();
 
-  const {user, login, setLogin} = useContext(AuthContext)
+  const { user,setUser, login, setLogin } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -46,15 +45,14 @@ export default function Authentication() {
         password: password,
       },
     }).then((res) => {
-      // console.log(res.data.tokenAuth.token);
-      console.log("this is  a eroror",DataError)
-      if (DataError){
-        console.log(res.errors[0].message)
-        notifyError("Please enter valid credentials")
-        return
+      if (DataError) {
+        console.log(res.errors[0].message);
+        notifyError("Please enter valid credentials");
+        return;
       }
       Cookie.set("token", res.data.tokenAuth.token);
-      setLogin(true)
+      setLogin(true);
+      setUser({name:res.data.tokenAuth.payload.username,role:"admin"});
       router.push("/");
     });
   };
