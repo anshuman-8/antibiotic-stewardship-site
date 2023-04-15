@@ -2,14 +2,19 @@ import React from "react";
 import { ClinicalSignType } from "../../utils/types";
 import { clinicalSignsPriority } from "../../utils/objectList";
 import { GrAdd } from "react-icons/gr";
+import {  gql,useQuery } from "@apollo/client";
+import { toyyyymmdd } from "../../utils/functions";
+import OldClinicalSigns from "./OldClinicalSigns";
 
 interface ClinicalSignProps {
   state: ClinicalSignType[] | [];
   setState: React.Dispatch<React.SetStateAction<ClinicalSignType[] | []>>;
+  patient: string | string[];
+  date: Date;
 }
 
 export default function ClinicalSign(props: ClinicalSignProps) {
-  const { state, setState } = props;
+  const { state, setState, patient,date } = props;
 
 
   const addColumn = () => {
@@ -29,6 +34,31 @@ export default function ClinicalSign(props: ClinicalSignProps) {
     ]);
   };
 
+  const GET_CLINICAL_SIGN = gql`
+    query ($patient: ID!, $startDate: String!, $endDate: String!) {
+      getClinicalSigns(
+        patient: $patient
+        startDate: $startDate
+        endDate: $endDate
+      ) {
+        id
+        patient {
+          id
+          fullName
+        }
+        neutrophil
+        bloodPressure
+        o2Saturation
+        date
+        procalcitonin
+        whiteBloodCell
+        sCreatinine
+        cratinineClearance
+        temperature
+      }
+    }
+  `;
+
   const listName = [
     "date",
     "temperature",
@@ -40,6 +70,29 @@ export default function ClinicalSign(props: ClinicalSignProps) {
     "cratinineClearance",
     "o2Saturation",
   ];
+
+  
+  const sevenDaysPriorClinicalSigns = (date) => {
+    const sevenDaysPrior = new Date(date);
+    sevenDaysPrior.setDate(sevenDaysPrior.getDate() - 7);
+    return toyyyymmdd(sevenDaysPrior);
+  };
+
+  const addOneDay = (date) => {
+    const oneDay = new Date(date);
+    oneDay.setDate(oneDay.getDate() + 1);
+    return toyyyymmdd(oneDay);
+  };
+
+  const { loading, error, data } = useQuery(GET_CLINICAL_SIGN, {
+    variables: {
+      patient: patient,
+      startDate: sevenDaysPriorClinicalSigns(date),
+      endDate: addOneDay(date),
+    },
+  });
+
+  
 
 
   return (
@@ -69,9 +122,10 @@ export default function ClinicalSign(props: ClinicalSignProps) {
           })}
         </div>
         <div className="flex overflow-x-scroll px-2">
+          {loading?<></>:<OldClinicalSigns data={data}/>}
           {state.map((item, index) => {
             return (
-              <div key={index} className="flex flex-col striped">
+              <div key={index+8} className="flex flex-col striped">
                 {listName.map((fieldItem, i) => {
                   return (
                     <div key={index}>
@@ -99,58 +153,3 @@ export default function ClinicalSign(props: ClinicalSignProps) {
     </div>
   );
 }
-
-// useEffect(() => {
-//   const today: Date = new Date();
-//   const pastSixDays: Date = new Date();
-//   pastSixDays.setDate(today.getDate() - 6);
-//   const dates = [];
-//   for (let d = today; d >= pastSixDays; d.setDate(d.getDate() - 1)) {
-//     dates.push(new Date(d));
-//   }
-//   const newClinicalSignsValue = dates.map((date) => {
-//     return {
-//       ...emptyClinicalSignsValue,
-//       date,
-//     };
-//   });
-//   setState(newClinicalSignsValue);
-// }, []);
-
-// {state.map((item, index) => {
-//   return (
-//     <div className="flex flex-col striped" key={index}>
-//       <div className="capitalize font-semibold h-10 w-[100%] text-white my-1 text-sm p-1 text-center align-middle">
-//         {item.date.toLocaleDateString() +
-//           " " +
-//           item.date.toLocaleDateString("en-US", { weekday: "short" })}
-//       </div>
-//       {clinicalSignsPriority.map((fieldItem, i) => {
-//         return (
-//           <div key={fieldItem.id}>
-//             <input
-//               className="max-w-[8rem] p-1 m-1 h-10 rounded-sm"
-//               placeholder={item.placeholder}
-//               name={fieldItem.id}
-//               title = {fieldItem.id}
-//               type="text"
-//               onChange={(e) => {
-//                 const value = e.target.value;
-//                 const newState = state.map((stateItem, index) => {
-//                   if (item.date === stateItem.date) {
-//                     return {
-//                       ...stateItem,
-//                       [fieldItem.id]: value,
-//                     };
-//                   }
-//                   return stateItem;
-//                 });
-//                 setState(newState);
-//               }}
-//             />
-//           </div>
-//         );
-//       })}
-//     </div>
-//   );
-// })}
