@@ -8,7 +8,8 @@ import { ToastContainer } from "react-toastify";
 import { AuthState } from "../context/authContext";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const API_URL = "http://localhost:8000/api/";
+  const API_URL = 'http://arctic.pythonanywhere.com/api/';
+  // const API_URL = "http://localhost:8000/api/";
 
   const client = new ApolloClient({
     uri: API_URL,
