@@ -83,7 +83,7 @@ export default function Authentication() {
             <div className=" mx-2 font-medium ">Password</div>
             <input
               className="peer border-2 border-primaryDark rounded-xl px-3 py-2 focus:border-cyan-500 focus:outline-none focus:shadow-xl invalid:border-red-500"
-              type={showPassword ? "password" : "text"}
+              type={!showPassword ? "password" : "text"}
               name="password"
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -102,14 +102,14 @@ export default function Authentication() {
             </div>
           </div>
 
-          <div className="my-3 mx-10">
+          {/* <div className="my-3 mx-10">
             New here?{" "}
             <Link href="/signup">
               <span className="text-blue-500 hover:underline cursor-pointer">
                 Signup
               </span>
             </Link>
-          </div>
+          </div> */}
 
           {!tokenLoading ? (
             <button

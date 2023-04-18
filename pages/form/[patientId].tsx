@@ -1,9 +1,9 @@
 import { ImSpinner2 } from "react-icons/im";
-import React, { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
-import { useMutation, gql,useQuery } from "@apollo/client";
+import { useMutation, gql } from "@apollo/client";
 
 import ClinicalSign from "../../components/Form/ClinicalSign";
 import CultureReport from "../../components/Form/CultureReport";
@@ -22,7 +22,6 @@ import { toyyyymmdd } from "../../utils/functions";
 export default function Form() {
   const { patientId } = useRouter().query;
   const router = useRouter();
-
 
   const [cultureSent, setCultureSent] = useState(false);
 
@@ -79,13 +78,13 @@ export default function Form() {
     {
       date: new Date(),
       procalcitonin: "",
-      neutrophil : "",
-      bloodPressure : "",
-      o2Saturation : "",
-      whiteBloodCell : "",
-      sCreatinine : "",
-      cratinineClearance : "",
-      temperature : "",
+      neutrophil: "",
+      bloodPressure: "",
+      o2Saturation: "",
+      whiteBloodCell: "",
+      sCreatinine: "",
+      cratinineClearance: "",
+      temperature: "",
     },
   ]);
 
@@ -168,7 +167,6 @@ export default function Form() {
 
   const submitForm = (e) => {
     e.preventDefault();
-    printAllData();
 
     const cultureReport =
       cultureSent === false
@@ -292,7 +290,11 @@ export default function Form() {
             </div>
           </div>
           {/* Intro and Diagnosis */}
-          <FormIntro state={introState} setState={setIntroState} patientId={patientId}/>
+          <FormIntro
+            state={introState}
+            setState={setIntroState}
+            patientId={patientId}
+          />
 
           {/* Diagnosis */}
           <Diagnosis state={diagnosisState} setState={setDiagnosisState} />

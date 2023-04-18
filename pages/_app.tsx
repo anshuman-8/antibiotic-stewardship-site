@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect, useContext, useState} from "react";
 import Head from "next/head";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
@@ -8,8 +8,9 @@ import { ToastContainer } from "react-toastify";
 import { AuthState } from "../context/authContext";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const API_URL = 'https://arctic.pythonanywhere.com/api/';
-  // const API_URL = "http://localhost:8000/api/";
+  
+  // const API_URL = 'https://arctic.pythonanywhere.com/api/';
+  const API_URL = "http://localhost:8000/api/";
 
   const client = new ApolloClient({
     uri: API_URL,
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
       "Content-Type": "application/json",
     },
   });
+
 
   return (
     <React.Fragment>
@@ -31,9 +33,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthState>
-        <Navbar />
 
         <ApolloProvider client={client}>
+        <Navbar />
           <div className="fixed z-50 top-10">
             <ToastContainer
               position="top-right"
