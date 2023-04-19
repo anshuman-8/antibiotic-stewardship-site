@@ -2,7 +2,7 @@ import React from "react";
 import { ClinicalSignType } from "../../utils/types";
 import { clinicalSignsPriority } from "../../utils/objectList";
 import { GrAdd } from "react-icons/gr";
-import {  gql,useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { toyyyymmdd } from "../../utils/functions";
 import OldClinicalSigns from "./OldClinicalSigns";
 
@@ -14,8 +14,7 @@ interface ClinicalSignProps {
 }
 
 export default function ClinicalSign(props: ClinicalSignProps) {
-  const { state, setState, patient,date } = props;
-
+  const { state, setState, patient, date } = props;
 
   const addColumn = () => {
     setState([
@@ -23,13 +22,13 @@ export default function ClinicalSign(props: ClinicalSignProps) {
       {
         date: new Date(),
         procalcitonin: "",
-        neutrophil : "",
-        bloodPressure : "",
-        o2Saturation : "",
-        whiteBloodCell : "",
-        sCreatinine : "",
-        cratinineClearance : "",
-        temperature : "",
+        neutrophil: "",
+        bloodPressure: "",
+        o2Saturation: "",
+        whiteBloodCell: "",
+        sCreatinine: "",
+        cratinineClearance: "",
+        temperature: "",
       },
     ]);
   };
@@ -71,7 +70,6 @@ export default function ClinicalSign(props: ClinicalSignProps) {
     "o2Saturation",
   ];
 
-  
   const sevenDaysPriorClinicalSigns = (date) => {
     const sevenDaysPrior = new Date(date);
     sevenDaysPrior.setDate(sevenDaysPrior.getDate() - 7);
@@ -91,9 +89,6 @@ export default function ClinicalSign(props: ClinicalSignProps) {
       endDate: addOneDay(date),
     },
   });
-
-  
-
 
   return (
     <div className="form-component">
@@ -122,29 +117,41 @@ export default function ClinicalSign(props: ClinicalSignProps) {
           })}
         </div>
         <div className="flex overflow-x-scroll px-2">
-          {loading?<></>:<OldClinicalSigns data={data}/>}
+          {loading ? <></> : <OldClinicalSigns data={data} />}
           {state.map((item, index) => {
             return (
-              <div key={index+8} className="flex flex-col striped">
-                {listName.map((fieldItem, i) => {
-                  return (
-                    <div key={index}>
-                      <input
-                        className="max-w-[8rem] p-1 m-1 h-10 rounded-sm"
-                        name={fieldItem}
-                        title={fieldItem}
-                        type={fieldItem==="date"?"date":"text"}
-                        onChange={(e) => {
-                          const name = e.target.name;
-                          const value = e.target.value;
-                          const updatedState = [...state];
-                          updatedState[index][name] = value;
-                          setState(updatedState);
-                        }}
-                      />
-                    </div>
-                  );
-                })}
+              <div key={index + 8} className="flex flex-col">
+                <div className="flex flex-col striped">
+                  {listName.map((fieldItem, i) => {
+                    return (
+                      <div key={index}>
+                        <input
+                          className="max-w-[8rem] p-1 m-1 h-10 rounded-sm"
+                          name={fieldItem}
+                          title={fieldItem}
+                          type={fieldItem === "date" ? "date" : "text"}
+                          onChange={(e) => {
+                            const name = e.target.name;
+                            const value = e.target.value;
+                            const updatedState = [...state];
+                            updatedState[index][name] = value;
+                            setState(updatedState);
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+                <div
+                  className="bg-red-500 text-base px-2 py-1 m-2 text-white rounded-lg cursor-pointer hover:bg-red-600"
+                  onClick={() => {
+                    const updatedState = [...state];
+                    updatedState.splice(index, 1);
+                    setState(updatedState);
+                  }}
+                >
+                  Remove
+                </div>
               </div>
             );
           })}

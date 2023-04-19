@@ -1,6 +1,6 @@
+import Link from "next/link";
 import React, { useMemo } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import Link from "next/link";
 import {
   useTable,
   useGlobalFilter,
