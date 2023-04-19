@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import { useMutation, gql } from "@apollo/client";
-
 import ClinicalSign from "../../components/Form/ClinicalSign";
 import CultureReport from "../../components/Form/CultureReport";
 import AntibioticUsed from "../../components/Form/AntibioticUsed";
@@ -56,6 +55,25 @@ export default function Form() {
     CultureReportType[] | []
   >([]);
 
+  const emptyCultureReport = {
+    report: 1,
+    sentBeforeAntibiotics: false,
+    dateTimeSent: Date.now().toString(),
+    dateTimeReported: Date.now().toString(),
+    specimen: "",
+    organism: "",
+    siteOfCollection: "",
+    antibioticSensitivity: [""],
+    multiDrugResistance: "",
+    resistance: "",
+    isXRay: false,
+    isUltrasound: false,
+    isCTScan: false,
+    isMRI: false,
+    isPETScan: false,
+    impression: "",
+  };
+
   const [antibioticUsedState, setAntibioticUsedState] = useState<
     AntibioticsUsedType[] | []
   >([
@@ -90,25 +108,6 @@ export default function Form() {
 
   const notifyError = (message: String) => toast.error(message);
   const notifySuccess = (message: String) => toast.success(message);
-
-  const emptyCultureReport = {
-    report: 1,
-    sentBeforeAntibiotics: false,
-    dateTimeSent: Date.now().toString(),
-    dateTimeReported: Date.now().toString(),
-    specimen: "",
-    organism: "",
-    siteOfCollection: "",
-    antibioticSensitivity: [""],
-    multiDrugResistance: "",
-    resistance: "",
-    isXRay: false,
-    isUltrasound: false,
-    isCTScan: false,
-    isMRI: false,
-    isPETScan: false,
-    impression: "",
-  };
 
   const addCultureReport = () => {
     if (cultureSent) {
@@ -230,7 +229,6 @@ export default function Form() {
     }
 
     const input = {
-      // convert patientId to int
       patient: parseInt(patientId?.toString() || "0"),
       reviewDate: introState.reviewDate,
       reviewDepartment: introState.reviewingDepartment,
@@ -286,7 +284,6 @@ export default function Form() {
             </Link>
             <div className="my-5 mx-2 text-slate-800 font-semibold uppercase text-2xl">
               Data Review Form{" "}
-              {/* <span className="lowercase">(1123MRDnumber)</span> */}
             </div>
           </div>
           {/* Intro and Diagnosis */}

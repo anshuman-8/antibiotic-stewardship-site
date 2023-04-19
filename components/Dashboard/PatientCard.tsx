@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { useMutation, gql, useLazyQuery } from "@apollo/client";
 import { ExportToCsv } from "export-to-csv";
 import { toast } from "react-toastify";
-
 
 export default function PatientCard(props) {
   const {
@@ -135,10 +134,7 @@ export default function PatientCard(props) {
       }
     }
   `;
-  const [
-    dischargePatient,
-    { data: dischargeData, loading: dischargeLoading, error: dischargeError },
-  ] = useMutation(dischargePatientGQL);
+  const [dischargePatient] = useMutation(dischargePatientGQL);
 
   const [
     getPatientReportData,
@@ -149,12 +145,11 @@ export default function PatientCard(props) {
     },
   ] = useLazyQuery(PatientReportGQL);
 
-  const [reportData, setReportData] = React.useState([]);
-
   const dischargeButton = () => {
-    console.log("discharge");
     if (confirm("Sure? discharge " + fullName)) {
-      dischargePatient({ variables: { id: id } });
+      dischargePatient({ variables: { id: id } })
+        .then(() => notifySuccess("Patient Discharged"))
+        .catch((err) => notifyError(err.message));
     }
   };
   const options = {
@@ -163,7 +158,7 @@ export default function PatientCard(props) {
     decimalSeparator: ".",
     showLabels: true,
     showTitle: true,
-    title: "My Awesome CSV",
+    title: `${fullName} Patient Report Data`,
     useTextFile: false,
     useBom: true,
     useKeysAsHeaders: true,
@@ -172,18 +167,11 @@ export default function PatientCard(props) {
   const csvExporter = new ExportToCsv(options);
 
   const downloadReport = () => {
-    console.log(id);
-
-    getPatientReportData({ variables: { id: id } }).then(
-      (res) => {
-       
-        if(res.data.patientAnalysisForms.length!==0)
+    getPatientReportData({ variables: { id: id } }).then((res) => {
+      if (res?.data.patientAnalysisForms?.length !== 0)
         csvExporter.generateCsv(res.data.patientAnalysisForms);
-        
-      }
-    );
+    });
   };
-  
 
   return (
     <div className="bg-slate-100/50 backdrop-blur-sm m-5 max-w-lg border min-w-min rounded-md p-2">

@@ -60,13 +60,13 @@ export default function ClinicalSign(props: ClinicalSignProps) {
 
   const listName = [
     "date",
-    "temperature",
-    "bloodPressure",
     "procalcitonin",
     "whiteBloodCell",
     "neutrophil",
     "sCreatinine",
     "cratinineClearance",
+    "temperature",
+    "bloodPressure",
     "o2Saturation",
   ];
 

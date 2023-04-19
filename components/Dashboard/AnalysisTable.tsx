@@ -7,7 +7,7 @@ import {
   useFilters,
   usePagination,
 } from "react-table";
-import {toStringDate} from "../../utils/functions";
+import { toStringDate } from "../../utils/functions";
 
 export default function AnalysisTable({ data }) {
   const columns = useMemo(
@@ -59,16 +59,6 @@ export default function AnalysisTable({ data }) {
     []
   );
 
-  const tableInstance = useTable(
-    {
-      columns,
-      data,
-    },
-    useFilters,
-    useGlobalFilter,
-    usePagination
-  );
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -85,13 +75,21 @@ export default function AnalysisTable({ data }) {
     previousPage,
     canNextPage,
     canPreviousPage,
-  } = tableInstance;
+  } = useTable(
+    {
+      columns,
+      data,
+    },
+    useFilters,
+    useGlobalFilter,
+    usePagination
+  );
 
   const { globalFilter, pageIndex, pageSize } = state;
 
   const calculate_age = (dob) => {
     var today = new Date();
-    var birthDate = new Date(dob); // create a date object directly from `dob1` argument
+    var birthDate = new Date(dob);
     var age_now = today.getFullYear() - birthDate.getFullYear();
     var m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
@@ -135,9 +133,9 @@ export default function AnalysisTable({ data }) {
                   >
                     {row.cells.map((cell, j) => (
                       <td
-                        {...cell.getCellProps()}
-                        key={i + j}
-                        className="py-3 px-3 text-center max-w-[320px] overflow-hidden truncate"
+                      key={i + j}
+                      className="py-3 px-3 text-center max-w-[320px] overflow-hidden truncate"
+                      {...cell.getCellProps()}
                       >
                         {cell.render("Cell")}
                       </td>
