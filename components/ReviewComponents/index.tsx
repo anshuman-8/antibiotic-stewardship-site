@@ -19,15 +19,19 @@ export default function index({ data }) {
       <div className="text-white font-medium mt-4 text-lg">
         Culture Reports:
       </div>
-      {data.cultureReport.length===0?
-      <span className="px-5 py-2 bg-slate-400 mb-3 rounded-md w-min">None</span>
-      :<div className="flex flex-row overflow-auto mb-3 mt-1">
-        <div>
-          {data.cultureReport.map((report, i) => {
-            return <CultureReports key={i} id={i} report={report} />;
-          })}
+      {data.cultureReport.length === 0 ? (
+        <span className="px-5 py-2 bg-slate-400 mb-3 rounded-md w-min">
+          None
+        </span>
+      ) : (
+        <div className="flex flex-row overflow-auto mb-3 mt-1">
+          <div className="w-full">
+            {data.cultureReport.map((report, i) => {
+              return <CultureReports key={i} id={i} report={report} />;
+            })}
+          </div>
         </div>
-      </div>}
+      )}
       <ClinicalSigns date={data.reviewDate} patient={data.patient.id} />
     </div>
   );
