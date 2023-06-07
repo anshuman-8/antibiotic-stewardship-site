@@ -164,7 +164,7 @@ export default function Form() {
   const [patientFormData, { data, loading, error }] =
     useMutation(patientDataFormGQL);
 
-  const submitForm = (e) => {
+  const submitForm = (e, isDraft) => {
     e.preventDefault();
 
     const cultureReport =
@@ -255,6 +255,7 @@ export default function Form() {
       cultureReport: cultureReport,
       antibioticUsed: antibioticsUsed,
       clinicalSign: clinicalSign,
+      draft: isDraft,
     };
 
     patientFormData({
@@ -376,16 +377,25 @@ export default function Form() {
             date={introState.reviewDate}
           />
 
-          {/* Comments */}
+          {/* submission */}
           <div className="flex justify-end mx-auto max-w-6xl mb-10">
             {!loading ? (
-              <button
-                type="submit"
-                className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
-                onClick={(e) => submitForm(e)}
-              >
-                Submit
-              </button>
+              <div className="space-x-5">
+                <button
+                  type="submit"
+                  className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
+                  onClick={(e) => submitForm(e, true)}
+                >
+                  Save as Draft
+                </button>
+                <button
+                  type="submit"
+                  className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
+                  onClick={(e) => submitForm(e, false)}
+                >
+                  Submit
+                </button>
+              </div>
             ) : (
               <div className="bg-primary/60 mt-3 w-28 h-12 rounded-md">
                 <ImSpinner2
