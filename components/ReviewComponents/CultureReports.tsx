@@ -36,7 +36,7 @@ export default function CultureReports(props) {
           {/* left column */}
           <div className="p-4 w-full space-y-3">
             {/* 1 */}
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between bg-slate-400 p-2 rounded-lg">
               <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
                 Culture Sent Before Antibiotics:{" "}
               </p>
@@ -46,7 +46,7 @@ export default function CultureReports(props) {
             </div>
 
             {/* 2 */}
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between p-2">
               <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
                 Site of collection:{" "}
               </p>
@@ -56,7 +56,7 @@ export default function CultureReports(props) {
             </div>
 
             {/* 3 */}
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between bg-slate-400 p-2 rounded-lg">
               <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
                 Organism:{" "}
               </p>
@@ -67,7 +67,7 @@ export default function CultureReports(props) {
 
             {/* 4 */}
 
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between p-2">
               <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
                 Specimen:{" "}
               </p>
@@ -78,7 +78,7 @@ export default function CultureReports(props) {
 
             {/* 5 */}
 
-            <div className="flex flex-row justify-between items-center">
+            <div className="flex flex-row justify-between bg-slate-400 p-2 rounded-lg">
               <p className="mr-2 uppercase text-sm font-bold text-white">
                 Multi Drug Resistant Organism:{" "}
               </p>
@@ -88,7 +88,7 @@ export default function CultureReports(props) {
             </div>
 
             {/* 6 */}
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between p-2">
               <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
                 Resistance:{" "}
               </p>
@@ -102,7 +102,7 @@ export default function CultureReports(props) {
           {/* right column */}
           <div className="p-4 w-full space-y-3">
             {/* 8 */}
-            <div className="flex flex-row justify-between my-1">
+            <div className="flex flex-row justify-between p-2">
               <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
                 Culture Sent :
               </p>
@@ -114,7 +114,7 @@ export default function CultureReports(props) {
               </div>
             </div>
             {/* 9 */}
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between bg-slate-400 p-2 rounded-lg">
               <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
                 Culture Reported :
               </p>
@@ -126,7 +126,7 @@ export default function CultureReports(props) {
               </div>
             </div>
             {/* 10 */}
-            <div className="mb-6 md:mb-0 flex flex-row justify-between">
+            <div className="mb-6 md:mb-0 flex flex-row justify-between p-2">
               <label htmlFor="specimen" className="font-semibold text-white">
                 Antibiotic Sensitivity:
               </label>
@@ -143,7 +143,8 @@ export default function CultureReports(props) {
                 })}
               </div>
             </div>
-            <div className="flex flex-row justify-between my-1">
+            {/* 11 */}
+            <div className="flex flex-row justify-between my-1 bg-slate-400 p-2 rounded-lg">
               <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
                 Imaging:{" "}
               </p>
@@ -162,7 +163,15 @@ export default function CultureReports(props) {
                     }
                   })}
                 </label>
-                <div className="max-h-20 rounded-md overflow-y-scroll bg-slate-700/30 p-1 my-2 min-w-[200px]">
+              </div>
+            </div>
+            {/* 12 */}
+            <div className="mb-6 md:mb-0 flex flex-row justify-between p-2 items-center">
+              <label htmlFor="specimen" className="font-semibold text-white">
+                IMAGING IMPRESSION:
+              </label>
+              <div className="flex justify-between flex-wrap w-1/2">
+                <div className="max-h-20 rounded-md overflow-x-scroll bg-slate-400 p-1  text-white">
                   {report.Imaging.impression}
                 </div>
               </div>
