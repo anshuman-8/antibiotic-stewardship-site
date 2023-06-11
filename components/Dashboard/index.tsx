@@ -27,6 +27,7 @@ export default function DashboardIndex() {
         patientLocation
         lastReviewDate
         active
+        hasDraft
       }
     }
   `;

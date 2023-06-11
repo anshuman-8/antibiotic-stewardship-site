@@ -88,7 +88,6 @@ export default function Analysis({ reportData }) {
       patientOutcome: patientOutcome,
       compliance: compliance,
       recommendation: recommendation,
-      draft: isDraft,
     };
     console.log(input);
 
@@ -144,13 +143,13 @@ export default function Analysis({ reportData }) {
           <div className="flex justify-end max-w-6xl mx-auto mb-10">
             {!loading ? (
               <div className="space-x-5">
-                <button
+                {/* <button
                   type="submit"
                   className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
                   onClick={(e) => submitForm(e, true)}
                 >
                   Save as Draft
-                </button>
+                </button> */}
                 <button
                   type="submit"
                   className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"

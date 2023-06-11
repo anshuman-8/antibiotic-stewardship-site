@@ -210,17 +210,18 @@ export default function Form() {
     });
 
     const clinicalSign = clinicalSignsValue.map((item) => {
-      return {
-        date: toyyyymmdd(new Date(item.date)),
-        procalcitonin: item.procalcitonin,
-        sCreatinine: item.sCreatinine,
-        temperature: item.temperature,
-        o2Saturation: item.o2Saturation,
-        whiteBloodCell: item.whiteBloodCell,
-        neutrophil: item.neutrophil,
-        cratinineClearance: item.cratinineClearance,
-        bloodPressure: item.bloodPressure,
-      };
+        return {
+          date: toyyyymmdd(new Date(item.date)),
+          procalcitonin: item.procalcitonin,
+          sCreatinine: item.sCreatinine,
+          temperature: item.temperature,
+          o2Saturation: item.o2Saturation,
+          whiteBloodCell: item.whiteBloodCell,
+          neutrophil: item.neutrophil,
+          cratinineClearance: item.cratinineClearance,
+          bloodPressure: item.bloodPressure,
+        };
+      
     });
 
     if (introState.reviewingDepartment.trim() === "") {
