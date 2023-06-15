@@ -18,10 +18,12 @@ export default function index({ data }) {
         Culture Reports:
       </div>
       {data.cultureReport.length === 0 ? (
-        <NoData/>
+        <span className="px-5 py-2 bg-slate-400 mb-3 rounded-md w-min">
+          None
+        </span>
       ) : (
         <div className="flex flex-row overflow-auto mb-3 mt-1">
-          <div>
+          <div className="w-full">
             {data.cultureReport.map((report, i) => {
               return <CultureReports key={i} id={i} report={report} />;
             })}
