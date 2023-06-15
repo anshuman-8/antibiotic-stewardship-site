@@ -1,6 +1,6 @@
 import React from "react";
 import { GrStatusGoodSmall } from "react-icons/gr";
-import { useMutation, gql, useLazyQuery } from "@apollo/client";
+import { useMutation, gql, useQuery } from "@apollo/client";
 import { ExportToCsv } from "export-to-csv";
 import { toast } from "react-toastify";
 
@@ -17,12 +17,20 @@ export default function PatientCard(props) {
     active,
   } = props;
 
-  const notifyError = (message: String) => toast.error(message);
-  const notifySuccess = (message: String) => toast.success(message);
+  const notifyError = (message) => toast.error(message);
+  const notifySuccess = (message) => toast.success(message);
 
   const dischargePatientGQL = gql`
     mutation ($id: ID) {
       dischargePatient(id: $id)
+    }
+  `;
+
+  const generateCSVGQL = gql`
+    mutation ($patientid: ID) {
+      generateCSV(patientId: $patientid) {
+        encodedCsv
+      }
     }
   `;
 
@@ -134,16 +142,19 @@ export default function PatientCard(props) {
       }
     }
   `;
-  const [dischargePatient] = useMutation(dischargePatientGQL);
 
-  const [
-    getPatientReportData,
-    {
-      loading: reportDataLoading,
-      error: reportDataError,
-      data: patientReportData,
+  const [dischargePatient] = useMutation(dischargePatientGQL);
+  const [generateCSV] = useMutation(generateCSVGQL);
+
+  const getPatientReportData = useQuery(PatientReportGQL, {
+    variables: { id: id },
+    onError: (error) => {
+      notifyError("Failed to fetch patient report data.");
+      console.error(error);
     },
-  ] = useLazyQuery(PatientReportGQL);
+  });
+
+  console.log("getPatientReportData:", getPatientReportData);
 
   const dischargeButton = () => {
     if (confirm("Sure? discharge " + fullName)) {
@@ -152,25 +163,39 @@ export default function PatientCard(props) {
         .catch((err) => notifyError(err.message));
     }
   };
-  const options = {
-    fieldSeparator: ",",
-    quoteStrings: '"',
-    decimalSeparator: ".",
-    showLabels: true,
-    showTitle: true,
-    title: `${fullName} Patient Report Data`,
-    useTextFile: false,
-    useBom: true,
-    useKeysAsHeaders: true,
-  };
 
-  const csvExporter = new ExportToCsv(options);
+  const downloadReportButton = () => {
+    if (getPatientReportData.loading) {
+      return;
+    }
 
-  const downloadReport = () => {
-    getPatientReportData({ variables: { id: id } }).then((res) => {
-      if (res?.data.patientAnalysisForms?.length !== 0)
-        csvExporter.generateCsv(res.data.patientAnalysisForms);
-    });
+    console.log("getPatientReportData.data:", getPatientReportData.data);
+
+    if (getPatientReportData.error) {
+      notifyError("Failed to fetch patient report data.");
+      console.error(getPatientReportData.error);
+      return;
+    }
+
+    const patientReportData = getPatientReportData.data?.patientAnalysisForms;
+
+    console.log("patientReportData:", patientReportData);
+
+    generateCSV({ variables: { patientid: id } })
+      .then((res) => {
+        const encodedCsv = res.data.generateCSV.encodedCsv;
+        const decodedCsv = Buffer.from(encodedCsv, "base64").toString("utf-8");
+        const csvData = new Blob([decodedCsv], { type: "text/csv" });
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(csvData);
+        link.download = `${fullName} Patient Report Data.csv`;
+        link.click();
+        notifySuccess("CSV generated successfully.");
+      })
+      .catch((error) => {
+        notifyError("Failed to generate CSV.");
+        console.error(error);
+      });
   };
 
   return (
@@ -198,9 +223,9 @@ export default function PatientCard(props) {
         </div>
         <div
           className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400"
-          onClick={downloadReport}
+          onClick={downloadReportButton}
         >
-          {reportDataLoading ? "Loading ..." : "Download Report"}
+          {getPatientReportData.loading ? "Loading ..." : "Download Report"}
         </div>
       </div>
     </div>
