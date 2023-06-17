@@ -1,24 +1,16 @@
 import React from "react";
 import { GrStatusGoodSmall } from "react-icons/gr";
-import { useMutation, gql, useQuery } from "@apollo/client";
-import { ExportToCsv } from "export-to-csv";
+import { useMutation, gql} from "@apollo/client";
 import { toast } from "react-toastify";
+import { calculate_age } from "../../utils/functions";
 
 export default function PatientCard(props) {
-  const {
-    id,
-    fullName,
-    mrdNumber,
-    dateOfAdmission,
-    department,
-    cormorbodities,
-    height,
-    weight,
-    active,
-  } = props;
+  const { id, fullName, mrdNumber, active, dateOfBirth } = props;
 
-  const notifyError = (message) => toast.error(message);
-  const notifySuccess = (message) => toast.success(message);
+  const [loading, setLoading] = React.useState(false);
+
+  const notifyError = (message: String) => toast.error(message);
+  const notifySuccess = (message: String) => toast.success(message);
 
   const dischargePatientGQL = gql`
     mutation ($id: ID) {
@@ -34,130 +26,16 @@ export default function PatientCard(props) {
     }
   `;
 
-  const PatientReportGQL = gql`
-    query ($id: ID!) {
-      patientAnalysisForms(patientId: $id) {
-        id
-        date
-        doctor
-        patientForm {
-          id
-          reviewDate
-          reviewDepartment
-          provisionalDiagnosis
-          finalDiagnosis
-          syndromicDiagnosis
-          diagnosisChoice
-          sepsis {
-            isSepsis
-            isSepticShock
-            isNeutropenicSepsis
-          }
-          focusOfInfection {
-            isUTI
-            isCNS
-            isPneumonia
-            isSkin
-            isAbdominal
-            isPrimaryBacteraemia
-            isSecondaryBacteraemia
-            isCatheterLinesStents
-            other
-          }
-          cultureReport {
-            id
-            timeSent
-            timeReported
-            sentBeforeAntibiotic
-            specimenType
-            siteOfCollection
-            organism
-            antibioticSensitivity {
-              antibiotic
-            }
-            multiDrugResistant
-            resistance
-            Imaging {
-              id
-              isxRay
-              isUltraSound
-              isCTScan
-              isMRI
-              isPETScan
-              impression
-            }
-          }
-          antibioticsUsed {
-            antibiotic
-            initialDate
-            loadingDose
-            maintenanceDose
-            route
-            frequency
-            duration
-            endDate
-          }
-        }
-        drugAdministered {
-          isRightDocumentation
-          isRightDrug
-          isRightDose
-          isRightRoute
-          isRightFrequency
-          isRightDuration
-          isRightIndication
-          isAppropriate
-          score
-        }
-        patientOutcome {
-          id
-          lenghtOfStay
-          dateOfDischarge
-          outcome
-        }
-        compliance {
-          serumCreatinine
-          isAppropriate
-          isRightDocumentation
-          isRecommendationFiled
-          isAntibioticChanged
-          isComplance
-          isDuration
-          isAntibiotisDoseChanged
-        }
-        recommendation {
-          indication
-          drug
-          dose
-          frequency
-          duration
-          deEscalation
-          isindication
-          isdrug
-          isdose
-          isfrequency
-          isduration
-          isdeEscalation
-        }
-      }
-    }
-  `;
-
   const [dischargePatient] = useMutation(dischargePatientGQL);
-  const [generateCSV] = useMutation(generateCSVGQL);
-
-  const getPatientReportData = useQuery(PatientReportGQL, {
-    variables: { id: id },
+  const [generateCSV] = useMutation(generateCSVGQL, {
     onError: (error) => {
-      notifyError("Failed to fetch patient report data.");
+      notifyError("Failed to fetch CSV file");
       console.error(error);
     },
   });
 
-  console.log("getPatientReportData:", getPatientReportData);
-
   const dischargeButton = () => {
-    if (confirm("Sure? discharge " + fullName)) {
+    if (confirm("Do you want to discharge " + fullName+ ` (${mrdNumber})`+ "?")) {
       dischargePatient({ variables: { id: id } })
         .then(() => notifySuccess("Patient Discharged"))
         .catch((err) => notifyError(err.message));
@@ -165,25 +43,12 @@ export default function PatientCard(props) {
   };
 
   const downloadReportButton = () => {
-    if (getPatientReportData.loading) {
-      return;
-    }
-
-    console.log("getPatientReportData.data:", getPatientReportData.data);
-
-    if (getPatientReportData.error) {
-      notifyError("Failed to fetch patient report data.");
-      console.error(getPatientReportData.error);
-      return;
-    }
-
-    const patientReportData = getPatientReportData.data?.patientAnalysisForms;
-
-    console.log("patientReportData:", patientReportData);
-
+    setLoading(true);
     generateCSV({ variables: { patientid: id } })
       .then((res) => {
         const encodedCsv = res.data.generateCSV.encodedCsv;
+        console.log("encodedCsv:", res.data);
+
         const decodedCsv = Buffer.from(encodedCsv, "base64").toString("utf-8");
         const csvData = new Blob([decodedCsv], { type: "text/csv" });
         const link = document.createElement("a");
@@ -191,11 +56,14 @@ export default function PatientCard(props) {
         link.download = `${fullName} Patient Report Data.csv`;
         link.click();
         notifySuccess("CSV generated successfully.");
+        setLoading(false);
       })
       .catch((error) => {
         notifyError("Failed to generate CSV.");
         console.error(error);
+        setLoading(false);
       });
+    setLoading(false);
   };
 
   return (
@@ -211,7 +79,7 @@ export default function PatientCard(props) {
       <div>MRD No: {mrdNumber}</div>
       <div className="space-x-5">
         {" "}
-        <span> Age: 19 </span> <span>Sex: M</span>
+        <span> Age: {calculate_age(dateOfBirth)} </span> <span>Sex: -</span>
       </div>
 
       <div className="space-x-5 mt-5 mb-2 flex flex-row">
@@ -222,10 +90,10 @@ export default function PatientCard(props) {
           Discharge
         </div>
         <div
-          className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400"
+          className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400 cursor-pointer"
           onClick={downloadReportButton}
         >
-          {getPatientReportData.loading ? "Loading ..." : "Download Report"}
+          {loading ? "Loading ..." : "Download Report"}
         </div>
       </div>
     </div>

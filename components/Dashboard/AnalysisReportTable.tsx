@@ -1,13 +1,12 @@
 import React, { useMemo } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import Link from "next/link";
 import {
   useTable,
   useGlobalFilter,
   useFilters,
   usePagination,
 } from "react-table";
-import {toStringDate} from "../../utils/functions";
+import {toStringDate, calculate_age} from "../../utils/functions";
 
 export default function AnalysisReportTable({ data }) {
   const columns = useMemo(
@@ -47,11 +46,6 @@ export default function AnalysisReportTable({ data }) {
     []
   );
 
-  // convert string object like "2023-03-09 15:15:55.492456+00:00" to date object
-    // const convertToDate = (dateString) => {
-    //     const date = new Date(dateString);
-    //     return date;
-    // }
 
   const tableInstance = useTable(
     {
@@ -82,17 +76,6 @@ export default function AnalysisReportTable({ data }) {
   } = tableInstance;
 
   const { globalFilter, pageIndex, pageSize } = state;
-
-  const calculate_age = (dob) => {
-    var today = new Date();
-    var birthDate = new Date(dob); // create a date object directly from `dob1` argument
-    var age_now = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age_now--;
-    }
-    return age_now;
-  };
 
   return (
     <div className="">

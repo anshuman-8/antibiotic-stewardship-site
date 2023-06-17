@@ -7,7 +7,7 @@ import {
   useFilters,
   usePagination,
 } from "react-table";
-import { toStringDate } from "../../utils/functions";
+import { toStringDate,calculate_age } from "../../utils/functions";
 
 export default function AnalysisTable({ data }) {
   const columns = useMemo(
@@ -22,7 +22,6 @@ export default function AnalysisTable({ data }) {
       },
       {
         Header: "Age",
-        // accessor: "age",
         Cell: ({ row }) => (
           <span>
             {calculate_age(row.original.patient.dateOfBirth) + " Years"}
@@ -31,7 +30,6 @@ export default function AnalysisTable({ data }) {
       },
       {
         Header: "Review id#",
-        // accessor: "age",
         Cell: ({ row }) => <span>{row.original.id}</span>,
       },
       {
@@ -40,7 +38,6 @@ export default function AnalysisTable({ data }) {
       },
       {
         Header: "Review Date",
-        // accessor: "lastReviewDate",
         Cell: ({ row }) => <span>{toStringDate(row.original.reviewDate)}</span>,
       },
       {
@@ -86,17 +83,6 @@ export default function AnalysisTable({ data }) {
   );
 
   const { globalFilter, pageIndex, pageSize } = state;
-
-  const calculate_age = (dob) => {
-    var today = new Date();
-    var birthDate = new Date(dob);
-    var age_now = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age_now--;
-    }
-    return age_now;
-  };
 
   return (
     <div className="">
