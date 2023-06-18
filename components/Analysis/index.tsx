@@ -18,7 +18,6 @@ export default function Analysis({ reportData }) {
 
   const router = useRouter();
 
-
   const [reviewer, setReviewer] = useState("");
   const [drugAdministeredCheck, setDrugAdministeredCheck] = useState({
     isRightDocumentation: false,
@@ -77,19 +76,19 @@ export default function Analysis({ reportData }) {
   const [analysisFormData, { data, loading, error }] =
     useMutation(AnalysisDataFormGQL);
 
-  const submitForm = (e)=>{
+  const submitForm = (e, isDraft) => {
     e.preventDefault();
 
     const input = {
       // date = toyyyymmdd(Date.now())
-      doctor : reviewer,
-      patient : reportData.form.patient.id,
-      patientForm : reportData.form.id,
-      drugAdministeredReview : drugAdministeredCheck,
-      patientOutcome : patientOutcome,
-      compliance : compliance,
-      recommendation : recommendation
-    }
+      doctor: reviewer,
+      patient: reportData.form.patient.id,
+      patientForm: reportData.form.id,
+      drugAdministeredReview: drugAdministeredCheck,
+      patientOutcome: patientOutcome,
+      compliance: compliance,
+      recommendation: recommendation,
+    };
     console.log(input);
 
     analysisFormData({
@@ -98,14 +97,13 @@ export default function Analysis({ reportData }) {
       },
       onCompleted: (data) => {
         notifySuccess("Form Submitted Successfully!");
-        router.push("/")
+        router.push("/");
       },
       onError: (error) => {
         notifyError("Form Submission Failed!");
       },
     });
-    
-  }
+  };
 
   return (
     <div className="bg-secondary h-screen w-full relative p-2">
@@ -144,21 +142,30 @@ export default function Analysis({ reportData }) {
           {/* Submit */}
           <div className="flex justify-end max-w-6xl mx-auto mb-10">
             {!loading ? (
-            <button
-              type="submit"
-              className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
-              onClick={(e) => submitForm(e)}
-            >
-              Submit
-            </button>
-          ) : (
-            <div className="bg-slate-400/50 px-6 mt-3 ">
-              <ImSpinner2
-                className="animate-spin my-3 fill-primary "
-                size={30}
-              />
-            </div>
-          )}
+              <div className="space-x-5">
+                {/* <button
+                  type="submit"
+                  className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
+                  onClick={(e) => submitForm(e, true)}
+                >
+                  Save as Draft
+                </button> */}
+                <button
+                  type="submit"
+                  className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
+                  onClick={(e) => submitForm(e, false)}
+                >
+                  Submit
+                </button>
+              </div>
+            ) : (
+              <div className="bg-slate-400/50 px-6 mt-3 ">
+                <ImSpinner2
+                  className="animate-spin my-3 fill-primary "
+                  size={30}
+                />
+              </div>
+            )}
           </div>
         </form>
       </div>

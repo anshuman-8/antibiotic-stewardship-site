@@ -8,8 +8,7 @@ import TablePlaceholder from "./TablePlaceholder";
 import AnalysisTab from "./AnalysisTab";
 import ActivePatientsTab from "./ActivePatientsTab";
 import AnalysisReportTab from "./AnalysisReportTab";
-import AllPatientTable from "./AllPatients";
-import { Tabs, Button, TabsRef } from "flowbite-react";
+import { Tabs } from "flowbite-react";
 import { AiFillCalendar } from "react-icons/ai";
 import { TbReportSearch, TbReport } from "react-icons/tb";
 import { BsPeopleFill } from "react-icons/bs";
@@ -28,6 +27,7 @@ export default function DashboardIndex() {
         patientLocation
         lastReviewDate
         active
+        hasDraft
       }
     }
   `;
