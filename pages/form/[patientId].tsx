@@ -48,6 +48,8 @@ export default function Form() {
     primaryBacteremia: false,
     secondaryBacteremia: false,
     catheterLinesStents: false,
+    CAI: false,
+    HAI: false,
     other: "",
   });
 
@@ -251,6 +253,8 @@ export default function Form() {
         isPrimaryBacteraemia: focusOfInfectionState.primaryBacteremia,
         isSecondaryBacteraemia: focusOfInfectionState.secondaryBacteremia,
         isCatheterLinesStents: focusOfInfectionState.catheterLinesStents,
+        isCAI: focusOfInfectionState.CAI,
+        isHAI: focusOfInfectionState.HAI,
         other: focusOfInfectionState.other,
       },
       cultureReport: cultureReport,

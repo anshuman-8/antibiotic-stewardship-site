@@ -145,6 +145,33 @@ export default function focusOfInfection(props) {
               Pneumonia
             </label>
           </div>
+          <div className="w-1/2 sm:w-1/3 md:w-1/5 p-1">
+            <input
+              type="checkbox"
+              name="CAI"
+              id="CAI"
+              className=""
+              title = "Community Acquired infection"
+              onChange={handleChange}
+            />
+            <label htmlFor="infection" className="ml-2">
+              CAI
+            </label>
+          </div>
+
+          <div className="w-1/2 sm:w-1/3 md:w-1/5 p-1">
+            <input
+              type="checkbox"
+              name="HAI"
+              id="HAI"
+              className=""
+              title = "Hospital Acquired infection"
+              onChange={handleChange}
+            />
+            <label htmlFor="infection" className="ml-2">
+              HAI
+            </label>
+          </div>
           <div className="w-full sm:w-2/3 md:w-2/5 my-2 mx-2">
             <label htmlFor="infection" className="ml-2">
               Others:{" "}

@@ -4,7 +4,7 @@ export default function AntibioticUsed({ data }) {
   return (
     <div className="flex flex-col">
       <div className="text-lg text-white font-semibold">Antibiotic Used</div>
-      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8 py-2 inline-block min-w-full sm:px-2 lg:px-8">
+      {data?.length === 0?<div className="overflow-x-auto sm:-mx-6 lg:-mx-8 py-2 inline-block min-w-full sm:px-2 lg:px-8">
         <div className="overflow-auto border-2 border-white rounded-lg">
           <table className="min-w-full  border-collapse">
             <thead className="bg-slate-500 text-white">
@@ -94,7 +94,15 @@ export default function AntibioticUsed({ data }) {
             </tbody>
           </table>
         </div>
-      </div>
+      </div>:<NoData />}
     </div>
   );
 }
+
+const NoData = () => {
+  return (
+    <div className="flex flex-col bg-slate-400 w-min rounded-md px-3 py-1 mb-3 mt-1">
+      <div className="font-base text-base">None</div>
+    </div>
+  );
+};

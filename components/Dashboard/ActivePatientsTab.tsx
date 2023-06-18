@@ -15,9 +15,6 @@ export default function ActivePatientsTab() {
         dateOfAdmission
         department
         patientLocation
-        cormorbodities
-        height
-        weight
         active
       }
     }
@@ -56,9 +53,6 @@ export default function ActivePatientsTab() {
               dateOfBirth={patient.dateOfBirth}
               dateOfAdmission={patient.dateOfAdmission}
               department={patient.department}
-              cormorbodities={patient.cormorbodities}
-              height={patient.height}
-              weight={patient.weight}
               active={patient.active}
             />
           ))}
