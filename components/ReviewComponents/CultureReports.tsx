@@ -36,7 +36,7 @@ export default function CultureReports(props) {
           {/* left column */}
           <div className="p-4 w-full space-y-3">
             {/* 1 */}
-            <div className="flex flex-row justify-between bg-slate-400 p-2 rounded-lg">
+            <div className="flex flex-row justify-between bg-slate-500 p-2 rounded-lg">
               <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
                 Culture Sent Before Antibiotics:{" "}
               </p>
@@ -56,7 +56,7 @@ export default function CultureReports(props) {
             </div>
 
             {/* 3 */}
-            <div className="flex flex-row justify-between bg-slate-400 p-2 rounded-lg">
+            <div className="flex flex-row justify-between bg-slate-500 p-2 rounded-lg">
               <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
                 Organism:{" "}
               </p>
@@ -78,7 +78,7 @@ export default function CultureReports(props) {
 
             {/* 5 */}
 
-            <div className="flex flex-row justify-between bg-slate-400 p-2 rounded-lg">
+            <div className="flex flex-row justify-between bg-slate-500 p-2 rounded-lg">
               <p className="mr-2 uppercase text-sm font-bold text-white">
                 Multi Drug Resistant Organism:{" "}
               </p>
@@ -114,7 +114,7 @@ export default function CultureReports(props) {
               </div>
             </div>
             {/* 9 */}
-            <div className="flex flex-row justify-between bg-slate-400 p-2 rounded-lg">
+            <div className="flex flex-row justify-between bg-slate-500 p-2 rounded-lg">
               <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
                 Culture Reported :
               </p>
@@ -144,7 +144,7 @@ export default function CultureReports(props) {
               </div>
             </div>
             {/* 11 */}
-            <div className="flex flex-row justify-between my-1 bg-slate-400 p-2 rounded-lg">
+            <div className="flex flex-row justify-between my-1 bg-slate-500 p-2 rounded-lg">
               <p className="mr-2 block uppercase tracking-wide text-sm font-bold text-white">
                 Imaging:{" "}
               </p>

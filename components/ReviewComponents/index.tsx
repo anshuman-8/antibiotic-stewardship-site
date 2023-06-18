@@ -13,7 +13,7 @@ export default function index({ data }) {
       <div className="text-xl text-white font-semibold mt-2 my-2">Report: </div>
       <Diagnosis data={data} />
       <InfectionFocus data={data} />
-      {data?.antibioticsUsed.length === 0?<AntibioticUsed data={data?.antibioticsUsed} />:<NoData />}
+      <AntibioticUsed data={data?.antibioticsUsed} />
       <div className="text-white font-medium mt-4 mb-4 text-lg">
         Culture Reports:
       </div>

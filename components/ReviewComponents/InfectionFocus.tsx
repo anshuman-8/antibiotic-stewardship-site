@@ -18,7 +18,7 @@ export default function InfectionFocus({ data }) {
             {Object.keys(data.sepsis).map((val, i) => {
               return (
                 data.sepsis[val] === true && (
-                  <span key={val}>{sepsisValue[val]}</span>
+                  <span key={val}>{sepsisValue[val]}, {" "}</span>
                 )
               );
             })}
@@ -36,9 +36,7 @@ export default function InfectionFocus({ data }) {
                 )
               );
             })}
-            {Object.keys(data.focusOfInfection).map((val, i) => {
-              console.log(val);
-              
+            {Object.keys(data.focusOfInfection).map((val, i) => {              
               return (
                 val === "other" && (
                   <span key={val} className="px-1">{data.focusOfInfection.val}</span>
