@@ -17,7 +17,6 @@
     "cookie": "^0.5.0",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
-    "export-to-csv": "^0.2.1",
     "flowbite": "^1.6.3",
     "flowbite-react": "^0.4.1",
     "graphql": "^16.6.0",

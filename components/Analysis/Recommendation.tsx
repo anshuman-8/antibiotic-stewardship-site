@@ -11,10 +11,6 @@ interface recommendationValuetype {
 export default function Recommendation(props) {
   const { state, setState } = props;
 
-  // const [recommendationList, setRecommendationList] = useState<
-  //   recommendationValuetype[]
-  // >(recommendationInitialValue);
-
   const [recommendationContent, setRecommendationContent] = useState({
     drug:false,
     indication:false,
@@ -26,20 +22,10 @@ export default function Recommendation(props) {
 
   const setChecked = (e) => {
     const { name, checked } = e.target;
-
-    // const newRecommendationList = recommendationList.map((item: any) => {
-    //   if (item.name === name) {
-    //     item.checked = checked;
-    //   }
-    //   return item;
-    // });
     const newName = "is" + name;
     setState({ ...state, [newName]: checked });
     setRecommendationContent({...recommendationContent, [name]:checked})
     console.log({ ...state, [newName]: checked });
-    // console.log("newRecommendationList", newRecommendationList);
-    
-    // setRecommendationList(newRecommendationList);
   };
 
   const setContent = (name: string, e) => {
@@ -67,11 +53,6 @@ export default function Recommendation(props) {
                 {value.label}
               </label>
             </div>
-            {/* <textarea
-              disabled={!value.checked}
-              // placeholder={"recommendation..."}
-              className="px-2 py-1 text-gray-700 border rounded-lg focus:outline-none mr-2"
-            /> */}
             {recommendationContent[value.name]? (
               <textarea
                 className="px-2 py-1 text-gray-700 border rounded-lg focus:outline-none mr-2"

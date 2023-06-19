@@ -53,7 +53,7 @@ export default function Analysis({ reportData }) {
     isDuration: false,
     isAntibiotisDoseChanged: false,
     serumCreatinine: 0,
-    // procalcitonin: 0,
+    comments: "",
   });
   const [patientOutcome, setPatientOutcome] = useState({
     lenghtOfStay: 0,
@@ -78,7 +78,10 @@ export default function Analysis({ reportData }) {
 
   const submitForm = (e, isDraft) => {
     e.preventDefault();
-
+    if(reviewer === ""){
+      notifyError("Please enter Reviewing Doctor!");
+      return;
+    }
     const input = {
       // date = toyyyymmdd(Date.now())
       doctor: reviewer,
