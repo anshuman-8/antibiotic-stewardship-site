@@ -111,7 +111,8 @@ export default function AnalysisPage() {
           isAntibioticChanged
           isComplance
           isDuration
-          isAntibioticChanged
+          isAntibioticDoseChanged
+          comments
         }
         recommendation {
           id
@@ -140,7 +141,7 @@ export default function AnalysisPage() {
   if (loading) return <div>Loading...</div>;
   if (error) return <p>Error :(</p>;
 
-  console.log("the data: ",data);
+  console.log("the data: ", data);
 
   return <Analysis reportData={data?.analysisForm} edit={true} />;
 }

@@ -50,12 +50,12 @@ export default function Analysis({ reportData, edit }) {
     isAntibioticChanged: false,
     isComplance: false,
     isDuration: false,
-    isAntibiotisDoseChanged: false,
+    isAntibioticDoseChanged: false,
     serumCreatinine: 0,
     comments: "",
   });
   const [patientOutcome, setPatientOutcome] = useState({
-    lenghtOfStay: 0,
+    lengthOfStay: 0,
     dateOfDischarge: "",
     outcome: "Alive",
   });
@@ -100,7 +100,7 @@ export default function Analysis({ reportData, edit }) {
         isAntibioticChanged: reportData.compliance.isAntibioticChanged,
         isComplance: reportData.compliance.isComplance,
         isDuration: reportData.compliance.isDuration,
-        isAntibiotisDoseChanged: reportData.compliance.isAntibiotisDoseChanged,
+        isAntibioticDoseChanged: reportData.compliance.isAntibioticDoseChanged,
         serumCreatinine: reportData.compliance.serumCreatinine,
         comments: reportData.compliance.comments,
       }));
@@ -144,7 +144,6 @@ export default function Analysis({ reportData, edit }) {
       compliance: compliance,
       recommendation: recommendation,
     };
-    console.log(input);
 
     analysisFormData({
       variables: {
@@ -198,13 +197,6 @@ export default function Analysis({ reportData, edit }) {
           <div className="flex justify-end max-w-6xl mx-auto mb-10">
             {!loading ? (
               <div className="space-x-5">
-                {/* <button
-                  type="submit"
-                  className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
-                  onClick={(e) => submitForm(e, true)}
-                >
-                  Save as Draft
-                </button> */}
                 <button
                   type="submit"
                   className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"

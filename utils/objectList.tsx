@@ -300,6 +300,6 @@ export const complianceList = [
   },
   {
     label: "Antibiotic Dose Changed",
-    name: "isAntibiotisDoseChanged",
+    name: "isAntibioticDoseChanged",
   },
 ];

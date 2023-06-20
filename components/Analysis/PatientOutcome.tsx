@@ -19,12 +19,12 @@ export default function OtherAnalysis(props) {
           </label>
           <input
             type="number"
-            name="lenghtOfStay"
-            id="lenghtOfStay"
-            value={state.lenghtOfStay}
+            name="lengthOfStay"
+            id="lengthOfStay"
+            value={state.lengthOfStay}
             className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
             onChange={(e) => {
-              setState({ ...state, lenghtOfStay: parseInt(e.target.value) });
+              setState({ ...state, lengthOfStay: parseInt(e.target.value) });
             }}
           />
         </div>
