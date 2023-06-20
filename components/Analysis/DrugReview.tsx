@@ -13,7 +13,6 @@ export default function DrugReview(props) {
       }
     }
     await setState({ ...state, [name]: checked , score: score });
-
   };
 
   return (

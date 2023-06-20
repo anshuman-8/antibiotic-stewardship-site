@@ -1,5 +1,5 @@
 import { ImSpinner2 } from "react-icons/im";
-import React, { useState } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useQuery, gql } from "@apollo/client";

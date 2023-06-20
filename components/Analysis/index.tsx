@@ -10,9 +10,8 @@ import { toast } from "react-toastify";
 import { useMutation, gql } from "@apollo/client";
 import { ImSpinner2 } from "react-icons/im";
 import { useRouter } from "next/router";
-import { toyyyymmdd } from "../../utils/functions";
 
-export default function Analysis({ reportData ,edit}) {
+export default function Analysis({ reportData, edit }) {
   const notifyError = (message: String) => toast.error(message);
   const notifySuccess = (message: String) => toast.success(message);
 
@@ -62,14 +61,57 @@ export default function Analysis({ reportData ,edit}) {
   });
 
   useEffect(() => {
+    console.log("reportData walala : ", reportData);
+
     if (edit) {
       setReviewer(reportData.doctor);
-      setDrugAdministeredCheck(reportData.drugAdministeredReview);
-      setRecommendation(reportData.recommendation);
-      setCompliance(reportData.compliance);
-      setPatientOutcome(reportData.patientOutcome);
+      setDrugAdministeredCheck((prevState) => ({
+        ...prevState,
+        isRightDocumentation: reportData.drugAdministered.isRightDocumentation,
+        isRightDrug: reportData.drugAdministered.isRightDrug,
+        isRightDose: reportData.drugAdministered.isRightDose,
+        isRightRoute: reportData.drugAdministered.isRightRoute,
+        isRightFrequency: reportData.drugAdministered.isRightFrequency,
+        isRightDuration: reportData.drugAdministered.isRightDuration,
+        isRightIndication: reportData.drugAdministered.isRightIndication,
+        isAppropriate: reportData.drugAdministered.isAppropriate,
+        score: reportData.drugAdministered.score,
+      }));
+      setRecommendation((prevState) => ({
+        ...prevState,
+        indication: reportData.recommendation.indication,
+        drug: reportData.recommendation.drug,
+        dose: reportData.recommendation.dose,
+        frequency: reportData.recommendation.frequency,
+        duration: reportData.recommendation.duration,
+        deEscalation: reportData.recommendation.deEscalation,
+        isindication: reportData.recommendation.isindication,
+        isdrug: reportData.recommendation.isdrug,
+        isdose: reportData.recommendation.isdose,
+        isfrequency: reportData.recommendation.isfrequency,
+        isduration: reportData.recommendation.isduration,
+        isdeEscalation: reportData.recommendation.isdeEscalation,
+      }));
+      setCompliance((prevState) => ({
+        ...prevState,
+        isAppropriate: reportData.compliance.isAppropriate,
+        isRightDocumentation: reportData.compliance.isRightDocumentation,
+        isRecommendationFiled: reportData.compliance.isRecommendationFiled,
+        isAntibioticChanged: reportData.compliance.isAntibioticChanged,
+        isComplance: reportData.compliance.isComplance,
+        isDuration: reportData.compliance.isDuration,
+        isAntibiotisDoseChanged: reportData.compliance.isAntibiotisDoseChanged,
+        serumCreatinine: reportData.compliance.serumCreatinine,
+        comments: reportData.compliance.comments,
+      }));
+      setPatientOutcome((prevState) => ({
+        ...prevState,
+        lengthOfStay: reportData.patientOutcome.lengthOfStay,
+        dateOfDischarge: reportData.patientOutcome.dateOfDischarge,
+        outcome: reportData.patientOutcome.outcome,
+      }));
     }
-  }, [edit]);
+  }, [edit, reportData]);
 
   const AnalysisDataFormGQL = gql`
     mutation ($input: AnalysisFormInput!) {
@@ -88,7 +130,7 @@ export default function Analysis({ reportData ,edit}) {
 
   const submitForm = (e, isDraft) => {
     e.preventDefault();
-    if(reviewer === ""){
+    if (reviewer === "") {
       notifyError("Please enter Reviewing Doctor!");
       return;
     }
