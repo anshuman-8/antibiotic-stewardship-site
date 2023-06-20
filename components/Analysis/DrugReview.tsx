@@ -8,11 +8,11 @@ export default function DrugReview(props) {
     let score = 0;
     const { name, checked } = e.target;
     for (const [key, value] of Object.entries({ ...state, [name]: checked })) {
-      if (value===true) {
+      if (value === true) {
         score += 1;
       }
     }
-    await setState({ ...state, [name]: checked , score: score });
+    await setState({ ...state, [name]: checked, score: score });
   };
 
   return (
@@ -28,6 +28,7 @@ export default function DrugReview(props) {
                 type="checkbox"
                 name={item.name}
                 id={item.name}
+                checked={state[item.name]}
                 className=""
                 onChange={handleClick}
               />
@@ -37,7 +38,6 @@ export default function DrugReview(props) {
             </div>
           );
         })}
-      
 
         <div className="sm:w-2/3 md:w-2/5 my-2 mx-2">
           <label htmlFor="infection" className="ml-2">

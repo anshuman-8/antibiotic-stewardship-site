@@ -210,7 +210,7 @@ export default function Analysis({ reportData, edit }) {
                   className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
                   onClick={(e) => submitForm(e, false)}
                 >
-                  Submit
+                  {edit ? "Update" : "Submit"}
                 </button>
               </div>
             ) : (
