@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DrugReview from "./DrugReview";
 import Introduction from "./Introduction";
 import Recommendation from "./Recommendation";
@@ -12,7 +12,7 @@ import { ImSpinner2 } from "react-icons/im";
 import { useRouter } from "next/router";
 import { toyyyymmdd } from "../../utils/functions";
 
-export default function Analysis({ reportData }) {
+export default function Analysis({ reportData ,edit}) {
   const notifyError = (message: String) => toast.error(message);
   const notifySuccess = (message: String) => toast.success(message);
 
@@ -61,6 +61,16 @@ export default function Analysis({ reportData }) {
     outcome: "Alive",
   });
 
+  useEffect(() => {
+    if (edit) {
+      setReviewer(reportData.doctor);
+      setDrugAdministeredCheck(reportData.drugAdministeredReview);
+      setRecommendation(reportData.recommendation);
+      setCompliance(reportData.compliance);
+      setPatientOutcome(reportData.patientOutcome);
+    }
+  }, [edit]);
+
   const AnalysisDataFormGQL = gql`
     mutation ($input: AnalysisFormInput!) {
       analysisDataForm(inputs: $input) {
@@ -85,8 +95,8 @@ export default function Analysis({ reportData }) {
     const input = {
       // date = toyyyymmdd(Date.now())
       doctor: reviewer,
-      patient: reportData.form.patient.id,
-      patientForm: reportData.form.id,
+      patient: reportData.patientForm.patient.id,
+      patientForm: reportData.patientForm.id,
       drugAdministeredReview: drugAdministeredCheck,
       patientOutcome: patientOutcome,
       compliance: compliance,
@@ -124,12 +134,12 @@ export default function Analysis({ reportData }) {
         </div>
         <form className="w-full">
           <Introduction
-            data={reportData.form.patient}
+            data={reportData.patientForm.patient}
             state={reviewer}
             setState={setReviewer}
           />
 
-          <ReviewComponents data={reportData.form} />
+          <ReviewComponents data={reportData.patientForm} />
 
           <DrugReview
             state={drugAdministeredCheck}
