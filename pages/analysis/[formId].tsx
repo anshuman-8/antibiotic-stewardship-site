@@ -13,7 +13,7 @@ export default function AnalysisPage() {
   
   const getFormDetails = gql`
     query ($id: ID!) {
-      form(id: $id) {
+      patientForm(id: $id) {
         id
         reviewDate
         patient {
@@ -89,6 +89,6 @@ export default function AnalysisPage() {
   if (error) return <p>Error :(</p>;
 
   return (
-    <Analysis reportData={data}/>
+    <Analysis reportData={data} edit={false}/>
   );
 }

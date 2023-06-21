@@ -6,7 +6,8 @@ import {
   useFilters,
   usePagination,
 } from "react-table";
-import {toStringDate, calculate_age} from "../../utils/functions";
+import { toStringDate, calculate_age } from "../../utils/functions";
+import Link from "next/link";
 
 export default function AnalysisReportTable({ data }) {
   const columns = useMemo(
@@ -34,18 +35,18 @@ export default function AnalysisReportTable({ data }) {
       {
         Header: "Review Date",
         // accessor: "lastReviewDate",
-        Cell: ({ row }) => <span>{toStringDate(row.original.patientForm.reviewDate)}</span>,
+        Cell: ({ row }) => (
+          <span>{toStringDate(row.original.patientForm.reviewDate)}</span>
+        ),
       },
       {
         Header: "Analysis Date",
         // accessor: "lastReviewDate",
         Cell: ({ row }) => <span>{toStringDate(row.original.date)}</span>,
       },
-      
     ],
     []
   );
-
 
   const tableInstance = useTable(
     {
@@ -119,6 +120,14 @@ export default function AnalysisReportTable({ data }) {
                         {cell.render("Cell")}
                       </td>
                     ))}
+
+                    <td className="py-3 px-3 text-center max-w-[320px] overflow-hidden truncate">
+                      <Link href={"/analysis/edit/" + row.original.id}>
+                        <button className="bg-gray-300 px-3 py-2 rounded-md shadow-md active:shadow-sm hover:bg-gray-400">
+                          Edit
+                        </button>
+                      </Link>
+                    </td>
                   </tr>
                 );
               })}

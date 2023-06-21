@@ -1,8 +1,7 @@
 import React from "react";
 
 export default function Introduction(props) {
-
-  const {data,state,setState} =props
+  const { data, state, setState } = props;
 
   const to_dd_mm_yyyy = (date: Date) => {
     let dd = date.getDate();
@@ -35,7 +34,7 @@ export default function Introduction(props) {
 
       <div className="w-full md:w-1/3 mb-6 md:mb-5">
         <label className="label-upper" htmlFor="">
-            Reviewing Doctor
+          Reviewing Doctor
         </label>
         <input
           required
@@ -44,11 +43,10 @@ export default function Introduction(props) {
           id="reviewing-doctor"
           type="text"
           placeholder="Dr."
-          onChange={
-            (e) => {
-              setState(e.target.value)
-            }
-          }
+          value={state}
+          onChange={(e) => {
+            setState(e.target.value);
+          }}
         />
       </div>
     </div>

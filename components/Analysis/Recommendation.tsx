@@ -12,25 +12,23 @@ export default function Recommendation(props) {
   const { state, setState } = props;
 
   const [recommendationContent, setRecommendationContent] = useState({
-    drug:false,
-    indication:false,
-    frequency:false,
-    dose:false,
-    duration:false,
-    deEscalation:false
-  })
+    drug: false,
+    indication: false,
+    frequency: false,
+    dose: false,
+    duration: false,
+    deEscalation: false,
+  });
 
   const setChecked = (e) => {
     const { name, checked } = e.target;
     const newName = "is" + name;
     setState({ ...state, [newName]: checked });
-    setRecommendationContent({...recommendationContent, [name]:checked})
-    console.log({ ...state, [newName]: checked });
+    setRecommendationContent({ ...recommendationContent, [name]: checked });
   };
 
   const setContent = (name: string, e) => {
     setState({ ...state, [name]: e.target.value });
-    console.log(state);
   };
 
   return (
@@ -47,15 +45,17 @@ export default function Recommendation(props) {
                 name={value.name}
                 id={value.name}
                 className=""
+                checked={state["is" + value.name]}
                 onChange={(e) => setChecked(e)}
               />
               <label htmlFor="infection" className="ml-2">
                 {value.label}
               </label>
             </div>
-            {recommendationContent[value.name]? (
+            {recommendationContent[value.name] || state["is" + value.name] ? (
               <textarea
                 className="px-2 py-1 text-gray-700 border rounded-lg focus:outline-none mr-2"
+                value={state[value.name]}
                 onChange={(e) => setContent(value.name, e)}
               ></textarea>
             ) : (

@@ -32,6 +32,7 @@ export default function Compliance(props) {
               type="checkbox"
               name={value.name}
               id={value.name}
+              checked={state[value.name]}
               className=""
               onChange={(e) => setChecked(e)}
             />
@@ -49,6 +50,7 @@ export default function Compliance(props) {
             type="number"
             name="serumCreatinine"
             id="serumCreatinine"
+            value={state.serumCreatinine}
             className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-1 px-4 leading-tight focus:outline-none focus:bg-white max-w-[120px]"
             onChange={(e) =>
               setState({ ...state, serumCreatinine: parseInt(e.target.value) })
@@ -64,9 +66,10 @@ export default function Compliance(props) {
             name="comments"
             id="comments"
             placeholder="Comments..."
-            className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-1 px-4 focus:outline-none focus:bg-white max-w-[250px]"
+            value={state.comments}
+            className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-1 px-4 focus:outline-none focus:bg-white max-w-[280px]"
             onChange={(e) =>
-              setState({ ...state, comments: parseInt(e.target.value) })
+              setState({ ...state, comments: e.target.value })
             }
           />
         </div>

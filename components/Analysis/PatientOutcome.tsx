@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toyyyymmdd } from "../../utils/functions";
 
 export default function OtherAnalysis(props) {
-  const {state, setState} = props;
+  const { state, setState } = props;
 
   return (
     <div className="form-component">
@@ -15,17 +15,17 @@ export default function OtherAnalysis(props) {
             htmlFor="infection"
             className="block tracking-wide font-bold mb-2 text-white"
           >
-            Lenght of Hospital Stay
+            length of Hospital Stay
           </label>
           <input
             type="number"
-            name="lenghtOfStay"
-            id="lenghtOfStay"
+            name="lengthOfStay"
+            id="lengthOfStay"
+            value={state.lengthOfStay}
             className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
             onChange={(e) => {
-              setState({...state, lenghtOfStay: parseInt(e.target.value)});
-            }
-            }
+              setState({ ...state, lengthOfStay: parseInt(e.target.value) });
+            }}
           />
         </div>
 
@@ -40,11 +40,14 @@ export default function OtherAnalysis(props) {
             type="date"
             name="dateOfDischarge"
             id="dateOfDischarge"
+            value={state.dateOfDischarge}
             className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-4 mb-3 leading-tight focus:outline-none  focus:bg-white"
             onChange={(e) => {
-              setState({...state, dateOfDischarge: toyyyymmdd(e.target.valueAsDate)});
-            }
-            }
+              setState({
+                ...state,
+                dateOfDischarge: toyyyymmdd(e.target.valueAsDate),
+              });
+            }}
           />
         </div>
 
@@ -60,12 +63,12 @@ export default function OtherAnalysis(props) {
               className="appearance-none block w-full bg-gray-100 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
               name="outcome"
               id="outcome"
+              value={state.outcome}
               required
               defaultValue={"Select Specialization"}
-              onChange={(e) => {                
-                setState({...state, outcome: e.target.value});
-              }
-              }
+              onChange={(e) => {
+                setState({ ...state, outcome: e.target.value });
+              }}
             >
               <option value="Alive">Alive</option>
               <option value="Dead">Dead</option>

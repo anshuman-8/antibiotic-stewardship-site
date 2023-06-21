@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DrugReview from "./DrugReview";
 import Introduction from "./Introduction";
 import Recommendation from "./Recommendation";
@@ -10,9 +10,8 @@ import { toast } from "react-toastify";
 import { useMutation, gql } from "@apollo/client";
 import { ImSpinner2 } from "react-icons/im";
 import { useRouter } from "next/router";
-import { toyyyymmdd } from "../../utils/functions";
 
-export default function Analysis({ reportData }) {
+export default function Analysis({ reportData, edit }) {
   const notifyError = (message: String) => toast.error(message);
   const notifySuccess = (message: String) => toast.success(message);
 
@@ -51,15 +50,67 @@ export default function Analysis({ reportData }) {
     isAntibioticChanged: false,
     isComplance: false,
     isDuration: false,
-    isAntibiotisDoseChanged: false,
+    isAntibioticDoseChanged: false,
     serumCreatinine: 0,
     comments: "",
   });
   const [patientOutcome, setPatientOutcome] = useState({
-    lenghtOfStay: 0,
+    lengthOfStay: 0,
     dateOfDischarge: "",
     outcome: "Alive",
   });
+
+  useEffect(() => {
+
+    if (edit) {
+      setReviewer(reportData.doctor);
+      setDrugAdministeredCheck((prevState) => ({
+        ...prevState,
+        isRightDocumentation: reportData.drugAdministered.isRightDocumentation,
+        isRightDrug: reportData.drugAdministered.isRightDrug,
+        isRightDose: reportData.drugAdministered.isRightDose,
+        isRightRoute: reportData.drugAdministered.isRightRoute,
+        isRightFrequency: reportData.drugAdministered.isRightFrequency,
+        isRightDuration: reportData.drugAdministered.isRightDuration,
+        isRightIndication: reportData.drugAdministered.isRightIndication,
+        isAppropriate: reportData.drugAdministered.isAppropriate,
+        score: reportData.drugAdministered.score,
+      }));
+      setRecommendation((prevState) => ({
+        ...prevState,
+        indication: reportData.recommendation.indication,
+        drug: reportData.recommendation.drug,
+        dose: reportData.recommendation.dose,
+        frequency: reportData.recommendation.frequency,
+        duration: reportData.recommendation.duration,
+        deEscalation: reportData.recommendation.deEscalation,
+        isindication: reportData.recommendation.isindication,
+        isdrug: reportData.recommendation.isdrug,
+        isdose: reportData.recommendation.isdose,
+        isfrequency: reportData.recommendation.isfrequency,
+        isduration: reportData.recommendation.isduration,
+        isdeEscalation: reportData.recommendation.isdeEscalation,
+      }));
+      setCompliance((prevState) => ({
+        ...prevState,
+        isAppropriate: reportData.compliance.isAppropriate,
+        isRightDocumentation: reportData.compliance.isRightDocumentation,
+        isRecommendationFiled: reportData.compliance.isRecommendationFiled,
+        isAntibioticChanged: reportData.compliance.isAntibioticChanged,
+        isComplance: reportData.compliance.isComplance,
+        isDuration: reportData.compliance.isDuration,
+        isAntibioticDoseChanged: reportData.compliance.isAntibioticDoseChanged,
+        serumCreatinine: reportData.compliance.serumCreatinine,
+        comments: reportData.compliance.comments,
+      }));
+      setPatientOutcome((prevState) => ({
+        ...prevState,
+        lengthOfStay: reportData.patientOutcome.lengthOfStay,
+        dateOfDischarge: reportData.patientOutcome.dateOfDischarge,
+        outcome: reportData.patientOutcome.outcome,
+      }));
+    }
+  }, [edit, reportData]);
 
   const AnalysisDataFormGQL = gql`
     mutation ($input: AnalysisFormInput!) {
@@ -67,7 +118,17 @@ export default function Analysis({ reportData }) {
         success
         returning {
           id
-          doctor
+        }
+      }
+    }
+  `;
+
+  const EditAnalysisDataForm = gql`
+    mutation ($input: AnalysisFormInput!, $id: ID!) {
+      editAnalysisDataForm(inputs: $input, id: $id) {
+        success
+        returning {
+          id
         }
       }
     }
@@ -75,37 +136,56 @@ export default function Analysis({ reportData }) {
 
   const [analysisFormData, { data, loading, error }] =
     useMutation(AnalysisDataFormGQL);
+  const [
+    editAnalysisFormData,
+    { data: editData, loading: editLoading, error: editError },
+  ] = useMutation(EditAnalysisDataForm);
 
-  const submitForm = (e, isDraft) => {
+  const submitForm = (e) => {
     e.preventDefault();
-    if(reviewer === ""){
+    if (reviewer === "") {
       notifyError("Please enter Reviewing Doctor!");
       return;
     }
     const input = {
       // date = toyyyymmdd(Date.now())
       doctor: reviewer,
-      patient: reportData.form.patient.id,
-      patientForm: reportData.form.id,
+      patient: reportData.patientForm.patient.id,
+      patientForm: reportData.patientForm.id,
       drugAdministeredReview: drugAdministeredCheck,
       patientOutcome: patientOutcome,
       compliance: compliance,
       recommendation: recommendation,
     };
-    console.log(input);
 
-    analysisFormData({
-      variables: {
-        input: input,
-      },
-      onCompleted: (data) => {
-        notifySuccess("Form Submitted Successfully!");
-        router.push("/");
-      },
-      onError: (error) => {
-        notifyError("Form Submission Failed!");
-      },
-    });
+    if(edit){
+      editAnalysisFormData({
+        variables: {
+          input: input,
+          id: reportData.id,
+        },
+        onCompleted: (editData) => {
+          notifySuccess("Form Edit Successfull!");
+          router.push("/");
+        },
+        onError: (editError) => {
+          notifyError("Form Submission Failed!");
+        },
+      });
+    }else{
+      analysisFormData({
+        variables: {
+          input: input,
+        },
+        onCompleted: (data) => {
+          notifySuccess("Form Submitted Successfully!");
+          router.push("/");
+        },
+        onError: (error) => {
+          notifyError("Form Submission Failed!");
+        },
+      });
+    }
   };
 
   return (
@@ -124,12 +204,12 @@ export default function Analysis({ reportData }) {
         </div>
         <form className="w-full">
           <Introduction
-            data={reportData.form.patient}
+            data={reportData.patientForm.patient}
             state={reviewer}
             setState={setReviewer}
           />
 
-          <ReviewComponents data={reportData.form} />
+          <ReviewComponents data={reportData.patientForm} />
 
           <DrugReview
             state={drugAdministeredCheck}
@@ -144,21 +224,14 @@ export default function Analysis({ reportData }) {
 
           {/* Submit */}
           <div className="flex justify-end max-w-6xl mx-auto mb-10">
-            {!loading ? (
+            {!(loading || editLoading) ? (
               <div className="space-x-5">
-                {/* <button
-                  type="submit"
-                  className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
-                  onClick={(e) => submitForm(e, true)}
-                >
-                  Save as Draft
-                </button> */}
                 <button
                   type="submit"
                   className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
-                  onClick={(e) => submitForm(e, false)}
+                  onClick={(e) => submitForm(e)}
                 >
-                  Submit
+                  {edit ? "Update" : "Submit"}
                 </button>
               </div>
             ) : (
