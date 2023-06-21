@@ -98,7 +98,7 @@ export default function AnalysisPage() {
         }
         patientOutcome {
           id
-          lenghtOfStay
+          lengthOfStay
           dateOfDischarge
           outcome
         }
@@ -139,9 +139,8 @@ export default function AnalysisPage() {
     },
   });
   if (loading) return <div>Loading...</div>;
-  if (error) return <p>Error :(</p>;
+  if (error) return <p>Error {":("}</p>;
 
-  console.log("the data: ", data);
 
   return <Analysis reportData={data?.analysisForm} edit={true} />;
 }

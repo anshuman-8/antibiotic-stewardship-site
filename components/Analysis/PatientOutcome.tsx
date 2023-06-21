@@ -15,7 +15,7 @@ export default function OtherAnalysis(props) {
             htmlFor="infection"
             className="block tracking-wide font-bold mb-2 text-white"
           >
-            Lenght of Hospital Stay
+            length of Hospital Stay
           </label>
           <input
             type="number"

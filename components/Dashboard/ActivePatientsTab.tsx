@@ -42,7 +42,7 @@ export default function ActivePatientsTab() {
 
   return (
     <div>
-      {data.activePatients.lenght !== 0 ? (
+      {data.activePatients.length !== 0 ? (
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {data.activePatients.map((patient) => (
             <PatientCard

@@ -25,12 +25,10 @@ export default function Recommendation(props) {
     const newName = "is" + name;
     setState({ ...state, [newName]: checked });
     setRecommendationContent({ ...recommendationContent, [name]: checked });
-    console.log({ ...state, [newName]: checked });
   };
 
   const setContent = (name: string, e) => {
     setState({ ...state, [name]: e.target.value });
-    console.log(state);
   };
 
   return (

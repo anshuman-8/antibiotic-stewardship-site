@@ -61,7 +61,6 @@ export default function Analysis({ reportData, edit }) {
   });
 
   useEffect(() => {
-    console.log("reportData walala : ", reportData);
 
     if (edit) {
       setReviewer(reportData.doctor);
@@ -119,7 +118,17 @@ export default function Analysis({ reportData, edit }) {
         success
         returning {
           id
-          doctor
+        }
+      }
+    }
+  `;
+
+  const EditAnalysisDataForm = gql`
+    mutation ($input: AnalysisFormInput!, $id: ID!) {
+      editAnalysisDataForm(inputs: $input, id: $id) {
+        success
+        returning {
+          id
         }
       }
     }
@@ -127,8 +136,12 @@ export default function Analysis({ reportData, edit }) {
 
   const [analysisFormData, { data, loading, error }] =
     useMutation(AnalysisDataFormGQL);
+  const [
+    editAnalysisFormData,
+    { data: editData, loading: editLoading, error: editError },
+  ] = useMutation(EditAnalysisDataForm);
 
-  const submitForm = (e, isDraft) => {
+  const submitForm = (e) => {
     e.preventDefault();
     if (reviewer === "") {
       notifyError("Please enter Reviewing Doctor!");
@@ -145,18 +158,34 @@ export default function Analysis({ reportData, edit }) {
       recommendation: recommendation,
     };
 
-    analysisFormData({
-      variables: {
-        input: input,
-      },
-      onCompleted: (data) => {
-        notifySuccess("Form Submitted Successfully!");
-        router.push("/");
-      },
-      onError: (error) => {
-        notifyError("Form Submission Failed!");
-      },
-    });
+    if(edit){
+      editAnalysisFormData({
+        variables: {
+          input: input,
+          id: reportData.id,
+        },
+        onCompleted: (editData) => {
+          notifySuccess("Form Edit Successfull!");
+          router.push("/");
+        },
+        onError: (editError) => {
+          notifyError("Form Submission Failed!");
+        },
+      });
+    }else{
+      analysisFormData({
+        variables: {
+          input: input,
+        },
+        onCompleted: (data) => {
+          notifySuccess("Form Submitted Successfully!");
+          router.push("/");
+        },
+        onError: (error) => {
+          notifyError("Form Submission Failed!");
+        },
+      });
+    }
   };
 
   return (
@@ -195,12 +224,12 @@ export default function Analysis({ reportData, edit }) {
 
           {/* Submit */}
           <div className="flex justify-end max-w-6xl mx-auto mb-10">
-            {!loading ? (
+            {!(loading || editLoading) ? (
               <div className="space-x-5">
                 <button
                   type="submit"
                   className="px-7 py-3 z-10 shadow-xl bg-primary text-white rounded-md text-lg font-medium my-2"
-                  onClick={(e) => submitForm(e, false)}
+                  onClick={(e) => submitForm(e)}
                 >
                   {edit ? "Update" : "Submit"}
                 </button>
