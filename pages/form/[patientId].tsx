@@ -96,7 +96,7 @@ export default function Form() {
     ClinicalSignType[] | []
   >([
     {
-      date: new Date(),
+      date: null,
       procalcitonin: "",
       neutrophil: "",
       bloodPressure: "",
@@ -211,19 +211,27 @@ export default function Form() {
       };
     });
 
+    const NonEmptyClinicalSigns = clinicalSignsValue.filter(
+      (item: ClinicalSignType) => item.date !== null
+    );
+
+    if (NonEmptyClinicalSigns.length === 0) {
+      notifyError("Please enter atleast one clinical sign");
+      return;
+    }
+
     const clinicalSign = clinicalSignsValue.map((item) => {
-        return {
-          date: toyyyymmdd(new Date(item.date)),
-          procalcitonin: item.procalcitonin,
-          sCreatinine: item.sCreatinine,
-          temperature: item.temperature,
-          o2Saturation: item.o2Saturation,
-          whiteBloodCell: item.whiteBloodCell,
-          neutrophil: item.neutrophil,
-          cratinineClearance: item.cratinineClearance,
-          bloodPressure: item.bloodPressure,
-        };
-      
+      return {
+        date: toyyyymmdd(new Date(item.date)),
+        procalcitonin: item.procalcitonin,
+        sCreatinine: item.sCreatinine,
+        temperature: item.temperature,
+        o2Saturation: item.o2Saturation,
+        whiteBloodCell: item.whiteBloodCell,
+        neutrophil: item.neutrophil,
+        cratinineClearance: item.cratinineClearance,
+        bloodPressure: item.bloodPressure,
+      };
     });
 
     if (introState.reviewingDepartment.trim() === "") {

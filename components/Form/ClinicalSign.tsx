@@ -20,7 +20,7 @@ export default function ClinicalSign(props: ClinicalSignProps) {
     setState([
       ...state,
       {
-        date: new Date(),
+        date: null,
         procalcitonin: "",
         neutrophil: "",
         bloodPressure: "",
