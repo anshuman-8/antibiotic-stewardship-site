@@ -212,18 +212,17 @@ export default function Form() {
     });
 
     const clinicalSign = clinicalSignsValue.map((item) => {
-        return {
-          date: toyyyymmdd(new Date(item.date)),
-          procalcitonin: item.procalcitonin,
-          sCreatinine: item.sCreatinine,
-          temperature: item.temperature,
-          o2Saturation: item.o2Saturation,
-          whiteBloodCell: item.whiteBloodCell,
-          neutrophil: item.neutrophil,
-          cratinineClearance: item.cratinineClearance,
-          bloodPressure: item.bloodPressure,
-        };
-      
+      return {
+        date: toyyyymmdd(new Date(item.date)),
+        procalcitonin: item.procalcitonin,
+        sCreatinine: item.sCreatinine,
+        temperature: item.temperature,
+        o2Saturation: item.o2Saturation,
+        whiteBloodCell: item.whiteBloodCell,
+        neutrophil: item.neutrophil,
+        cratinineClearance: item.cratinineClearance,
+        bloodPressure: item.bloodPressure,
+      };
     });
 
     if (introState.reviewingDepartment.trim() === "") {
@@ -333,7 +332,10 @@ export default function Form() {
                   name="cultureSent"
                   value="false"
                   required
-                  onChange={(e) => setCultureSent(false)}
+                  onChange={(e) => {
+                    setCultureSent(false);
+                    setCultureReportList([]);
+                  }}
                 />
                 <label className="mx-2 text-sm font-semibold text-white">
                   No
