@@ -96,7 +96,7 @@ export default function Form() {
     ClinicalSignType[] | []
   >([
     {
-      date: new Date(),
+      date: null,
       procalcitonin: "",
       neutrophil: "",
       bloodPressure: "",
@@ -210,6 +210,15 @@ export default function Form() {
         endDate: item.endDate,
       };
     });
+
+    const NonEmptyClinicalSigns = clinicalSignsValue.filter(
+      (item: ClinicalSignType) => item.date !== null
+    );
+
+    if (NonEmptyClinicalSigns.length === 0) {
+      notifyError("Please enter atleast one clinical sign");
+      return;
+    }
 
     const clinicalSign = clinicalSignsValue.map((item) => {
       return {
