@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/authContext";
 import Cookie from "js-cookie";
-import { useMutation, gql} from "@apollo/client";
+import { useMutation, gql } from "@apollo/client";
 
 export default function Navbar() {
   const { user, login, setLogin, setUser } = useContext(AuthContext);
@@ -29,6 +29,13 @@ export default function Navbar() {
   `;
   const [verifyUser] = useMutation(verifyUserGQL);
 
+  const logout = () => {
+    Cookie.remove("token");
+    setLogin(false);
+    setUser(null);
+    router.reload();
+  };
+
   const getUser = () => {
     verifyUser({
       variables: {
@@ -50,9 +57,17 @@ export default function Navbar() {
         ANTIBIOTIC STEWARDSHIP COMMITTEE
       </div>
       {login ? (
-        <div className="bg-slate-300/70 backdrop-blur-sm my-auto mx-10 px-5 py-3 rounded-md">
-          {user.name}
-        </div>
+        <>
+          <div className="bg-slate-300/70 backdrop-blur-sm my-auto ml-10 mr-2 px-5 py-3 rounded-md">
+            {user.name}
+          </div>
+          <button
+            className="bg-slate-300/70 backdrop-blur-sm my-auto mr-10 px-5 py-3 rounded-md text-red-600"
+            onClick={() => logout()}
+          >
+            Logout
+          </button>
+        </>
       ) : (
         <button
           onClick={() => router.push("/login")}
