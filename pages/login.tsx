@@ -12,7 +12,7 @@ import { AuthContext } from "../context/authContext";
 export default function Authentication() {
   const router = useRouter();
 
-  const { user,setUser, login, setLogin } = useContext(AuthContext);
+  const { user, setUser, login, setLogin } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -44,17 +44,21 @@ export default function Authentication() {
         username: username,
         password: password,
       },
-    }).then((res) => {
-      if (DataError) {
-        console.log(res.errors[0].message);
-        notifyError("Please enter valid credentials");
-        return;
-      }
-      Cookie.set("token", res.data.tokenAuth.token);
-      setLogin(true);
-      setUser({name:res.data.tokenAuth.payload.username,role:"admin"});
-      router.push("/");
-    });
+    })
+      .then((res) => {
+        if (DataError) {
+          console.log(res.errors[0].message);
+          notifyError("Please enter valid credentials");
+          return;
+        }
+        Cookie.set("token", res.data.tokenAuth.token);
+        setLogin(true);
+        setUser({ name: res.data.tokenAuth.payload.username, role: "admin" });
+        router.push("/");
+      })
+      .catch((err) => {
+        notifyError(err.message);
+      });
   };
 
   return (
