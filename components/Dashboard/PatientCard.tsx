@@ -47,8 +47,6 @@ export default function PatientCard(props) {
     generateCSV({ variables: { patientid: id } })
       .then((res) => {
         const encodedCsv = res.data.generateCSV.encodedCsv;
-        console.log("encodedCsv:", res.data);
-
         const decodedCsv = Buffer.from(encodedCsv, "base64").toString("utf-8");
         const csvData = new Blob([decodedCsv], { type: "text/csv" });
         const link = document.createElement("a");

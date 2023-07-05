@@ -47,7 +47,6 @@ export default function Authentication() {
     })
       .then((res) => {
         if (DataError) {
-          console.log(res.errors[0].message);
           notifyError("Please enter valid credentials");
           return;
         }

@@ -11,10 +11,6 @@ export default function AntibioticsUsed(props:AntibioticsUsedProps){
 
   const {rows, setRows} = props;
 
-  // useEffect(() => {
-  //   console.log("rows", rows);
-  // }, [rows]);
-
   const [count, setCount] = useState(1);
 
   const addRow = (event: { preventDefault: () => void }) => {

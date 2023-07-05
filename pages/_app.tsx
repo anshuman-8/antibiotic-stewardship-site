@@ -24,13 +24,28 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <React.Fragment>
       <Head>
-        <title>AMSP</title>
+        <title>Amrita Stewardship Portal</title>
         <meta
           name="description"
-          content="Amrita Antibiotic Stewardship project"
+          content="Antibiotic Stewardship Portal for managing septic patients and log their daily reports and progress for Amrita Hospital"
+          key="description"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:title" content="Amrita Stewardship Portal" />
+        <meta
+          property="og:description"
+          content="Antibiotic Stewardship Portal for managing septic patients and log their daily reports and progress for Amrita Hospital"
+        />
+        <meta property="og:site_name" content="Amrita Stewardship Portal" />
+        <meta property="og:image" content="/static/stewardship-portal.png" />
+        <meta property="og:image:secure_url" content="/static/stewardship-portal.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="810" />
+        <meta property="og:image:alt" content="Amrita Stewardship Portal" />
+        <meta property="og:url" content="https://amrita-antibiotic-stewardship.vercel.app/" />
+        <meta property="og:locale" content="en-IN" />
+        <meta property="og:type" content="website" />
       </Head>
       <AuthState>
 
