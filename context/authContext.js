@@ -30,23 +30,6 @@ export const AuthState = ({ children }) => {
     setUser((user.color = "red"));
   }
 
-  //   const [
-  //     getAuthToken,
-  //     { loading: tokenLoading, error: DataError, data: tokenData },
-  //   ] = useMutation(GET_TOKEN);
-
-  //   function fetchToken(token) {
-  //     getAuthToken({
-  //       variables: {
-  //         username: username,
-  //         password: password,
-  //       },
-  //     }).then((res) => {
-  //       console.log(res.data.tokenAuth.token);
-  //       Cookie.set("token", res.data.tokenAuth.token);
-  //       router.push("/");
-  //     });
-  //   }
 
   function setToken(token) {
     Cookies.set("token", token);

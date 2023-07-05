@@ -81,7 +81,6 @@ export default function CultureReport(props: proptype) {
     });
 
     setState(newCultureReport);
-    console.log("new cil report,", newCultureReport);
   };
 
   const imagingChange = (name: keyof typeof imaging) => {

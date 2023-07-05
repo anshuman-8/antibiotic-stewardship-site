@@ -49,10 +49,6 @@ export default function ClinicalSigns({ date, patient }) {
     },
   });
 
-  console.log("dates", sevenDaysPriorClinicalSigns(date), addOneDay(date));
-
-  console.log("clinical signs", data);
-
   if (loading) return <p>Loading ...</p>;
 
   if (error) return <p>Error :(</p>;
